@@ -1,8 +1,20 @@
-export default function Page() {
+import Banner from "@/components/ui/banner";
+import dbConnect from "@/lib/dbConnect";
+//
+export default async function Page() {
+  //
+  await dbConnect()
+    .then(() => {
+      console.log("database connected successfully");
+    })
+    .catch((err) => {
+      console.log("database connection error:", err);
+    });
+
+  //
   return (
-    <div>
-      <h1>Welcome to the Home Page</h1>
-      <p>This is the main landing page of the application.</p>
-    </div>
+    <section className="">
+      <Banner />
+    </section>
   );
 }
