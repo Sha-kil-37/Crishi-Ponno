@@ -12,7 +12,7 @@ export default function Navbar() {
   let user = false;
   //
   return (
-    <nav className="py-2 bg-gray-50 absolute w-full z-50 sticky top-0 left-0">
+    <nav className="py-2 bg-gray-50 w-full z-50 sticky top-0 left-0">
       <div className="xl:w-7xl mx-auto ">
         <div className="flex items-center justify-between py-2">
           <Link href="/" className="text-2xl font-bold text-[#006A4E]">
