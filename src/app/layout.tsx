@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import "../../styles/globals.css";
 import Navbar from "@/components/layout/navbar";
 import Footer from "@/components/layout/footer";
-// import Favicon from "@/public/meta/crishiponnofavicon.png"
 //
 export const metadata: Metadata = {
   title: "Crishi Ponno",
