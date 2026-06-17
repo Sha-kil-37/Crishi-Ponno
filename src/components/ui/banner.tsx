@@ -4,6 +4,7 @@ import SearchBox from "./searchBox";
 
 //
 export default function Banner() {
+
   return (
     <div className="xl:w-7xl mx-auto py-4">
       <div className="flex gap-x-6 justify-center">
