@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import "../../styles/globals.css";
-import Navbar from "@/components/layout/navbar";
-import Footer from "@/components/layout/footer";
+import "../styles/globals.css";
+import Navbar from "@/src/components/layout/navbar";
+import Footer from "@/src/components/layout/footer";
 //
 export const metadata: Metadata = {
   title: "Crishi Ponno",
