@@ -2,8 +2,8 @@
 import BarIcon from "@/public/icons/bar.png";
 import Link from "next/link";
 import Image from "next/image";
-import CartIcon from "@/public/icons/shoppingCart.png";
-import BangladeshIcon from "@/public/icons/bangladesh.png";
+import CartIcon from "@/public/icons/cart.png";
+import BangladeshIcon from "@/";
 import LanguageIcon from "@/public/icons/language.png";
 import UserIcon from "@/public/icons/user.png";
 //
