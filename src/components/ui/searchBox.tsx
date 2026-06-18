@@ -1,8 +1,9 @@
 "use client";
-import cameraIcon from "@/public/icons/camera.png";
 import Image from "next/image";
-import searchbar from "@/public/icons/searchBar.png";
 import React from "react";
+
+const cameraIcon = "/icons/camera.png";
+const searchbar = "/icons/searchBar.png";
 //
 export default function SearchBox() {
   const [file, setFile] = React.useState<File | null>(null);

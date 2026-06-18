@@ -1,4 +1,4 @@
-import Banner from "@/src/components/ui/banner";
+import Banner from "@/components/ui/banner";
 //
 export default async function Page() {
   //

@@ -1,11 +1,12 @@
 "use client";
-import BarIcon from "@/public/icons/bar.png";
 import Link from "next/link";
 import Image from "next/image";
-import CartIcon from "@/public/icons/cart.png";
-import BangladeshIcon from "@/";
-import LanguageIcon from "@/public/icons/language.png";
-import UserIcon from "@/public/icons/user.png";
+
+const BarIcon = "/icons/bar.png";
+const CartIcon = "/icons/cart.png";
+const BangladeshIcon = "/icons/bangladesh.png";
+const LanguageIcon = "/icons/language.png";
+const UserIcon = "/icons/user.png";
 //
 export default function Navbar() {
   //
