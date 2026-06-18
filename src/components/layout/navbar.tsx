@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 const BarIcon = "/icons/bar.png";
-const CartIcon = "/icons/cart.png";
+const CartIcon = "/icons/shoppingCart.png";
 const BangladeshIcon = "/icons/bangladesh.png";
 const LanguageIcon = "/icons/language.png";
 const UserIcon = "/icons/user.png";
