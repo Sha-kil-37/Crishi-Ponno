@@ -128,7 +128,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between py-2">
           <ul className="flex gap-x-6">
             <li className="flex">
-              <Image src={BarIcon} alt="Bar Icon" />
+              <Image src={BarIcon} alt="Bar Icon" height={20} width={20} />
               <span>All Categories</span>
             </li>
             <li>Find Factorys</li>
