@@ -77,7 +77,7 @@ export default async function db() {
   }
 
   if (!cached.promise) {
-    cached.promise = connectWithFallback(MONGODB_URI).catch((error) => {
+    cached.promise = connectWithFallback(mongoUri).catch((error) => {
       cached.promise = null;
       throw error;
     });
