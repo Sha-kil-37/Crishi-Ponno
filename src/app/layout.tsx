@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "../styles/globals.css";
-import Navbar from "@/components/layout/navbar";
-import Footer from "@/components/layout/footer";
+import Dialog from "@/components/ui/dialog";
+import { DialogProvider } from "@/hooks/useDialog";
 //
 export const metadata: Metadata = {
   title: "Crishi Ponno",
@@ -18,9 +18,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Navbar />
-        {children}
-        <Footer />
+        <DialogProvider>
+          {children}
+          <Dialog />
+        </DialogProvider>
       </body>
     </html>
   );

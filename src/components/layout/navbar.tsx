@@ -1,7 +1,9 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
+import { useDialog } from "@/hooks/useDialog";
 
+//
 const BarIcon = "/icons/bar.png";
 const CartIcon = "/icons/shoppingCart.png";
 const BangladeshIcon = "/icons/bangladesh.png";
@@ -10,7 +12,9 @@ const UserIcon = "/icons/user.png";
 //
 export default function Navbar() {
   //
-  let user = false;
+  const { openDialog } = useDialog();
+
+  // let user = false;
   //
   return (
     <nav className="py-2 bg-gray-50 w-full z-50 sticky top-0 left-0">
@@ -112,17 +116,14 @@ export default function Navbar() {
                 <p className="font-medium inline-block">Your cart is empty</p>
               </div>
             </li>
-            {user ? (
-              <Link href={"/login"} className="flex gap-x-1 items-center">
-                <Image src={UserIcon} alt="User Icon" width={20} height={20} />
-                <span>Log out</span>
-              </Link>
-            ) : (
-              <Link href={"/login"} className="flex gap-x-1 items-center">
-                <Image src={UserIcon} alt="User Icon" width={20} height={20} />
-                <span>Log in</span>
-              </Link>
-            )}
+
+            <button
+              onClick={openDialog}
+              className="cursor-pointer flex gap-x-2 items-center"
+            >
+              <Image src={UserIcon} alt="User Icon" width={20} height={20} />
+              <span>Sign In</span>
+            </button>
           </ul>
         </div>
         <div className="flex items-center justify-between py-2">
