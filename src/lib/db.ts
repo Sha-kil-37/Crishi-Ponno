@@ -27,7 +27,7 @@ function setFallbackDns() {
   );
 }
 
-
+const mongoUri = MONGODB_URI;
 
 type MongooseCache = {
   conn: typeof mongoose | null;
