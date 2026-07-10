@@ -1,5 +1,5 @@
-import db from "@/lib/db";
-import User from "@/models/User";
+// import db from "@/lib/db";
+// import User from "@/models/User";
 // GET /api/users
 export async function GET() {
   // await db();
