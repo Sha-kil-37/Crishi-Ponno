@@ -27,7 +27,7 @@ function setFallbackDns() {
   );
 }
 
-const mongoUri = MONGODB_URI;
+
 
 type MongooseCache = {
   conn: typeof mongoose | null;
@@ -77,7 +77,7 @@ export default async function db() {
   }
 
   if (!cached.promise) {
-    cached.promise = connectWithFallback(mongoUri).catch((error) => {
+    cached.promise = connectWithFallback(MONGODB_URI).catch((error) => {
       cached.promise = null;
       throw error;
     });
