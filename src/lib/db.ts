@@ -1,9 +1,13 @@
 import mongoose from "mongoose";
 import dns from "dns";
-// 
+//
 const MONGODB_URI = process.env.MONGODB_URI;
 const GOOGLE_DNS_SERVERS = ["8.8.8.8", "8.8.4.4"];
 const LOCAL_DNS_PREFIXES = ["127.0.0.1", "::1"];
+
+if (!MONGODB_URI) {
+  throw new Error("Please define the MONGODB_URI environment variable.");
+}
 
 function isLocalDnsServer(server: string) {
   return LOCAL_DNS_PREFIXES.some(
@@ -23,25 +27,23 @@ function setFallbackDns() {
   );
 }
 
-if (!MONGODB_URI) {
-  throw new Error("Please define the MONGODB_URI environment variable.");
-}
+const mongoUri = MONGODB_URI;
 
-let cached = (
-  global as typeof globalThis & {
-    mongoose?: {
-      conn: typeof mongoose | null;
-      promise: Promise<typeof mongoose> | null;
-    };
-  }
-).mongoose;
+type MongooseCache = {
+  conn: typeof mongoose | null;
+  promise: Promise<typeof mongoose> | null;
+};
 
-if (!cached) {
-  cached = global.mongoose = {
-    conn: null,
-    promise: null,
-  };
-}
+const globalWithMongoose = globalThis as typeof globalThis & {
+  mongoose?: MongooseCache;
+};
+
+let cached: MongooseCache = globalWithMongoose.mongoose ?? {
+  conn: null,
+  promise: null,
+};
+
+globalWithMongoose.mongoose = cached;
 
 async function connectWithFallback(uri: string) {
   if (shouldUseFallbackDns()) {
@@ -75,7 +77,7 @@ export default async function db() {
   }
 
   if (!cached.promise) {
-    cached.promise = connectWithFallback(MONGODB_URI).catch((error) => {
+    cached.promise = connectWithFallback(mongoUri).catch((error) => {
       cached.promise = null;
       throw error;
     });
