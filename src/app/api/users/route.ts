@@ -1,6 +1,6 @@
 import UserModel from "@/models/User";
 import db from "@/lib/db";
-import { handleApiError } from "@/lib/error-handler";
+import { handleApiError } from "@/hooks/error-handler";
 import { User } from "@/types/user";
 // 
 const user: User[] = [];

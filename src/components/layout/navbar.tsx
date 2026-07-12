@@ -2,6 +2,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useDialog } from "@/hooks/useDialog";
+import GoogleButton from "../utils/googleButton";
 
 //
 const BarIcon = "/icons/bar.png";
@@ -13,12 +14,54 @@ const UserIcon = "/icons/user.png";
 export default function Navbar() {
   //
   const { openDialog } = useDialog();
+  //
+  // handle submit function for sign in form
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    // handle sign in logic here
+  };
+  //
+  const handleOpenSignIn = () => {
+    openDialog({
+      //
+      children: (
+        <div className="">
+          <h2 className="text-2xl">Sign in or create account</h2>
+          {/* <p className="">
+            Sign in to manage your orders, wishlist, and shopping cart.
+          </p> */}
 
-  // let user = false;
+          <form onSubmit={handleSubmit} className="mt-5">
+            <label htmlFor="email" className="font-medium">
+              Enter your email
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="john@example.com"
+              className="mt-1 w-full py-2 px-2 outline-none border rounded"
+              required
+            />
+
+            <button
+              type="submit"
+              className="cursor-pointer mt-4 w-full bg-[#006A4E] text-white py-2 rounded font-medium"
+            >
+              Sign In
+            </button>
+          </form>
+          <p className="text-center font-medium mt-2">Continue with</p>
+          <GoogleButton />
+        </div>
+      ),
+    });
+  };
+
   //
   return (
-    <nav className="py-2 bg-gray-50 w-full z-50 sticky top-0 left-0">
-      <div className="xl:w-7xl mx-auto ">
+    <nav className="py-2 bg-gray-100 w-full z-50 sticky top-0 left-0">
+      <div className="xl:w-7xl mx-auto">
         <div className="flex items-center justify-between py-2">
           <Link href="/" className="text-2xl font-bold text-[#006A4E]">
             কৃষি পন্য
@@ -33,7 +76,7 @@ export default function Navbar() {
                 height={32}
               />
 
-              <div className="top-[120%] left-[50%] absolute bg-white p-6 hidden group-hover:block rounded border border-gray-300 shadow xl:w-100 transform -translate-x-1/2 after:content-[''] after:absolute after:top-[-8px] after:left-[50%] after:bg-white after:w-4 after:h-4 after:rotate-45 after:-translate-x-1/2 after:border-t after:border-l after:border-gray-300">
+              <div className="top-[120%] left-[50%] absolute bg-white p-6 hidden group-hover:block rounded border border-gray-200 shadow xl:w-100 transform -translate-x-1/2 after:content-[''] after:absolute after:top-[-8px] after:left-[50%] after:bg-white after:w-4 after:h-4 after:rotate-45 after:-translate-x-1/2 after:border-t after:border-l after:border-gray-300">
                 <h3 className="font-medium text-xl">Specify your location</h3>
                 <p>Shipping fees vary based on your location</p>
                 <button className="w-full mx-auto rounded bg-[#006A4E] py-2 text-white mt-5 font-medium cursor-pointer">
@@ -75,7 +118,7 @@ export default function Navbar() {
                 className="inline-block"
               />
               <span className="inline-block">English-BDT</span>
-              <div className="top-[120%] left-[50%] absolute bg-white p-6 hidden group-hover:block rounded border border-gray-300 shadow xl:w-100 transform -translate-x-1/2 after:content-[''] after:absolute after:top-[-8px] after:left-[50%] after:bg-white after:w-4 after:h-4 after:rotate-45 after:-translate-x-1/2 after:border-t after:border-l after:border-gray-300">
+              <div className="top-[120%] left-[50%] absolute bg-white p-6 hidden group-hover:block rounded border border-gray-200 shadow xl:w-100 transform -translate-x-1/2 after:content-[''] after:absolute after:top-[-8px] after:left-[50%] after:bg-white after:w-4 after:h-4 after:rotate-45 after:-translate-x-1/2 after:border-t after:border-l after:border-gray-300">
                 <h3 className="font-medium text-xl">
                   Set language and currency
                 </h3>
@@ -112,13 +155,13 @@ export default function Navbar() {
                 width={32}
                 height={32}
               />
-              <div className="top-[120%] left-[50%] absolute bg-white p-6 hidden group-hover:block rounded border border-gray-300 shadow xl:w-60 transform -translate-x-1/2 after:content-[''] after:absolute after:top-[-8px] after:left-[50%] after:bg-white after:w-4 after:h-4 after:rotate-45 after:-translate-x-1/2 after:border-t after:border-l after:border-gray-300">
+              <div className="top-[120%] left-[50%] absolute bg-white p-6 hidden group-hover:block rounded border border-gray-200 shadow xl:w-60 transform -translate-x-1/2 after:content-[''] after:absolute after:top-[-8px] after:left-[50%] after:bg-white after:w-4 after:h-4 after:rotate-45 after:-translate-x-1/2 after:border-t after:border-l after:border-gray-300">
                 <p className="font-medium inline-block">Your cart is empty</p>
               </div>
             </li>
 
             <button
-              onClick={openDialog}
+              onClick={handleOpenSignIn}
               className="cursor-pointer flex gap-x-2 items-center"
             >
               <Image src={UserIcon} alt="User Icon" width={20} height={20} />
@@ -126,6 +169,7 @@ export default function Navbar() {
             </button>
           </ul>
         </div>
+
         <div className="flex items-center justify-between py-2">
           <ul className="flex gap-x-6">
             <li className="flex">
