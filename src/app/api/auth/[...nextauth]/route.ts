@@ -5,10 +5,10 @@ import UserModel from "@/models/User";
 //
 const handler = NextAuth({
   secret: process.env.NEXTAUTH_SECRET,
-  session: {
-    strategy: "jwt",
-    maxAge: 1 * 60, // 1 minutes
-  },
+  // session: {
+  //   strategy: "jwt",
+  //   maxAge: 1 * 60, // 1 minutes
+  // },
 
   providers: [
     GoogleProvider({

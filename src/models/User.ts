@@ -10,7 +10,10 @@ const UserSchema = new Schema(
       type: String,
       unique: true,
     },
-    image: String,
+    image: {
+      default: null,
+      type: String,
+    },
   },
   {
     timestamps: true,
