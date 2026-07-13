@@ -49,7 +49,7 @@ async function connectWithFallback(uri: string) {
   if (shouldUseFallbackDns()) {
     setFallbackDns();
   }
-
+  //
   try {
     return await mongoose.connect(uri, {
       autoIndex: true,
