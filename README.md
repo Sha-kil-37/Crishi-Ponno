@@ -34,3 +34,8 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+<!--  -->
+
+
+ কিভাবে আমি আমার অ্যাপ্লিকেশন ব্যবহারকারী দের সনাক্ত করে রাখতে পারি যাতে পরবর্তীতে ওই ব্যবহারকারী তার ব্রাউজার থেকে খুব সহজে আমার অ্যাপটি ব্যবহার করতে পারবে এবং অ্যাপটি ব্যবহারকারীর ব্যবহার করা ব্রাউজারটিকে মনে রাখতে পারবে
