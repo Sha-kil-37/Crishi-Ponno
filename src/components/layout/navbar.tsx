@@ -3,6 +3,10 @@ import Link from "next/link";
 import Image from "next/image";
 import { useDialog } from "@/hooks/useDialog";
 import GoogleButton from "../utils/googleButton";
+import { ShoppingBag } from "lucide-react";
+import { ShieldPlus } from "lucide-react";
+import { Zap } from "lucide-react";
+import { ClipboardClock } from "lucide-react";
 
 //
 const BarIcon = "/icons/bar.png";
@@ -16,43 +20,35 @@ export default function Navbar() {
   const { openDialog } = useDialog();
   //
   // handle submit function for sign in form
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    // handle sign in logic here
-  };
+
   //
   const handleOpenSignIn = () => {
     openDialog({
       //
       children: (
-        <div className="">
-          <h2 className="text-2xl">Sign in or create account</h2>
-          {/* <p className="">
+        <div>
+          <div className="flex items-center gap-x-4">
+            <ShoppingBag size={30} />
+            <h2 className="font-bold text-2xl">কৃষি পন্য</h2>
+          </div>
+          <p className="mt-2 mb-5 text-xl">
             Sign in to manage your orders, wishlist, and shopping cart.
-          </p> */}
-
-          <form onSubmit={handleSubmit} className="mt-5">
-            <label htmlFor="email" className="font-medium">
-              Enter your email
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              placeholder="john@example.com"
-              className="mt-1 w-full py-2 px-2 outline-none border rounded"
-              required
-            />
-
-            <button
-              type="submit"
-              className="cursor-pointer mt-4 w-full bg-[#006A4E] text-white py-2 rounded font-medium"
-            >
-              Sign In
-            </button>
-          </form>
-          <p className="text-center font-medium mt-2">Continue with</p>
+          </p>
           <GoogleButton />
+          <ul className="flex justify-center gap-x-4 items-center mt-5">
+            <li className="flex items-center gap-x-2">
+              <ShieldPlus size={20} />
+              <span>Secure shopping</span>
+            </li>
+            <li className="flex items-center gap-x-2">
+              <Zap size={20} />
+              <span>Fast checkout</span>
+            </li>
+            <li className="flex items-center gap-x-2">
+              <ClipboardClock size={20} />
+              <span>Order tracking</span>
+            </li>
+          </ul>
         </div>
       ),
     });

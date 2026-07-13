@@ -2,7 +2,7 @@
 //
 import { useEffect, useState } from "react";
 import { useDialog } from "@/hooks/useDialog";
-
+//
 export default function Dialog() {
   const { open, closeDialog, content } = useDialog();
   const [isVisible, setIsVisible] = useState(false);
@@ -35,7 +35,7 @@ export default function Dialog() {
 
       {/* Dialog */}
       <div
-        className={`relative z-10 w-auto max-w-lg rounded border border-gray-200 shadow bg-white p-4 transition-all duration-300 ${
+        className={`relative z-10 max-w-lg rounded border border-gray-200 shadow bg-white p-8 transition-all duration-300 ${
           isVisible
             ? "translate-y-0 scale-100 opacity-100 ease-out"
             : "translate-y-4 scale-95 opacity-0 ease-in"

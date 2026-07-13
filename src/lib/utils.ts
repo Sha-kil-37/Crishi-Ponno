@@ -1,5 +1,0 @@
-// formatCurrency()
-
-// generateSlug()
-
-// calculateDiscount()

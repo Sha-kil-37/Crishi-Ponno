@@ -4,13 +4,34 @@ import Navbar from "@/components/layout/navbar";
 import Banner from "@/components/ui/banner";
 import { DialogProvider } from "@/hooks/useDialog";
 import Dialog from "@/components/utils/dialog";
-// import { useSession } from "next-auth/react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect } from "react";
+import { Toaster } from "@/components/utils/sonner";
+import { toast } from "sonner";
 
 //
 export default function Page() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const isAuthSuccess = searchParams.get("auth") === "success";
   //
-  // const { data: session } = useSession()
-  // console.log(session)
+  useEffect(() => {
+    if (!isAuthSuccess) {
+      return;
+    }
+    toast.success("Sign in success", {
+      position: "top-center",
+      // description: "Sign in success",
+      action: {
+        label: "✕",
+        onClick: () => console.log("Undo"),
+      },
+    });
+    router.replace("/", { scroll: false });
+    router.refresh();
+    //
+    return;
+  }, [isAuthSuccess, router]);
   //
   return (
     <section>
@@ -19,6 +40,7 @@ export default function Page() {
         <Banner />
         <Footer />
         <Dialog />
+        <Toaster />
       </DialogProvider>
     </section>
   );

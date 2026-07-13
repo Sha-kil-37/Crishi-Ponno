@@ -40,7 +40,7 @@ const handler = NextAuth({
           await existingUser.save();
         }
       } catch (error) {
-        console.error("Google auth user creation failed:", error);
+        // console.error(error);
         return false;
       }
       return true;
