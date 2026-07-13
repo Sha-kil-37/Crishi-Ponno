@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
 import "../styles/globals.css";
-import Dialog from "@/components/utils/dialog";
-import { DialogProvider } from "@/hooks/useDialog";
 import AuthProvider from "@/components/providers/auth-provider";
 //
 export const metadata: Metadata = {
@@ -19,12 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <AuthProvider>
-          <DialogProvider>
-            {children}
-            <Dialog />
-          </DialogProvider>
-        </AuthProvider>
+        <AuthProvider>{children}</AuthProvider>
       </body>
     </html>
   );
