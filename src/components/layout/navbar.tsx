@@ -29,7 +29,7 @@ export default function Navbar() {
         <div>
           <div className="flex items-center gap-x-4">
             <ShoppingBag size={30} />
-            <h2 className="font-bold text-2xl">কৃষি পন্য</h2>
+            <h2 className="font-bold text-2xl text-[#1f7a1f]">কৃষি পন্য</h2>
           </div>
           <p className="mt-2 mb-5 text-xl">
             Sign in to manage your orders, wishlist, and shopping cart.
@@ -56,10 +56,10 @@ export default function Navbar() {
 
   //
   return (
-    <nav className="py-2 bg-gray-100 w-full z-50 sticky top-0 left-0">
+    <nav className="py-2 w-full z-50 sticky top-0 left-0 bg-[rgba(255,255,255,0.94)] border-b border-[#dcebdc] backdrop-blur-md">
       <div className="xl:w-7xl mx-auto">
         <div className="flex items-center justify-between py-2">
-          <Link href="/" className="text-2xl font-bold text-[#006A4E]">
+          <Link href="/" className="text-2xl font-bold text-[#1f7a1f]">
             কৃষি পন্য
           </Link>
           <ul className="flex gap-x-8 items-center">
@@ -72,10 +72,10 @@ export default function Navbar() {
                 height={32}
               />
 
-              <div className="top-[120%] left-[50%] absolute bg-white p-6 hidden group-hover:block rounded border border-gray-200 shadow xl:w-100 transform -translate-x-1/2 after:content-[''] after:absolute after:top-[-8px] after:left-[50%] after:bg-white after:w-4 after:h-4 after:rotate-45 after:-translate-x-1/2 after:border-t after:border-l after:border-gray-300">
+              <div className="top-[120%] left-[50%] absolute brand-card p-6 hidden group-hover:block rounded-xl xl:w-100 transform -translate-x-1/2 after:content-[''] after:absolute after:left-[50%] after:bg-white after:w-4 after:h-4 after:rotate-45 after:-translate-x-1/2 after:border-t after:border-l after:border-gray-300">
                 <h3 className="font-medium text-xl">Specify your location</h3>
                 <p>Shipping fees vary based on your location</p>
-                <button className="w-full mx-auto rounded bg-[#006A4E] py-2 text-white mt-5 font-medium cursor-pointer">
+                <button className="w-full mx-auto rounded-lg brand-button py-2 mt-5 font-medium cursor-pointer">
                   Sign in to add Address
                 </button>
                 <div className="mt-3 flex items-center gap-x-3">
@@ -98,7 +98,7 @@ export default function Navbar() {
                   />
                   <button
                     type="submit"
-                    className="rounded w-full mx-auto bg-[#006A4E] text-white py-2 font-medium mt-5 cursor-pointer"
+                    className="rounded-lg w-full mx-auto brand-button py-2 font-medium mt-5 cursor-pointer"
                   >
                     Save
                   </button>
@@ -114,7 +114,7 @@ export default function Navbar() {
                 className="inline-block"
               />
               <span className="inline-block">English-BDT</span>
-              <div className="top-[120%] left-[50%] absolute bg-white p-6 hidden group-hover:block rounded border border-gray-200 shadow xl:w-100 transform -translate-x-1/2 after:content-[''] after:absolute after:top-[-8px] after:left-[50%] after:bg-white after:w-4 after:h-4 after:rotate-45 after:-translate-x-1/2 after:border-t after:border-l after:border-gray-300">
+              <div className="top-[120%] left-[50%] absolute brand-card p-6 hidden group-hover:block rounded-xl xl:w-100 transform -translate-x-1/2 after:content-[''] after:absolute after:left-[50%] after:bg-white after:w-4 after:h-4 after:rotate-45 after:-translate-x-1/2 after:border-t after:border-l after:border-gray-300">
                 <h3 className="font-medium text-xl">
                   Set language and currency
                 </h3>
@@ -137,7 +137,7 @@ export default function Navbar() {
                   </select>
                   <button
                     type="submit"
-                    className="rounded w-full mx-auto bg-[#006A4E] text-white py-2 font-medium mt-5 cursor-pointer"
+                    className="rounded-lg w-full mx-auto brand-button py-2 font-medium mt-5 cursor-pointer"
                   >
                     Save
                   </button>
@@ -151,14 +151,14 @@ export default function Navbar() {
                 width={32}
                 height={32}
               />
-              <div className="top-[120%] left-[50%] absolute bg-white p-6 hidden group-hover:block rounded border border-gray-200 shadow xl:w-60 transform -translate-x-1/2 after:content-[''] after:absolute after:top-[-8px] after:left-[50%] after:bg-white after:w-4 after:h-4 after:rotate-45 after:-translate-x-1/2 after:border-t after:border-l after:border-gray-300">
+              <div className="top-[120%] left-[50%] absolute brand-card p-6 hidden group-hover:block rounded-xl xl:w-60 transform -translate-x-1/2 after:content-[''] after:absolute after:top-[-8px] after:left-[50%] after:bg-white after:w-4 after:h-4 after:rotate-45 after:-translate-x-1/2 after:border-t after:border-l after:border-gray-300">
                 <p className="font-medium inline-block">Your cart is empty</p>
               </div>
             </li>
 
             <button
               onClick={handleOpenSignIn}
-              className="cursor-pointer flex gap-x-2 items-center"
+              className="cursor-pointer flex gap-x-2 items-center rounded-full px-3 py-2 hover:bg-[#f3f9f2]"
             >
               <Image src={UserIcon} alt="User Icon" width={20} height={20} />
               <span>Sign In</span>

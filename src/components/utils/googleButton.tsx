@@ -8,7 +8,7 @@ export default function GoogleButton() {
   //
   return (
     <button
-      className="w-full cursor-pointer rounded border border-gray-300 flex justify-center items-center py-2"
+      className="w-full cursor-pointer rounded-xl border border-[#dcebdc] bg-white px-4 py-2 flex justify-center items-center gap-2 shadow-sm transition hover:-translate-y-0.5"
       onClick={() => signIn("google", { callbackUrl: "/?auth=success" })}
     >
       <Image

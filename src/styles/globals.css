@@ -1,1 +1,13 @@
+@import url("https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap");
 @import "tailwindcss";
+/*  */
+:root {
+  --font-sans: "Hind Siliguri", "Noto Sans Bengali", sans-serif;
+  --brand-primary: #1f7a1f;
+  --brand-dark: #0f3d2e;
+  --brand-accent: #f59e0b;
+  --brand-bg: #f6fbf4;
+  --brand-surface: #ffffff;
+  --brand-border: #dcebdc;
+  --brand-text: #163b1b;
+}

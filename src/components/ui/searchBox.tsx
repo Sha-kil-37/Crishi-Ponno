@@ -1,9 +1,9 @@
 "use client";
 import Image from "next/image";
 import React from "react";
-
 const cameraIcon = "/icons/camera.png";
-const searchbar = "/icons/searchBar.png";
+import { Search } from "lucide-react";
+
 //
 export default function SearchBox() {
   const [file, setFile] = React.useState<File | null>(null);
@@ -33,7 +33,7 @@ export default function SearchBox() {
   return (
     <form
       onSubmit={handleSearch}
-      className="p-4 border mt-5 xl:w-3xl mx-auto rounded-lg"
+      className="p-6 mt-5 w-4xl mx-auto rounded-lg bg-white border border-[#dcebdc] shadow-[0_10px_30px_rgba(15,61,46,0.08)]"
     >
       <input
         onChange={handleSearchInput}
@@ -64,16 +64,10 @@ export default function SearchBox() {
 
         <button
           type="submit"
-          className="bg-slate-200 px-4 py-2 rounded-lg flex items-center gap-x-2 cursor-pointer"
+          className="bg-[linear-gradient(135deg,#1f7a1f_0%,#0f3d2e_100%)] border border-[#1f7a1f] transition-all duration-200 ease-in-out hover:-translate-y-px hover:shadow-[0_8px_20px_rgba(31,122,31,0.2)] hover:brightness-[1.03] px-4 py-2 rounded-lg flex items-center gap-x-2 cursor-pointer"
         >
-          <Image
-            className="inline-block"
-            src={searchbar}
-            alt="Search Icon"
-            width={15}
-            height={15}
-          />
-          <span className="inline-block font-medium">Search</span>
+          <Search className="text-white" />
+          <span className="inline-block text-white font-medium">Search</span>
         </button>
       </div>
     </form>
