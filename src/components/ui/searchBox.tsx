@@ -1,8 +1,7 @@
 "use client";
-import Image from "next/image";
+//
 import React from "react";
-const cameraIcon = "/icons/camera.png";
-import { Search } from "lucide-react";
+import { Search, Camera } from "lucide-react";
 
 //
 export default function SearchBox() {
@@ -33,7 +32,7 @@ export default function SearchBox() {
   return (
     <form
       onSubmit={handleSearch}
-      className="p-6 mt-5 w-4xl mx-auto rounded-lg bg-white border border-[#dcebdc] shadow-[0_10px_30px_rgba(15,61,46,0.08)]"
+      className="animated-border p-6 mt-5 w-4xl mx-auto shadow-[0_10px_30px_rgba(15,61,46,0.08)]"
     >
       <input
         onChange={handleSearchInput}
@@ -52,13 +51,7 @@ export default function SearchBox() {
             accept="image/*"
             className="hidden"
           />
-          <Image
-            className="inline-block"
-            src={cameraIcon}
-            alt="Camera Icon"
-            width={24}
-            height={24}
-          />
+          <Camera className="inline-block" />
           <span className="inline-block ml-2">Image Search</span>
         </label>
 
