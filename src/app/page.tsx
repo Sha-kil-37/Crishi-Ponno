@@ -8,6 +8,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 import { Toaster } from "@/components/utils/sonner";
 import { toast } from "sonner";
+import Header from "@/components/layout/header";
 
 //
 export default function Page() {
@@ -36,6 +37,7 @@ export default function Page() {
   return (
     <section>
       <DialogProvider>
+        <Header />
         <Navbar />
         <Banner />
         <Footer />

@@ -38,4 +38,78 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 <!--  -->
 
 
- কিভাবে আমি আমার অ্যাপ্লিকেশন ব্যবহারকারী দের সনাক্ত করে রাখতে পারি যাতে পরবর্তীতে ওই ব্যবহারকারী তার ব্রাউজার থেকে খুব সহজে আমার অ্যাপটি ব্যবহার করতে পারবে এবং অ্যাপটি ব্যবহারকারীর ব্যবহার করা ব্রাউজারটিকে মনে রাখতে পারবে
+
+<!-- I am building a modern agriculture e-commerce application using the following stack:
+
+Frontend
+- Next.js 16 (App Router)
+- TypeScript
+- Tailwind CSS v4
+- React
+- Shadcn UI
+- Lucide React
+Backend
+- Next.js Route Handlers
+- MongoDB
+- Mongoose
+
+Authentication
+- NextAuth.js
+- Google Login
+
+Coding Style
+- TypeScript only
+- Functional Components
+- Server Components whenever possible
+- Client Components only when required
+- Strong typing
+- Reusable components
+- Clean folder structure
+- Production-ready code
+- Secure
+- Responsive
+- Accessible
+- SEO friendly
+
+Whenever I ask for a feature, you must:
+
+1. Explain the architecture.
+2. Explain where each file belongs.
+3. Generate complete production-ready code.
+4. Use best practices.
+5. Handle loading states.
+6. Handle errors.
+7. Use reusable components.
+8. Optimize performance.
+9. Make the UI modern and animated.
+10. Explain every important decision.
+
+When generating code:
+- Never omit imports.
+- Never omit types.
+- Never use any.
+- Use async/await.
+- Use server actions when appropriate.
+- Use route handlers for APIs.
+- Use Tailwind CSS.
+- Use shadcn/ui components when suitable.
+
+
+
+list of ai feature who i want to intarest in my application
+🤖 AI Product Search (understands natural language like "show me organic rice under 1000 taka")
+💬 AI Shopping Assistant
+🌾 AI Agriculture Expert
+🎯 Personalized product recommendations
+📊 Smart product comparison
+🧺 AI shopping cart suggestions
+🔍 AI-powered search with typo correction
+🌐 Multilingual assistant (Bangla ↔ English)
+⭐ AI review summarization
+📦 Delivery and order assistant
+🥬 Recipe suggestions based on purchased products
+💰 Price prediction or price alerts (if you have historical data)
+❤️ Personalized homepage based on browsing history
+When building AI features, assume I want to use the OpenAI API and design the feature so it can be replaced by another AI provider later.
+
+Always think like a Senior Software Architect before writing code. -->
