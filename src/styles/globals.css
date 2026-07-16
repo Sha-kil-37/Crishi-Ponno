@@ -1,6 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap");
 @import "tailwindcss";
-
 /*  */
 :root {
   --font-sans: "Hind Siliguri", "Noto Sans Bengali", sans-serif;
@@ -13,36 +12,7 @@
   --brand-text: #163b1b;
 }
 
-html.dark {
-  --brand-primary: #5ddf77;
-  --brand-dark: #a7f3b0;
-  --brand-accent: #fbbf24;
-  --brand-bg: #07110a;
-  --brand-surface: #111c16;
-  --brand-border: #27422f;
-  --brand-text: #f3f7f2;
-}
-
-html {
-  color-scheme: light;
-}
-
-html.dark {
-  color-scheme: dark;
-}
-
-body {
-  min-height: 100vh;
-  background-color: var(--brand-bg);
-  color: var(--brand-text);
-  transition:
-    background-color 0.2s ease,
-    color 0.2s ease;
-}
-
-
-
-/* Animated Border Animation */
+/* Search box css start */
 @keyframes animatedBorder {
   0% {
     background-position: 0% 50%;
@@ -80,3 +50,4 @@ body {
   mask-composite: exclude;
   pointer-events: none;
 }
+/* Search box css end */

@@ -20,6 +20,7 @@ export default function Page() {
     if (!isAuthSuccess) {
       return;
     }
+    //
     toast.success("Sign in success", {
       position: "top-center",
       // description: "Sign in success",
@@ -28,6 +29,7 @@ export default function Page() {
         onClick: () => console.log("Undo"),
       },
     });
+    //
     router.replace("/", { scroll: false });
     router.refresh();
     //

@@ -59,7 +59,7 @@ export default function Navbar() {
   };
   //
   return (
-    <nav className="py-2 w-full z-50 sticky top-0 left-0 border-b backdrop-blur-md border-[#dcebdc] bg-[rgba(255,255,255,0.94)]">
+    <nav className="py-2 w-full z-50 sticky top-0 left-0 border-b backdrop-blur-md border-[#dcebdc]">
       <div className="mx-auto w-7xl">
         <div className="flex items-center justify-between py-2">
           <Link href="/" className="text-2xl font-bold text-[#1f7a1f]">
@@ -88,15 +88,14 @@ export default function Navbar() {
             </button>
             <button
               onClick={handleOpenSignIn}
-              className="cursor-pointer flex gap-x-2 items-center rounded-full px-3 py-2 hover:bg-[#f6fbf4] text-[#163b1b]"
-              
+              className="cursor-pointer flex gap-x-2 items-center rounded-full px-3 py-2 hover:bg-[#f6fbf4]"
             >
               <User />
               <span>Sign In</span>
             </button>
           </ul>
         </div>
-
+        {/*  */}
         <div className="flex items-center justify-between py-2">
           <ul className="flex gap-x-6">
             <li className="flex">

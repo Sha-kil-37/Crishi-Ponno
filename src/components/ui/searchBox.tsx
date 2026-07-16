@@ -59,8 +59,8 @@ export default function SearchBox() {
           type="submit"
           className="bg-[linear-gradient(135deg,#1f7a1f_0%,#0f3d2e_100%)] border border-[#1f7a1f] transition-all duration-200 ease-in-out hover:-translate-y-px hover:shadow-[0_8px_20px_rgba(31,122,31,0.2)] hover:brightness-[1.03] px-4 py-2 rounded-lg flex items-center gap-x-2 cursor-pointer"
         >
-          <Search className="text-white" />
-          <span className="inline-block text-white font-medium">Search</span>
+          <Search className="" />
+          <span className="inline-block font-medium">Search</span>
         </button>
       </div>
     </form>

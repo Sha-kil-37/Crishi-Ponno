@@ -28,14 +28,14 @@ export default function Dialog() {
       {/* Overlay */}
       <div
         onClick={closeDialog}
-        className={`absolute inset-0 bg-white/10 backdrop-blur-xs transition-opacity duration-50 ${
+        className={`absolute inset-0 backdrop-blur-xs transition-opacity duration-50 ${
           isVisible ? "opacity-100 ease-out" : "opacity-0 ease-in"
         }`}
       />
 
       {/* Dialog */}
       <div
-        className={`bg-white border border-[#dcebdc] shadow-[0_10px_30px_rgba(15,61,46,0.08)] relative z-10 max-w-lg rounded p-8 transition-all duration-300 ${
+        className={`border border-[#dcebdc] shadow-[0_10px_30px_rgba(15,61,46,0.08)] relative z-10 max-w-lg rounded p-8 transition-all duration-300 ${
           isVisible
             ? "translate-y-0 scale-100 opacity-100 ease-out"
             : "translate-y-4 scale-95 opacity-0 ease-in"
@@ -52,14 +52,14 @@ export default function Dialog() {
           <div>{content}</div>
         ) : (
           <div>
-            <p className="text-[#163b1b]">
+            <p className="">
               This is your global dialog. You can show login, register, search,
               cart preview, newsletter, or promotional content here.
             </p>
 
             <button
               onClick={closeDialog}
-              className="cursor-pointer mt-8 rounded-lg bg-black px-5 py-3 text-white"
+              className="cursor-pointer mt-8 rounded-lg  px-5 py-3"
             >
               Close
             </button>
