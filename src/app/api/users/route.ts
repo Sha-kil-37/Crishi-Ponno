@@ -8,7 +8,7 @@ const user: User[] = [];
 // GET /api/users
 export async function GET() {
   try {
-    console.log(user);
+ 
     await db();
     const data = await UserModel.find();
     return Response.json(data, { status: 200 });

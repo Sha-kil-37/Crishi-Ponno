@@ -4,7 +4,7 @@ import dns from "dns";
 const MONGODB_URI = process.env.MONGODB_URI;
 const GOOGLE_DNS_SERVERS = ["8.8.8.8", "8.8.4.4"];
 const LOCAL_DNS_PREFIXES = ["127.0.0.1", "::1"];
-
+//
 if (!MONGODB_URI) {
   throw new Error("Please define the MONGODB_URI environment variable.");
 }
@@ -18,7 +18,6 @@ function isLocalDnsServer(server: string) {
 function shouldUseFallbackDns() {
   return dns.getServers().some(isLocalDnsServer);
 }
-
 function setFallbackDns() {
   dns.setServers(GOOGLE_DNS_SERVERS);
   console.warn(
@@ -42,9 +41,9 @@ let cached: MongooseCache = globalWithMongoose.mongoose ?? {
   conn: null,
   promise: null,
 };
-
+//
 globalWithMongoose.mongoose = cached;
-
+//
 async function connectWithFallback(uri: string) {
   if (shouldUseFallbackDns()) {
     setFallbackDns();
