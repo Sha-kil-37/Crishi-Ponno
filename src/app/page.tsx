@@ -1,7 +1,7 @@
 "use client";
 import Footer from "@/components/layout/footer";
 import Navbar from "@/components/layout/navbar";
-import Banner from "@/components/ui/banner";
+import Banner from "@/components/shared/banner";
 import { DialogProvider } from "@/hooks/useDialog";
 import Dialog from "@/components/utils/dialog";
 import { useRouter, useSearchParams } from "next/navigation";
