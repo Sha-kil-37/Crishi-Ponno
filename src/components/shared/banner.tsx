@@ -1,6 +1,6 @@
 "use client";
 
-import SearchBox from "../search/searchBox";
+import SearchBox from "./searchBox";
 
 //
 export default function Banner() {
