@@ -38,7 +38,7 @@ export default function Page() {
     return;
   }, [isAuthSuccess, router]);
   //
-  const categories: Category[] = [
+  const categories = [
     {
       id: "vegetables",
       title: "Vegetables",
