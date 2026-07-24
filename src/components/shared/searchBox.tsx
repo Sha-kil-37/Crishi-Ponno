@@ -3,8 +3,11 @@
 import React from "react";
 import { Search, Camera } from "lucide-react";
 //
-export default function SearchBox() {
+interface SearchBoxProps {
+  compact?: boolean;
+}
 
+export default function SearchBox({ compact = false }: SearchBoxProps) {
   // handle file upload
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -30,7 +33,6 @@ export default function SearchBox() {
         className="animated-border p-6 mt-5 shadow-[0_10px_30px_rgba(15,61,46,0.08)]"
       >
         <input
-          value={""}
           onChange={handleSearchInput}
           type="text"
           placeholder="Search for products"
@@ -57,7 +59,6 @@ export default function SearchBox() {
             className="bg-[linear-gradient(135deg,#1f7a1f_0%,#0f3d2e_100%)] border border-[#1f7a1f] transition-all duration-200 ease-in-out hover:-translate-y-px hover:shadow-[0_8px_20px_rgba(31,122,31,0.2)] hover:brightness-[1.03] px-4 py-2 rounded-lg flex items-center gap-x-2 cursor-pointer disabled:opacity-70"
           >
             <Search />
-            
           </button>
         </div>
       </form>

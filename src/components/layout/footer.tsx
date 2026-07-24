@@ -104,10 +104,12 @@ export default function Footer() {
             <Link href="#">Google Play store</Link>
           </div>
         </div>
+        <p className="mt-5">
+        &copy; Copyright 2026 কৃষি পন্য, All rights reserved
+      </p>
       </div>
-      <div className="mt-5">
-        <p className="text-center">Copyright &copy; 2026 কৃষি পন্য</p>
-      </div>
+
+      
     </footer>
   );
 }

@@ -1,9 +1,10 @@
 "use client";
 //
+import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
-import { useDialog } from "@/hooks/useDialog";
+import { useDialog } from "@/hooks/client/useDialog";
 import GoogleButton from "../utils/googleButton";
 import {
   ShoppingBag,
@@ -16,16 +17,23 @@ import {
   MoonStar,
   Sun,
 } from "lucide-react";
+import SearchBox from "../shared/searchBox";
+
+interface NavbarProps {
+  showNavboxSearch: boolean;
+}
 //
-//
-export default function Navbar() {
+export default function Navbar({ showNavboxSearch }: NavbarProps) {
   //
   const { openDialog } = useDialog();
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  // handle theme and navbar search box
+  useEffect(() => {
+    setMounted(!mounted);
+  }, []);
 
-  useEffect(() => setMounted(true), []);
-  //
+  // handle sign in dialog
   const handleOpenSignIn = () => {
     openDialog({
       //
@@ -58,13 +66,53 @@ export default function Navbar() {
     });
   };
   //
+
+  //
   return (
     <nav className="py-2 w-full z-50 sticky top-0 left-0 border-b backdrop-blur-md border-[#dcebdc]">
-      <div className="mx-auto w-7xl">
-        <div className="flex items-center justify-between py-2">
+      <div className="mx-auto w-7xl grid grid-cols-3 items-center">
+        <div className="">
           <Link href="/" className="text-2xl font-bold text-[#1f7a1f]">
             কৃষি পন্য
           </Link>
+          <ul className="flex gap-x-6">
+            <li className="flex">
+              <Menu />
+              <span>All Categories</span>
+            </li>
+            <li>Find Factorys</li>
+            <li>Order protections</li>
+          </ul>
+        </div>
+        <AnimatePresence>
+          {showNavboxSearch && (
+            <motion.div
+              initial={{
+                opacity: 0,
+                y: -20,
+                scale: 0.95,
+              }}
+              animate={{
+                opacity: 1,
+                y: 0,
+                scale: 1,
+              }}
+              exit={{
+                opacity: 0,
+                y: -20,
+                scale: 0.95,
+              }}
+              transition={{
+                duration: 0.25,
+              }}
+              // className="w-full max-w-xl"
+            >
+              <SearchBox compact />
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <div className="">
           <ul className="flex gap-x-8 items-center">
             <li className="relative group transition duration-500 cursor-pointer">
               <ShoppingCart />
@@ -94,17 +142,7 @@ export default function Navbar() {
               <span>Sign In</span>
             </button>
           </ul>
-        </div>
-        {/*  */}
-        <div className="flex items-center justify-between py-2">
-          <ul className="flex gap-x-6">
-            <li className="flex">
-              <Menu />
-              <span>All Categories</span>
-            </li>
-            <li>Find Factorys</li>
-            <li>Order protections</li>
-          </ul>
+
           <ul className="flex gap-x-6">
             <li>Become a Supplier</li>
             <li>Help Center</li>

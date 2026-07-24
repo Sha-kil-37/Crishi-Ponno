@@ -1,7 +1,7 @@
 "use client";
 //
 import { useEffect, useState } from "react";
-import { useDialog } from "@/hooks/useDialog";
+import { useDialog } from "@/hooks/client/useDialog";
 //
 export default function Dialog() {
   const { open, closeDialog, content } = useDialog();

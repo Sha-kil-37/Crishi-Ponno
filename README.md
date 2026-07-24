@@ -36,7 +36,7 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 <!--  -->
 
-<!-- 
+
 You are a Senior Software Architect, Senior Full-Stack Engineer, AI Engineer, and Next.js expert.
 
 I am building a production-ready agriculture e-commerce application named "Crishi Ponno".
@@ -68,8 +68,6 @@ Authentication
 PROJECT STRUCTURE
 ==========================
 
-My project already contains these AI folders.
-
 src/
  ├── ai/
  │    ├── parsers/
@@ -79,8 +77,6 @@ src/
  │    ├── services/
  │    ├── tools/
  │    └── types/
-
-
 
 Extend this architecture professionally.
 
@@ -344,4 +340,4 @@ to verify everything works.
 Stop after completing Module 1.
 
 Wait for my approval before generating Module 2.
- -->
+ 
