@@ -18,7 +18,7 @@ import {
   Sun,
 } from "lucide-react";
 import SearchBox from "../shared/searchBox";
-
+//
 interface NavbarProps {
   showNavboxSearch: boolean;
 }
@@ -84,33 +84,35 @@ export default function Navbar({ showNavboxSearch }: NavbarProps) {
             <li>Order protections</li>
           </ul>
         </div>
-        <AnimatePresence>
-          {showNavboxSearch && (
-            <motion.div
-              initial={{
-                opacity: 0,
-                y: -20,
-                scale: 0.95,
-              }}
-              animate={{
-                opacity: 1,
-                y: 0,
-                scale: 1,
-              }}
-              exit={{
-                opacity: 0,
-                y: -20,
-                scale: 0.95,
-              }}
-              transition={{
-                duration: 0.25,
-              }}
-              // className="w-full max-w-xl"
-            >
-              <SearchBox compact />
-            </motion.div>
-          )}
-        </AnimatePresence>
+        <div className="flex justify-center">
+          <AnimatePresence>
+            {showNavboxSearch && (
+              <motion.div
+                initial={{
+                  opacity: 0,
+                  y: -20,
+                  scale: 0.95,
+                }}
+                animate={{
+                  opacity: 1,
+                  y: 0,
+                  scale: 1,
+                }}
+                exit={{
+                  opacity: 0,
+                  y: -20,
+                  scale: 0.95,
+                }}
+                transition={{
+                  duration: 0.25,
+                }}
+                // className="w-full max-w-xl"
+              >
+                <SearchBox compact />
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
 
         <div className="">
           <ul className="flex gap-x-8 items-center">
