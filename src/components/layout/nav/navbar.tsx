@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 import { useDialog } from "@/hooks/client/useDialog";
-import GoogleButton from "../utils/googleButton";
+import GoogleButton from "../../utils/googleButton";
 import {
   ShoppingBag,
   ShieldPlus,
@@ -17,17 +17,21 @@ import {
   MoonStar,
   Sun,
 } from "lucide-react";
-import SearchBox from "../shared/searchBox";
+import SearchBox from "../../shared/searchBox";
+import NavCategoryMenu from "./navCategoryMenu";
+import { Category } from "@/types/navCategory";
 //
 interface NavbarProps {
   showNavboxSearch: boolean;
+  categories: Category[];
 }
 //
-export default function Navbar({ showNavboxSearch }: NavbarProps) {
+export default function Navbar({ showNavboxSearch, categories }: NavbarProps) {
   //
   const { openDialog } = useDialog();
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const [isOpenCategory, setIsOpenCategory] = useState(false);
   // handle theme and navbar search box
   useEffect(() => {
     setMounted(!mounted);
@@ -76,14 +80,25 @@ export default function Navbar({ showNavboxSearch }: NavbarProps) {
             কৃষি পন্য
           </Link>
           <ul className="flex gap-x-6">
-            <li className="flex">
-              <Menu />
-              <span>All Categories</span>
+            <li
+              className="relative"
+              onMouseEnter={() => setIsOpenCategory(true)}
+              onMouseLeave={() => setIsOpenCategory(false)}
+            >
+              <button className="flex items-center">
+                <Menu />
+                <span>All Categories</span>
+              </button>
+              <AnimatePresence>
+                {isOpenCategory && <NavCategoryMenu categories={categories} />}
+              </AnimatePresence>
             </li>
+
             <li>Find Factorys</li>
             <li>Order protections</li>
           </ul>
         </div>
+
         <div className="flex justify-center">
           <AnimatePresence>
             {showNavboxSearch && (
