@@ -1,4 +1,5 @@
 "use client";
+//
 import { motion } from "framer-motion";
 import CategorySidebar from "./categorySidebar";
 import CategoryContent from "./categoryContent";
@@ -28,10 +29,12 @@ export default function NavCategoryMenu({ categories }: NavCategoryMenuProps) {
       transition={{
         duration: 0.2,
       }}
-      className="absolute left-0 top-full mt-2  w-[900px] grid grid-cols-[260px_1fr] bg-gray-500"
+      className="absolute left-0 top-full w-full bg-white"
     >
-      <CategorySidebar categories={categories} />
-      <CategoryContent />
+      <div className="w-7xl mx-auto grid grid-cols-[260px_1fr]">
+        <CategorySidebar categories={categories} />
+        <CategoryContent />
+      </div>
     </motion.div>
   );
 }

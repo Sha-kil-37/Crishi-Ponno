@@ -54,7 +54,7 @@ export default function Page() {
       ],
     },
     {
-      id: "Fruits",
+      id: "fruits",
       title: "Fruits",
       children: [
         {
@@ -62,8 +62,36 @@ export default function Page() {
           items: ["Apple", "Jack Fruit", "Banana", "Pine Apple", "Mango"],
         },
         {
-          title: "Organic",
-          items: ["Organic Papaya", "Organic Lemon"],
+          title: "Organic Fruits",
+          items: ["Papaya", "Lemon"],
+        },
+      ],
+    },
+    {
+      id: "tress",
+      title: "Tress",
+      children: [
+        {
+          title: "Seedlings grown from seeds",
+          items: ["Oak", "Maple", "Birch", "Willow", "Cherry Blossom"],
+        },
+        {
+          title: "Seedlings produced by grafting method",
+          items: ["Banyan", "Mango", "Eucalyptus"],
+        },
+      ],
+    },
+    {
+      id: "agricultural equipment",
+      title: "Agricultural Equipment",
+      children: [
+        {
+          title: "Heavy equipment",
+          items: ["Tractor", "Crawler Tractor", "Plow", "Rotavator"],
+        },
+        {
+          title: "General equipment",
+          items: ["Hoe", "Shovel", "Pitchfork"],
         },
       ],
     },

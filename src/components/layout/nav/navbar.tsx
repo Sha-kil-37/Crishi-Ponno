@@ -20,6 +20,8 @@ import {
 import SearchBox from "../../shared/searchBox";
 import NavCategoryMenu from "./navCategoryMenu";
 import { Category } from "@/types/navCategory";
+import FindFactory from "@/components/shared/findFactory";
+import OrderProtection from "@/components/shared/orderProtection";
 //
 interface NavbarProps {
   showNavboxSearch: boolean;
@@ -32,6 +34,8 @@ export default function Navbar({ showNavboxSearch, categories }: NavbarProps) {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const [isOpenCategory, setIsOpenCategory] = useState(false);
+  const [isOpenFindFactory, setIsOpenFindFactory] = useState(false);
+  const [isOpenOrderProtection, setIsOpenOrderProtection] = useState(false);
   // handle theme and navbar search box
   useEffect(() => {
     setMounted(!mounted);
@@ -73,29 +77,51 @@ export default function Navbar({ showNavboxSearch, categories }: NavbarProps) {
 
   //
   return (
-    <nav className="py-2 w-full z-50 sticky top-0 left-0 border-b backdrop-blur-md border-[#dcebdc]">
+    <nav className="w-full z-50 sticky top-0 left-0 border-b backdrop-blur-md border-[#dcebdc] pt-3">
       <div className="mx-auto w-7xl grid grid-cols-3 items-center">
-        <div className="">
+        <div>
           <Link href="/" className="text-2xl font-bold text-[#1f7a1f]">
             কৃষি পন্য
           </Link>
           <ul className="flex gap-x-6">
             <li
-              className="relative"
               onMouseEnter={() => setIsOpenCategory(true)}
               onMouseLeave={() => setIsOpenCategory(false)}
+              className="py-3 cursor-pointer"
             >
-              <button className="flex items-center">
+              <button className="flex items-center gap-x-3 cursor-pointer">
                 <Menu />
                 <span>All Categories</span>
               </button>
+
               <AnimatePresence>
                 {isOpenCategory && <NavCategoryMenu categories={categories} />}
               </AnimatePresence>
             </li>
-
-            <li>Find Factorys</li>
-            <li>Order protections</li>
+            <li
+              onMouseEnter={() => setIsOpenFindFactory(true)}
+              onMouseLeave={() => setIsOpenFindFactory(false)}
+              className="py-3 cursor-pointer"
+            >
+              {
+                <AnimatePresence>
+                  {isOpenFindFactory && <FindFactory />}
+                </AnimatePresence>
+              }
+              Find Factorys
+            </li>
+            <li
+              className="py-3 cursor-pointer"
+              onMouseEnter={() => setIsOpenOrderProtection(true)}
+              onMouseLeave={() => setIsOpenOrderProtection(false)}
+            >
+              {
+                <AnimatePresence>
+                  {isOpenOrderProtection && <OrderProtection />}
+                </AnimatePresence>
+              }
+              Order Protections
+            </li>
           </ul>
         </div>
 
@@ -161,10 +187,9 @@ export default function Navbar({ showNavboxSearch, categories }: NavbarProps) {
           </ul>
 
           <ul className="flex gap-x-6">
-            <li>Become a Supplier</li>
-            <li>Help Center</li>
-            <li>App</li>
-            <li>Sell on Crishi Ponno</li>
+            <li className="py-3">Become a Supplier</li>
+            <li className="py-3">Help Center</li>
+            <li className="py-3">Sell on Crishi Ponno</li>
           </ul>
         </div>
       </div>
