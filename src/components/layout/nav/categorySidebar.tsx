@@ -11,11 +11,10 @@ export default function CategorySidebar({ categories }: CategorySidebarProps) {
   const [activeId, setActiveId] = useState("string");
   const [isForYouCategory, setIsForYouCategory] = useState(true);
 
-
   //
   return (
-    <aside>
-      <ul className="">
+    <aside className="">
+      <ul>
         <li
           onClick={() => {
             setActiveId("");

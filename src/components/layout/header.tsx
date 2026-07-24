@@ -1,4 +1,6 @@
 //
+"use client";
+
 function Header() {
   return (
     <section className="py-2 border-b border-[#dcebdc]">

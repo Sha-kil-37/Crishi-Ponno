@@ -22,6 +22,8 @@ import NavCategoryMenu from "./navCategoryMenu";
 import { Category } from "@/types/navCategory";
 import FindFactory from "@/components/shared/findFactory";
 import OrderProtection from "@/components/shared/orderProtection";
+import BecomeASupplier from "@/components/shared/becomeASupplier";
+import HelpCenter from "@/components/shared/helpCenter";
 //
 interface NavbarProps {
   showNavboxSearch: boolean;
@@ -36,6 +38,8 @@ export default function Navbar({ showNavboxSearch, categories }: NavbarProps) {
   const [isOpenCategory, setIsOpenCategory] = useState(false);
   const [isOpenFindFactory, setIsOpenFindFactory] = useState(false);
   const [isOpenOrderProtection, setIsOpenOrderProtection] = useState(false);
+  const [isOpenBecomeASupplier, setIsOpenBecomeASupplier] = useState(false);
+  const [isOpenHelpCenter, setIsOpenHelpCenter] = useState(false);
   // handle theme and navbar search box
   useEffect(() => {
     setMounted(!mounted);
@@ -187,9 +191,31 @@ export default function Navbar({ showNavboxSearch, categories }: NavbarProps) {
           </ul>
 
           <ul className="flex gap-x-6">
-            <li className="py-3">Become a Supplier</li>
-            <li className="py-3">Help Center</li>
-            <li className="py-3">Sell on Crishi Ponno</li>
+            <li
+              className="py-3 cursor-pointer"
+              onMouseEnter={() => setIsOpenBecomeASupplier(true)}
+              onMouseLeave={() => setIsOpenBecomeASupplier(false)}
+            >
+              {
+                <AnimatePresence>
+                  {isOpenBecomeASupplier && <BecomeASupplier />}
+                </AnimatePresence>
+              }
+              Become a Supplier
+            </li>
+            <li
+              className="py-3 cursor-pointer"
+              onMouseEnter={() => setIsOpenHelpCenter(true)}
+              onMouseLeave={() => setIsOpenHelpCenter(false)}
+            >
+              {
+                <AnimatePresence>
+                  {isOpenHelpCenter && <HelpCenter />}
+                </AnimatePresence>
+              }
+              Help Center
+            </li>
+            <li className="py-3 cursor-pointer">Sell on Crishi Ponno</li>
           </ul>
         </div>
       </div>

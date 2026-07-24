@@ -29,7 +29,7 @@ export default function NavCategoryMenu({ categories }: NavCategoryMenuProps) {
       transition={{
         duration: 0.2,
       }}
-      className="absolute left-0 top-full w-full bg-white"
+      className="absolute left-0 top-full w-full bg-gray-200"
     >
       <div className="w-7xl mx-auto grid grid-cols-[260px_1fr]">
         <CategorySidebar categories={categories} />

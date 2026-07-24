@@ -12,7 +12,6 @@ export default function Banner({ bannerRef, showNavboxSearch }: BannerProps) {
   return (
     <section className="xl:w-7xl mx-auto py-10">
       <div ref={bannerRef}>{!showNavboxSearch && <SearchBox />}</div>
-
       <h2>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis pariatur
         deserunt, non sequi vel sed doloribus eum autem illum magnam

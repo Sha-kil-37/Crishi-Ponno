@@ -1,3 +1,5 @@
+"use client";
+
 import { motion } from "framer-motion";
 
 export default function FindFactory() {
@@ -18,14 +20,17 @@ export default function FindFactory() {
       transition={{
         duration: 0.2,
       }}
-      className="absolute left-0 top-full w-full bg-white"
+      className="absolute left-0 top-full w-full bg-gray-200"
     >
       <div className="mx-auto w-7xl">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil,
-        voluptate quisquam dolores voluptatem quis fugiat molestias explicabo
-        facilis aliquam inventore ut. Dolor odio consequatur temporibus!
-        Distinctio voluptatibus voluptatum suscipit asperiores soluta?
-        Perspiciatis eveniet vel soluta eaque illum dolorem perferendis
+        <h2 className="text-center">Find Factorys</h2>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil,
+          voluptate quisquam dolores voluptatem quis fugiat molestias explicabo
+          facilis aliquam inventore ut. Dolor odio consequatur temporibus!
+          Distinctio voluptatibus voluptatum suscipit asperiores soluta?
+          Perspiciatis eveniet vel soluta eaque illum dolorem perferendis
+        </p>
         cupiditate!
       </div>
     </motion.div>
