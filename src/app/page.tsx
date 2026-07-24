@@ -10,6 +10,7 @@ import { Toaster } from "@/components/utils/sonner";
 import { toast } from "sonner";
 import Header from "@/components/layout/header";
 import { useNavboxSearch } from "@/hooks/client/useNavboxSearch";
+import { Category } from "@/types/navCategory";
 //
 export default function Page() {
   const bannerRef = useRef<HTMLDivElement | null>(null);
@@ -38,7 +39,7 @@ export default function Page() {
     return;
   }, [isAuthSuccess, router]);
   //
-  const categories = [
+  const categories: Category[] = [
     {
       id: "vegetables",
       title: "Vegetables",
