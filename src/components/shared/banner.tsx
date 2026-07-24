@@ -3,17 +3,15 @@ import { RefObject } from "react";
 import SearchBox from "./searchBox";
 
 interface BannerProps {
-  bannerRef: RefObject<HTMLElement | null>;
+  bannerRef: RefObject<HTMLDivElement | null>;
   showNavboxSearch: boolean;
 }
 //
 export default function Banner({ bannerRef, showNavboxSearch }: BannerProps) {
   //
   return (
-    <section ref={bannerRef} className="xl:w-7xl mx-auto py-10">
-      <div >
-        {!showNavboxSearch && <SearchBox />}
-      </div>
+    <section className="xl:w-7xl mx-auto py-10">
+      <div ref={bannerRef}>{!showNavboxSearch && <SearchBox />}</div>
 
       <h2>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis pariatur
