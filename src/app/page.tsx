@@ -92,7 +92,7 @@ export default function Page() {
         },
         {
           title: "General equipment",
-          items: ["Hoe", "Shovel", "Pitchfork"],
+          items: ["Hoe"],
         },
       ],
     },
