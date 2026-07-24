@@ -10,8 +10,8 @@ interface BannerProps {
 export default function Banner({ bannerRef, showNavboxSearch }: BannerProps) {
   //
   return (
-    <section  className="xl:w-7xl mx-auto py-10">
-      <div ref={bannerRef}>
+    <section ref={bannerRef} className="xl:w-7xl mx-auto py-10">
+      <div >
         {!showNavboxSearch && <SearchBox />}
       </div>
 
