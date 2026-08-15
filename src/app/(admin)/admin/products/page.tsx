@@ -1,18 +1,24 @@
+import SearchBar from "@/components/shared/admin/SearchBar";
 
 export default function Page() {
   //
   return (
-    <div>
-      <h1 className="font-bold text-center text-xl">
-        this is admin product page
-      </h1>
-      <p className="text-center">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic enim non ad
-        nisi soluta tempora ipsum! Obcaecati enim quas recusandae nesciunt,
-        placeat quis corporis iste eligendi nihil rem, similique cumque eum
-        aliquid? Qui suscipit unde odit. Eaque suscipit facere unde maxime! Enim
-        molestiae veniam sit dolore est a non? Quis?
-      </p>
-    </div>
+    <main>
+      <div className="flex justify-between items-center">
+        <h1 className="text-2xl font-bold">
+          Manage your agricultural products
+        </h1>
+        <button className="px-3 py-2 bg-[#1f7a1f] text-white cursor-pointer font-bold">
+          Add Product
+        </button>
+      </div>
+      <div className="flex justify-between items-center mt-5">
+        <SearchBar />
+        <h2>
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Praesentium,
+          exercitationem.
+        </h2>
+      </div>
+    </main>
   );
 }

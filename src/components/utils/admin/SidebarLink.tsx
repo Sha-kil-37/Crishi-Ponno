@@ -24,5 +24,7 @@ export default function SidebarLink({
     return <span className={`${className}`}>{children}</span>;
   }
 
-  return <Link href={href}>{children}</Link>;
+  return <Link href={href} className={`font-bold text-black`}>
+    {children}
+  </Link>;
 }
