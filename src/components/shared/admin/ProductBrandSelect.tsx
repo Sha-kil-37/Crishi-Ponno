@@ -8,26 +8,26 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-export interface ProductCategory {
+export interface ProductBrand {
   _id: string;
   name: string;
 }
 
-interface ProductCategorySelectProps {
-  categories: ProductCategory[];
+interface ProductBrandSelectProps {
+  brands: ProductBrand[];
   value?: string;
   onValueChange: (value: string) => void;
   placeholder?: string;
   disabled?: boolean;
 }
 
-export default function ProductCategorySelect({
-  categories,
+export default function ProductBrandSelect({
+  brands,
   value,
   onValueChange,
-  placeholder = "Select a category",
+  placeholder = "Select a brand",
   disabled = false,
-}: ProductCategorySelectProps) {
+}: ProductBrandSelectProps) {
   return (
     <Select
       value={value}
@@ -43,9 +43,9 @@ export default function ProductCategorySelect({
       </SelectTrigger>
 
       <SelectContent>
-        {categories.map((category) => (
-          <SelectItem key={category._id} value={category._id}>
-            {category.name}
+        {brands.map((brand) => (
+          <SelectItem key={brand._id} value={brand._id}>
+            {brand.name}
           </SelectItem>
         ))}
       </SelectContent>

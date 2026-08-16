@@ -1,5 +1,5 @@
 "use client";
-
+//
 import {
   Select,
   SelectContent,
@@ -7,27 +7,27 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-
-export interface ProductCategory {
+//
+export interface ProductStatus {
   _id: string;
   name: string;
 }
-
-interface ProductCategorySelectProps {
-  categories: ProductCategory[];
+//
+interface ProductStatusSelectProps {
+  statuses: ProductStatus[];
   value?: string;
   onValueChange: (value: string) => void;
   placeholder?: string;
   disabled?: boolean;
 }
-
-export default function ProductCategorySelect({
-  categories,
+//
+export default function ProductStatusSelect({
+  statuses,
   value,
   onValueChange,
-  placeholder = "Select a category",
+  placeholder = "Select a status",
   disabled = false,
-}: ProductCategorySelectProps) {
+}: ProductStatusSelectProps) {
   return (
     <Select
       value={value}
@@ -43,9 +43,9 @@ export default function ProductCategorySelect({
       </SelectTrigger>
 
       <SelectContent>
-        {categories.map((category) => (
-          <SelectItem key={category._id} value={category._id}>
-            {category.name}
+        {statuses.map((status) => (
+          <SelectItem key={status._id} value={status._id}>
+            {status.name}
           </SelectItem>
         ))}
       </SelectContent>
