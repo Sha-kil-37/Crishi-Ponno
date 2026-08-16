@@ -1,5 +1,5 @@
 import SearchBar from "@/components/shared/admin/SearchBar";
-
+//
 export default function Page() {
   //
   return (
