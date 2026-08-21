@@ -31,8 +31,6 @@ export default function SidebarItem({ item, level = 0 }: SidebarItemProps) {
           (pathname === item.href || pathname.startsWith(`${item.href}/`)),
         );
 
-
-
   useEffect(() => {
     if (isChildActive) {
       setOpen(true);
@@ -80,7 +78,7 @@ export default function SidebarItem({ item, level = 0 }: SidebarItemProps) {
       </div>
     );
   }
-
+  //
   return (
     <Link
       href={item.href ?? "#"}

@@ -1,4 +1,3 @@
-// src/types/admin-sidebar.ts
 
 import type { LucideIcon } from "lucide-react";
 
@@ -7,7 +6,7 @@ export interface SidebarItem {
   href?: string;
   icon: LucideIcon;
   children?: SidebarItem[];
-//   permission?: string;
+  permission?: string;
 }
 
 export interface SidebarSection {

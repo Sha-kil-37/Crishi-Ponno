@@ -1,18 +1,11 @@
-// src/config/admin-sidebar.ts
-
 import { SidebarSection } from "@/types/admin/adminSideBar";
 import {
-  BarChart3,
-  Boxes,
   ClipboardList,
   Cog,
-  CreditCard,
-  FileText,
   LayoutDashboard,
   Megaphone,
-  Package,
+  ClipboardMinus,
   PackageSearch,
-  Receipt,
   Settings,
   ShoppingCart,
   Sparkles,
@@ -20,8 +13,19 @@ import {
   Truck,
   Users,
   Warehouse,
+  Ribbon,
+  UserStar,
+  RefreshCcw,
+  AppWindow,
+  Puzzle,
+  HandHelping,
+  BadgeCheck,
+  ChartNoAxesCombined,
+  ToolCase,
+  Plus,
+  SquarePen,
+  Trash,
 } from "lucide-react";
-
 
 export const adminSidebarConfig: SidebarSection[] = [
   {
@@ -40,17 +44,68 @@ export const adminSidebarConfig: SidebarSection[] = [
       {
         title: "Products",
         href: "/admin/products",
-        icon: Package,
+        icon: ToolCase,
+        children: [
+          {
+            title: "Add Product",
+            href: "/admin/products/create",
+            icon: Plus,
+          },
+          {
+            title: "Update Product",
+            href: "/admin/products/update",
+            icon: SquarePen,
+          },
+          {
+            title: "Delete Product",
+            href: "/admin/products/delete",
+            icon: Trash,
+          },
+        ],
       },
       {
         title: "Categories",
         href: "/admin/categories",
         icon: Tags,
+        children: [
+          {
+            title: "Add Category",
+            href: "/admin/categories/create",
+            icon: Plus,
+          },
+          {
+            title: "Update Category",
+            href: "/admin/categories/update",
+            icon: SquarePen,
+          },
+          {
+            title: "Delete Category",
+            href: "/admin/categories/delete",
+            icon: Trash,
+          },
+        ],
       },
       {
         title: "Brands",
         href: "/admin/brands",
-        icon: Boxes,
+        icon: Ribbon,
+        children: [
+          {
+            title: "Add Brand",
+            href: "/admin/brands/create",
+            icon: Plus,
+          },
+          {
+            title: "Update Brand",
+            href: "/admin/brands/update",
+            icon: SquarePen,
+          },
+          {
+            title: "Delete Brand",
+            href: "/admin/brands/delete",
+            icon: Trash,
+          },
+        ],
       },
       {
         title: "Units",
@@ -76,7 +131,7 @@ export const adminSidebarConfig: SidebarSection[] = [
       {
         title: "Processing",
         href: "/admin/orders/processing",
-        icon: Receipt,
+        icon: RefreshCcw,
       },
       {
         title: "Shipped",
@@ -113,7 +168,7 @@ export const adminSidebarConfig: SidebarSection[] = [
       {
         title: "Reviews",
         href: "/admin/reviews",
-        icon: FileText,
+        icon: UserStar,
       },
     ],
   },
@@ -124,12 +179,22 @@ export const adminSidebarConfig: SidebarSection[] = [
       {
         title: "Coupons",
         href: "/admin/coupons",
-        icon: CreditCard,
+        icon: Puzzle,
       },
       {
         title: "Banners",
         href: "/admin/banners",
+        icon: AppWindow,
+      },
+      {
+        title: "Affiliates",
+        href: "/admin/affiliates",
         icon: Megaphone,
+      },
+      {
+        title: "Promotions",
+        href: "/admin/promotions",
+        icon: HandHelping,
       },
     ],
   },
@@ -145,7 +210,12 @@ export const adminSidebarConfig: SidebarSection[] = [
       {
         title: "Recommendations",
         href: "/admin/ai-recommendations",
-        icon: Sparkles,
+        icon: BadgeCheck,
+      },
+      {
+        title: "Analytics",
+        href: "/admin/ai-analytics",
+        icon: ChartNoAxesCombined,
       },
     ],
   },
@@ -156,7 +226,17 @@ export const adminSidebarConfig: SidebarSection[] = [
       {
         title: "Sales Reports",
         href: "/admin/reports/sales",
-        icon: BarChart3,
+        icon: ClipboardMinus,
+      },
+      {
+        title: "Product Reports",
+        href: "/admin/reports/products",
+        icon: ClipboardMinus,
+      },
+      {
+        title: "Customer Reports",
+        href: "/admin/reports/customers",
+        icon: ClipboardMinus,
       },
     ],
   },
