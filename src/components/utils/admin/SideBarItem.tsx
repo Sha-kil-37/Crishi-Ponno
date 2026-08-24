@@ -16,7 +16,7 @@ interface SidebarItemProps {
 export default function SidebarItem({ item, level = 0 }: SidebarItemProps) {
   const pathname = usePathname();
   const hasChildren = Boolean(item.children && item.children.length > 0);
-
+  //
   const isChildActive = item.children?.some(
     (child) =>
       child.href &&
@@ -42,31 +42,35 @@ export default function SidebarItem({ item, level = 0 }: SidebarItemProps) {
   if (hasChildren) {
     return (
       <div>
-        <button
-          type="button"
-          onClick={() => setOpen((previous) => !previous)}
-          aria-expanded={open}
+        <div
           className={`
             flex w-full items-center justify-between rounded-lg
-            px-3 py-2.5 text-sm font-medium
-            transition-colors
-            hover:bg-muted
-            ${isChildActive ? "bg-muted text-foreground" : "text-muted-foreground"}
+            text-sm font-medium transition-colors
+            ${isActive ? "bg-primary text-primary-foreground" : "text-muted-foreground"}
           `}
         >
-          <span className="flex items-center gap-3">
+          <Link
+            href={item.href ?? "#"}
+            aria-current={isActive ? "page" : undefined}
+            className="flex min-w-0 flex-1 items-center gap-3 px-3 py-2.5 hover:bg-muted hover:text-foreground"
+          >
             <Icon className="size-5" />
 
             <span>{item.title}</span>
-          </span>
+          </Link>
 
-          <ChevronDown
-            className={`
-              size-4 transition-transform
-              ${open ? "rotate-180" : ""}
-            `}
-          />
-        </button>
+          <button
+            type="button"
+            onClick={() => setOpen((previous) => !previous)}
+            aria-expanded={open}
+            aria-label={`${open ? "Collapse" : "Expand"} ${item.title} menu`}
+            className="p-3 hover:bg-muted hover:text-foreground"
+          >
+            <ChevronDown
+              className={`size-4 transition-transform ${open ? "rotate-180" : ""}`}
+            />
+          </button>
+        </div>
 
         {open && (
           <div className="ml-5 mt-1 space-y-1 border-l pl-3">

@@ -1,19 +1,19 @@
-
 "use client";
-
+//
 import Link from "next/link";
 import { adminSidebarConfig } from "@/config/adminSideBar";
 import SideBarItem from "@/components/utils/admin/SideBarItem";
 
 //
 export default function Sidebar() {
+  //
   return (
     <aside className="hidden h-screen w-64 shrink-0 border-r bg-background lg:block">
       <div className="flex h-full flex-col">
         {/* Logo */}
         <div className="flex h-16 items-center border-b px-6">
           <Link href="/admin" className="text-xl font-bold">
-            Crishi Ponno
+            কৃষি পন্য
           </Link>
         </div>
 
