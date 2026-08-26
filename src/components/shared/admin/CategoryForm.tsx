@@ -88,16 +88,15 @@ export default function CategoryForm() {
   //  handle form submission
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const result = categorySchema.safeParse({
+    const category = categorySchema.safeParse({
       name,
       description,
       parent: parent || undefined,
       status,
       image,
     });
-    if (!result.success) {
-      const fieldErrors = result.error.flatten().fieldErrors;
-
+    if (!category.success) {
+      const fieldErrors = category.error.flatten().fieldErrors;
       setErrors({
         name: fieldErrors.name?.[0],
         description: fieldErrors.description?.[0],
@@ -105,22 +104,37 @@ export default function CategoryForm() {
         status: fieldErrors.status?.[0],
         image: fieldErrors.image?.[0],
       });
-
       return;
     }
+    //
+    const formData = new FormData();
+    formData.append("name", category.data.name);
+    formData.append("description", category.data.description);
+    formData.append("parent", category.data.parent ?? "");
+    formData.append("status", category.data.status);
+    formData.append("image", category.data.image);
+    void fetch("/api/admin/categories", {
+      method: "POST",
+      body: formData,
+    }).then(async (response) => {
+      if (!response.ok) {
+        const result = await response.json();
+        setErrors({
+          name:
+            response.status === 409 ? result.error : result.error?.name?.[0],
+        });
+        return;
+      }
 
-    setErrors({});
-    setIsSaved(true);
-    console.log(
-      "Category data is valid and ready to be submitted:",
-      result.data,
-    );
+      setErrors({});
+      setIsSaved(true);
+    });
   };
   //
   const handleReset = () => {
     setName("");
     setDescription("");
-    setParent("");
+    setParent("top-level category");
     setStatus("Published");
     setImage(null);
     setErrors({});
