@@ -5,14 +5,13 @@ import Link from "next/link";
 import { ChevronDown } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-
 import type { SidebarItem as SidebarItem } from "@/types/admin/adminSideBar";
-
+//
 interface SidebarItemProps {
   item: SidebarItem;
   level?: number;
 }
-
+//
 export default function SidebarItem({ item, level = 0 }: SidebarItemProps) {
   const pathname = usePathname();
   const hasChildren = Boolean(item.children && item.children.length > 0);

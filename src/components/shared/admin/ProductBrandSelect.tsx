@@ -30,6 +30,7 @@ export default function ProductBrandSelect({
 }: ProductBrandSelectProps) {
   return (
     <Select
+      required
       value={value}
       onValueChange={(value) => {
         if (value !== null) {

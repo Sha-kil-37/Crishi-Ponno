@@ -30,6 +30,7 @@ export default function ProductStatusSelect({
 }: ProductStatusSelectProps) {
   return (
     <Select
+      required
       value={value}
       onValueChange={(value) => {
         if (value !== null) {
