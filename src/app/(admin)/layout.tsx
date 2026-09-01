@@ -15,8 +15,14 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
 
       {/* Main Content */}
       <div className="flex flex-1 flex-col">
-        <header className="h-16 border-b px-6 flex items-center">
-          Admin Header
+        <header className="h-16 border-b px-6 flex items-center bg-[#dcebdc]">
+          <marquee
+            behavior="alternate"
+            direction="left"
+            className="text-lg font-semibold"
+          >
+            Welcome to the Crishi Ponno  Admin Panel
+          </marquee>
         </header>
 
         <main className="flex-1">{children}</main>

@@ -7,6 +7,7 @@ import { createSlug } from "@/lib/admin/createSlug";
 import cloudinary from "@/lib/cloudinary";
 //
 export async function POST(request: Request) {
+  //
   try {
     const formData = await request.formData();
     const image = formData.get("image");

@@ -126,24 +126,24 @@ export default function CategoryForm() {
         return;
       }
 
+      setName("");
+      setDescription("");
+      setParent("top-level category");
+      setStatus("Published");
+      setImage(null);
       setErrors({});
       setIsSaved(true);
+      setTimeout(() => {
+        setIsSaved(false);
+      }, 3000);
     });
   };
   //
-  const handleReset = () => {
-    setName("");
-    setDescription("");
-    setParent("top-level category");
-    setStatus("Published");
-    setImage(null);
-    setErrors({});
-    setIsSaved(false);
-  };
+
   //
 
   return (
-    <main className="mx-auto max-w-7xl">
+    <main className="px-10 py-6 sm:px-6 lg:px-8">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <Link
@@ -165,7 +165,14 @@ export default function CategoryForm() {
         </div>
         <div className="flex items-center gap-3">
           <Link
-            onClick={handleReset}
+            onClick={() => {
+              setName("");
+              setDescription("");
+              setParent("top-level category");
+              setStatus("Published");
+              setImage(null);
+              setErrors({});
+            }}
             href="/admin/categories"
             className="rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
           >
