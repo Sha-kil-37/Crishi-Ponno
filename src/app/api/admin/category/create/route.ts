@@ -15,7 +15,7 @@ export async function POST(request: Request) {
     const parsed = categorySchema.safeParse({
       name: formData.get("name"),
       description: formData.get("description"),
-      parent: formData.get("parent") || undefined,
+      parent: formData.get("parent"),
       status: formData.get("status"),
       image: image instanceof File ? image : null,
     });
@@ -80,6 +80,7 @@ export async function POST(request: Request) {
     // Save Cloudinary information in MongoDB
     const category = await Category.create({
       name: parsed.data.name,
+      parent: parsed.data.parent,
       slug: createSlug({ value: parsed.data.name }),
       description: parsed.data.description,
       status: parsed.data.status,
@@ -88,7 +89,7 @@ export async function POST(request: Request) {
         public_id: result.public_id,
       },
     });
-
+    //
     return NextResponse.json(
       {
         msg: "Category created successfully.",

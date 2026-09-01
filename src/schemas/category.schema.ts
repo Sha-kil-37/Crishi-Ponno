@@ -14,7 +14,7 @@ export const categorySchema = z.object({
     .min(10, "Description must be at least 10 characters")
     .max(160, "Description cannot exceed 160 characters"),
   //
-  parent: z.string().optional(),
+  parent: z.string().trim().min(2).max(50),
   status: z.enum(["Published", "Draft"]),
   image: z
     .instanceof(File, { message: "Category image is required" })

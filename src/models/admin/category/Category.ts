@@ -15,7 +15,7 @@ const CategorySchema = new Schema(
     },
     parent: {
       type: String,
-      default: null,
+      required: true,
       trim: true,
     },
     slug: {

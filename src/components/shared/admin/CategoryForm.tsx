@@ -87,59 +87,62 @@ export default function CategoryForm() {
   };
   //  handle form submission
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const category = categorySchema.safeParse({
-      name: name.trim(),
-      description: description.trim(),
-      parent: parent || undefined,
-      status: status,
-      image: image,
-    });
-    if (!category.success) {
-      const fieldErrors = category.error.flatten().fieldErrors;
-      setErrors({
-        name: fieldErrors.name?.[0],
-        description: fieldErrors.description?.[0],
-        parent: fieldErrors.parent?.[0],
-        status: fieldErrors.status?.[0],
-        image: fieldErrors.image?.[0],
+    try {
+      event.preventDefault();
+      const category = categorySchema.safeParse({
+        name: name.trim(),
+        description: description.trim(),
+        parent: parent || undefined,
+        status: status,
+        image: image,
       });
-      return;
-    }
-    //
-    const formData = new FormData();
-    formData.append("name", category.data.name);
-    formData.append("description", category.data.description);
-    formData.append("parent", category.data.parent ?? "");
-    formData.append("status", category.data.status);
-    formData.append("image", category.data.image);
-    void fetch("/api/admin/categories", {
-      method: "POST",
-      body: formData,
-    }).then(async (response) => {
-      if (!response.ok) {
-        const result = await response.json();
+      if (!category.success) {
+        const fieldErrors = category.error.flatten().fieldErrors;
         setErrors({
-          name:
-            response.status === 409 ? result.error : result.error?.name?.[0],
+          name: fieldErrors.name?.[0],
+          description: fieldErrors.description?.[0],
+          parent: fieldErrors.parent?.[0],
+          status: fieldErrors.status?.[0],
+          image: fieldErrors.image?.[0],
         });
         return;
       }
+      //
 
-      setName("");
-      setDescription("");
-      setParent("top-level category");
-      setStatus("Published");
-      setImage(null);
-      setErrors({});
-      setIsSaved(true);
-      setTimeout(() => {
-        setIsSaved(false);
-      }, 3000);
-    });
+      const formData = new FormData();
+      formData.append("name", category.data.name);
+      formData.append("description", category.data.description);
+      formData.append("parent", category.data.parent ?? "");
+      formData.append("status", category.data.status);
+      formData.append("image", category.data.image);
+      void fetch("/api/admin/category/create", {
+        method: "POST",
+        body: formData,
+      }).then(async (response) => {
+        if (!response.ok) {
+          const result = await response.json();
+          setErrors({
+            name:
+              response.status === 409 ? result.error : result.error?.name?.[0],
+          });
+          return;
+        }
+
+        setName("");
+        setDescription("");
+        setParent("top-level category");
+        setStatus("Published");
+        setImage(null);
+        setErrors({});
+        setIsSaved(true);
+        setTimeout(() => {
+          setIsSaved(false);
+        }, 3000);
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
-  //
-
   //
 
   return (
@@ -153,9 +156,7 @@ export default function CategoryForm() {
             <ArrowLeft size={16} />
             Back to categories
           </Link>
-          <p className="text-sm font-medium uppercase tracking-[0.2em] text-[#1f7a1f]">
-            Catalogue structure
-          </p>
+
           <h1 className="mt-2 text-3xl font-bold tracking-tight text-slate-900">
             Create a category
           </h1>
@@ -164,7 +165,7 @@ export default function CategoryForm() {
           </p>
         </div>
         <div className="flex items-center gap-3">
-          <Link
+          <button
             onClick={() => {
               setName("");
               setDescription("");
@@ -173,11 +174,10 @@ export default function CategoryForm() {
               setImage(null);
               setErrors({});
             }}
-            href="/admin/categories"
-            className="rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
+            className="rounded-xl cursor-pointer border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
           >
             Cancel
-          </Link>
+          </button>
           <button
             type="submit"
             form="category-form"
@@ -190,7 +190,7 @@ export default function CategoryForm() {
       </div>
 
       {isSaved && (
-        <div className="flex items-center gap-2 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-semibold text-emerald-800">
+        <div className="flex items-center gap-2 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-semibold text-emerald-800 mt-5">
           <Check size={17} />
           Category details are ready to be connected to your API.
         </div>
@@ -200,7 +200,7 @@ export default function CategoryForm() {
         id="category-form"
         name="category-form"
         onSubmit={handleSubmit}
-        className="grid gap-6 xl:grid-cols-[1.45fr_0.75fr]"
+        className="grid gap-6 xl:grid-cols-[1.45fr_0.75fr] mt-10"
       >
         <section className="space-y-6 rounded-2xl border border-[#dfeadf] bg-white p-5 shadow-sm sm:p-6">
           <div className="flex items-center gap-3 border-b border-slate-100 pb-5">
