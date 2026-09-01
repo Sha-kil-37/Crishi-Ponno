@@ -29,10 +29,17 @@ const CategorySchema = new Schema(
       type: String,
       enum: ["Published", "Draft"],
       required: true,
+      default: "Draft",
     },
     image: {
-      type: String,
-      default: null,
+      url: {
+        type: String,
+        required: false,
+      },
+      public_id: {
+        type: String,
+        required: false,
+      },
     },
   },
   { timestamps: true },

@@ -1,7 +1,7 @@
 // schemas/category.schema.ts
 
 import { z } from "zod";
-
+//
 export const categorySchema = z.object({
   name: z
     .string()
@@ -13,7 +13,7 @@ export const categorySchema = z.object({
     .trim()
     .min(10, "Description must be at least 10 characters")
     .max(160, "Description cannot exceed 160 characters"),
-
+  //
   parent: z.string().optional(),
   status: z.enum(["Published", "Draft"]),
   image: z

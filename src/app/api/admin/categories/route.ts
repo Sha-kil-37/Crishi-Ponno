@@ -4,11 +4,13 @@ import db from "@/lib/db";
 import Category from "@/models/admin/category/Category";
 import { categorySchema } from "@/schemas/category.schema";
 import { createSlug } from "@/lib/admin/createSlug";
+import cloudinary from "@/lib/cloudinary";
 //
 export async function POST(request: Request) {
   try {
     const formData = await request.formData();
     const image = formData.get("image");
+    // Parse and validate the form data
     const parsed = categorySchema.safeParse({
       name: formData.get("name"),
       description: formData.get("description"),
@@ -16,7 +18,7 @@ export async function POST(request: Request) {
       status: formData.get("status"),
       image: image instanceof File ? image : null,
     });
-
+    //
     if (!parsed.success) {
       return NextResponse.json(
         { error: parsed.error.flatten().fieldErrors },
@@ -24,22 +26,72 @@ export async function POST(request: Request) {
       );
     }
 
+    //  Connect to MongoDB
+
     await db();
-    const imageData = parsed.data.image
-      ? `data:${parsed.data.image.type};base64,${Buffer.from(
-          await parsed.data.image.arrayBuffer(),
-        ).toString("base64")}`
-      : null;
-    console.log(imageData);
-    // const category = await Category.create({
-    //   ...parsed.data,
-    //   slug: createSlug({ value: formData.get("name") as string }),
-    //   image: imageData,
-    // });
+
+    // Check duplicate category
+
+    const existingCategory = await Category.findOne({
+      $or: [
+        { name: parsed.data.name },
+        { slug: createSlug({ value: parsed.data.name }) },
+      ],
+    }).lean();
+
+    if (existingCategory) {
+      return NextResponse.json(
+        {
+          error: "A category with this name already exists.",
+        },
+        { status: 409 },
+      );
+    }
+    // Convert File → Buffer
+    const bytes = await parsed.data.image.arrayBuffer();
+    const buffer = Buffer.from(bytes);
+
+    // Upload to Cloudinary
+    const uploadResult = await new Promise((resolve, reject) => {
+      const uploadStream = cloudinary.uploader.upload_stream(
+        {
+          folder: "crishi-ponno/categories",
+          resource_type: "image",
+        },
+        (error, result) => {
+          if (error) {
+            reject(error);
+          } else {
+            resolve(result);
+          }
+        },
+      );
+
+      uploadStream.end(buffer);
+    });
+
+    const result = uploadResult as {
+      secure_url: string;
+      public_id: string;
+    };
+    // call db to ensure connection is established before proceeding
+    await db();
+    // Save Cloudinary information in MongoDB
+    const category = await Category.create({
+      name: parsed.data.name,
+      slug: createSlug({ value: parsed.data.name }),
+      description: parsed.data.description,
+      status: parsed.data.status,
+      image: {
+        url: result.secure_url,
+        public_id: result.public_id,
+      },
+    });
 
     return NextResponse.json(
       {
         msg: "Category created successfully.",
+        category: category,
       },
       { status: 201 },
     );
@@ -58,7 +110,6 @@ export async function POST(request: Request) {
       );
     }
 
-    console.error("Category creation failed:", error);
     return NextResponse.json(
       { error: "Unable to create category." },
       { status: 500 },

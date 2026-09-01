@@ -89,11 +89,11 @@ export default function CategoryForm() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const category = categorySchema.safeParse({
-      name,
-      description,
+      name: name.trim(),
+      description: description.trim(),
       parent: parent || undefined,
-      status,
-      image,
+      status: status,
+      image: image,
     });
     if (!category.success) {
       const fieldErrors = category.error.flatten().fieldErrors;
