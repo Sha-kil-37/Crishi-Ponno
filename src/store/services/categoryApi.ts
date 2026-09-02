@@ -6,9 +6,9 @@ export const categoryApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: "/api/admin/category",
   }),
-
+  //
   tagTypes: ["Category"],
-
+  //
   endpoints: (builder) => ({
     getAllCategory: builder.query<Category[], void>({
       query: () => "/all-category",

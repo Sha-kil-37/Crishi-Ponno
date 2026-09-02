@@ -1,79 +1,46 @@
 //
 "use client";
-
+//
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import {
-  ChevronRight,
   FolderTree,
   Layers3,
-  MoreHorizontal,
-  PencilLine,
   Plus,
   Search,
   ShoppingBasket,
-  Trash2,
 } from "lucide-react";
-
-const categories = [
-  {
-    name: "Vegetables",
-    slug: "vegetables",
-    description: "Fresh, seasonal and organic produce",
-    children: 2,
-    products: 286,
-    updated: "Today, 09:42 AM",
-    accent: "bg-lime-100 text-lime-800",
-    status: "Published",
-  },
-  {
-    name: "Fruits",
-    slug: "fruits",
-    description: "Orchard favourites and tropical harvests",
-    children: 2,
-    products: 174,
-    updated: "Yesterday, 04:18 PM",
-    accent: "bg-orange-100 text-orange-800",
-    status: "Published",
-  },
-  {
-    name: "Tree seedlings",
-    slug: "tree-seedlings",
-    description: "Strong starts for greener farms",
-    children: 2,
-    products: 96,
-    updated: "18 Aug 2026",
-    accent: "bg-emerald-100 text-emerald-800",
-    status: "Published",
-  },
-  {
-    name: "Agricultural equipment",
-    slug: "agricultural-equipment",
-    description: "Tools and equipment for every field",
-    children: 2,
-    products: 68,
-    updated: "16 Aug 2026",
-    accent: "bg-sky-100 text-sky-800",
-    status: "Draft",
-  },
-];
+import Category from "@/components/shared/admin/Category";
+import { useGetAllCategoryQuery } from "@/store/services/categoryApi";
 
 export default function Page() {
+  const { data, isLoading, isFetching, isError } = useGetAllCategoryQuery();
   const [query, setQuery] = useState("");
   const [status, setStatus] = useState("All status");
   const filteredCategories = useMemo(
-    () =>
-      categories.filter((category) => {
-        const matchesQuery = `${category.name} ${category.description}`
-          .toLowerCase()
-          .includes(query.toLowerCase());
-        return (
-          matchesQuery &&
-          (status === "All status" || category.status === status)
-        );
-      }),
-    [query, status],
-  );
+  () =>
+    data?.filter((category) => {
+      const matchesQuery = `${category.name} ${category.description}`
+        .toLowerCase()
+        .includes(query.toLowerCase());
+
+      return (
+        matchesQuery &&
+        (status === "All status" || category.status === status)
+      );
+    }) ?? [],
+  [data, query, status],
+);
+
+  if (isLoading) {
+    return <p>Loading categories...</p>;
+  }
+
+  if (isError) {
+    return <p className="text-red-500">Failed to load categories.</p>;
+  }
+  //
+  console.log(data);
   //
   return (
     <main className="space-y-6">
@@ -104,7 +71,6 @@ export default function Page() {
       </section>
 
       <section className="grid gap-4 sm:grid-cols-3">
-       
         {[
           {
             label: "Total categories",
@@ -180,87 +146,11 @@ export default function Page() {
         </div>
 
         <div className="mt-5 grid gap-4 xl:grid-cols-2">
-          {filteredCategories.map((category) => (
-            <article
-              key={category.slug}
-              className="group rounded-xl border border-slate-200 p-4 transition hover:border-emerald-300 hover:shadow-md"
-            >
-              <div className="flex items-start justify-between gap-4">
-                <div className="flex min-w-0 items-center gap-3">
-                  <div
-                    className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl text-lg font-bold ${category.accent}`}
-                  >
-                    {category.name.slice(0, 1)}
-                  </div>
-                  <div className="min-w-0">
-                    <h3 className="truncate font-bold text-slate-900">
-                      {category.name}
-                    </h3>
-                    <p className="mt-1 truncate text-sm text-slate-500">
-                      {category.description}
-                    </p>
-                  </div>
-                </div>
-                <button
-                  aria-label={`More options for ${category.name}`}
-                  className="rounded-lg p-1.5 text-slate-400 hover:bg-slate-100 hover:text-slate-700"
-                >
-                  <MoreHorizontal size={19} />
-                </button>
-              </div>
-              <div className="mt-5 grid grid-cols-3 border-t border-slate-100 pt-4">
-                <div>
-                  <p className="text-xs text-slate-400">Products</p>
-                  <p className="mt-1 font-bold text-slate-800">
-                    {category.products}
-                  </p>
-                </div>
-                <div>
-                  <p className="text-xs text-slate-400">Subcategories</p>
-                  <p className="mt-1 font-bold text-slate-800">
-                    {category.children}
-                  </p>
-                </div>
-                <div>
-                  <p className="text-xs text-slate-400">Status</p>
-                  <p
-                    className={`mt-1 text-sm font-bold ${category.status === "Draft" ? "text-amber-700" : "text-emerald-700"}`}
-                  >
-                    {category.status}
-                  </p>
-                </div>
-              </div>
-              <div className="mt-4 flex items-center justify-between border-t border-slate-100 pt-3">
-                <p className="text-xs text-slate-400">
-                  Updated {category.updated}
-                </p>
-                <div className="flex items-center gap-1">
-                  <Link
-                    href="/admin/categories/update"
-                    aria-label={`Edit ${category.name}`}
-                    className="rounded-lg p-2 text-slate-500 hover:bg-slate-100 hover:text-[#1f7a1f]"
-                  >
-                    <PencilLine size={16} />
-                  </Link>
-                  <Link
-                    href="/admin/categories/delete"
-                    aria-label={`Delete ${category.name}`}
-                    className="rounded-lg p-2 text-slate-500 hover:bg-rose-50 hover:text-rose-600"
-                  >
-                    <Trash2 size={16} />
-                  </Link>
-                  <button
-                    aria-label={`View ${category.name}`}
-                    className="rounded-lg p-2 text-[#1f7a1f] hover:bg-emerald-50"
-                  >
-                    <ChevronRight size={17} />
-                  </button>
-                </div>
-              </div>
-            </article>
+          {filteredCategories?.map((category) => (
+            <Category key={category.slug} category={category} />
           ))}
         </div>
-        {filteredCategories.length === 0 && (
+        {filteredCategories?.length === 0 && (
           <p className="py-10 text-center text-sm text-slate-500">
             No categories match your search.
           </p>

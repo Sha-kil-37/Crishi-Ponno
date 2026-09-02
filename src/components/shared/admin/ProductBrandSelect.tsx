@@ -1,5 +1,5 @@
 "use client";
-
+//
 import {
   Select,
   SelectContent,
@@ -7,12 +7,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-
+//
 export interface ProductBrand {
   _id: string;
   name: string;
 }
-
+//
 interface ProductBrandSelectProps {
   brands: ProductBrand[];
   value?: string;
@@ -20,7 +20,7 @@ interface ProductBrandSelectProps {
   placeholder?: string;
   disabled?: boolean;
 }
-
+//
 export default function ProductBrandSelect({
   brands,
   value,

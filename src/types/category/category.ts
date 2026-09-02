@@ -1,10 +1,11 @@
+//
 export interface Category {
   _id: string;
   name: string;
   slug: string;
   description?: string;
   image?: {
-    publicId?: string;
+    public_id?: string;
     url?: string;
   };
   parent?: string;

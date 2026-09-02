@@ -34,11 +34,11 @@ const CategorySchema = new Schema(
     image: {
       url: {
         type: String,
-        required: false,
+        required: true,
       },
       public_id: {
         type: String,
-        required: false,
+        required: true,
       },
     },
   },
