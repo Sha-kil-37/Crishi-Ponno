@@ -10,67 +10,59 @@ import {
   Save,
   Sprout,
 } from "lucide-react";
-import { categorySchema } from "@/schemas/category.schema";
-import { useGetAllCategoryQuery } from "@/store/services/categoryApi";
-//
+import { brandSchema } from "@/schemas/brand.schema";
 
 //
-export default function CategoryForm() {
-  const { data, isLoading, isFetching, isError } = useGetAllCategoryQuery();
+export default function BrandForm() {
+  //   const { data, isLoading, isFetching, isError } = useGetAllCategoryQuery();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [parent, setParent] = useState("Top-level category");
   const [status, setStatus] = useState<"Published" | "Draft">("Published");
   const [isSaved, setIsSaved] = useState(false);
   const [image, setImage] = useState<File | null>(null);
   const [errors, setErrors] = useState<
-    Partial<
-      Record<"name" | "description" | "parent" | "status" | "image", string>
-    >
+    Partial<Record<"name" | "description" | "status" | "image", string>>
   >({});
   //
-  console.log(data);
-  const categoryInitial = useMemo(
+
+  const brandInitial = useMemo(
     () => name.trim().slice(0, 1).toUpperCase() || "C",
     [name],
   );
-  //  handle category name
-  const handleCategoryName = (value: string) => {
+  //  handle brand name
+  const handleBrandName = (value: string) => {
     setName(value);
     setErrors((prev) => ({ ...prev, name: undefined }));
   };
-  // handle category description
-  const handleCategoryDescription = (value: string) => {
+  // handle brand description
+  const handleBrandDescription = (value: string) => {
     if (value.length <= 160) {
       setDescription(value);
       setErrors((prev) => ({ ...prev, description: undefined }));
     }
   };
-  // handle parent category
-  const handleParentCategory = (value: string) => {
-    setParent(value);
-  };
-  // handle category status
-  const handleCategoryStatus = (value: string) => {
+
+  // handle brand status
+  const handleBrandStatus = (value: string) => {
     if (value === "Published" || value === "Draft") {
       setStatus(value);
       setErrors((prev) => ({ ...prev, status: undefined }));
     }
   };
   //  handle image input
-  const handleCategoryImage = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleBrandImage = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
 
     if (!file) return;
 
-    const result = categorySchema.shape.image.safeParse(file);
+    const result = brandSchema.shape.image.safeParse(file);
 
     if (!result.success) {
       setErrors((prev) => ({
         ...prev,
         image: result.error.issues[0]?.message,
       }));
-
+      //
       setImage(null);
       return;
     }
@@ -86,19 +78,17 @@ export default function CategoryForm() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     try {
       event.preventDefault();
-      const category = categorySchema.safeParse({
+      const brand = brandSchema.safeParse({
         name: name.trim(),
         description: description.trim(),
-        parent: parent || undefined,
         status: status,
         image: image,
       });
-      if (!category.success) {
-        const fieldErrors = category.error.flatten().fieldErrors;
+      if (!brand.success) {
+        const fieldErrors = brand.error.flatten().fieldErrors;
         setErrors({
           name: fieldErrors.name?.[0],
           description: fieldErrors.description?.[0],
-          parent: fieldErrors.parent?.[0],
           status: fieldErrors.status?.[0],
           image: fieldErrors.image?.[0],
         });
@@ -107,12 +97,11 @@ export default function CategoryForm() {
       //
 
       const formData = new FormData();
-      formData.append("name", category.data.name);
-      formData.append("description", category.data.description);
-      formData.append("parent", category.data.parent ?? "");
-      formData.append("status", category.data.status);
-      formData.append("image", category.data.image);
-      void fetch("/api/admin/category/create", {
+      formData.append("name", brand.data.name);
+      formData.append("description", brand.data.description);
+      formData.append("status", brand.data.status);
+      formData.append("image", brand.data.image);
+      void fetch("/api/admin/brand/create", {
         method: "POST",
         body: formData,
       }).then(async (response) => {
@@ -127,7 +116,6 @@ export default function CategoryForm() {
 
         setName("");
         setDescription("");
-        setParent("top-level category");
         setStatus("Published");
         setImage(null);
         setErrors({});
@@ -137,7 +125,7 @@ export default function CategoryForm() {
         }, 3000);
       });
     } catch (error) {
-      console.error("Error submitting category form:", error);
+      console.error("Error submitting brand form:", error);
       setErrors({
         name: "An error occurred while submitting the form.",
       });
@@ -150,15 +138,15 @@ export default function CategoryForm() {
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <Link
-            href="/admin/categories"
+            href="/admin/brands"
             className="mb-3 inline-flex items-center gap-2 text-sm font-semibold text-[#1f7a1f] hover:text-[#145a14]"
           >
             <ArrowLeft size={16} />
-            Back to categories
+            Back to brands
           </Link>
 
           <h1 className="mt-2 text-3xl font-bold tracking-tight text-slate-900">
-            Create a category
+            Create a brand
           </h1>
           <p className="mt-1 text-sm text-slate-500">
             Give products a clear and discoverable place in your shop.
@@ -169,7 +157,6 @@ export default function CategoryForm() {
             onClick={() => {
               setName("");
               setDescription("");
-              setParent("top-level category");
               setStatus("Published");
               setImage(null);
               setErrors({});
@@ -180,11 +167,11 @@ export default function CategoryForm() {
           </button>
           <button
             type="submit"
-            form="category-form"
+            form="brand-form"
             className="inline-flex items-center gap-2 rounded-xl bg-[#1f7a1f] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#145a14] cursor-pointer"
           >
             <Save size={16} />
-            Save category
+            Save brand
           </button>
         </div>
       </div>
@@ -192,13 +179,13 @@ export default function CategoryForm() {
       {isSaved && (
         <div className="flex items-center gap-2 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-semibold text-emerald-800 mt-5">
           <Check size={17} />
-          Category details are ready to be connected to your API.
+          Brand details are ready to be connected to your API.
         </div>
       )}
 
       <form
-        id="category-form"
-        name="category-form"
+        id="brand-form"
+        name="brand-form"
         onSubmit={handleSubmit}
         className="grid gap-6 xl:grid-cols-[1.45fr_0.75fr] mt-10"
       >
@@ -208,7 +195,7 @@ export default function CategoryForm() {
               <Layers3 size={20} />
             </div>
             <div>
-              <h2 className="font-bold text-slate-900">Category details</h2>
+              <h2 className="font-bold text-slate-900">Brand details</h2>
               <p className="text-sm text-slate-500">
                 Set the basics for this product group.
               </p>
@@ -217,21 +204,19 @@ export default function CategoryForm() {
           <div className="grid gap-5 md:grid-cols-2">
             <div>
               <label
-                htmlFor="category-name"
+                htmlFor="brand-name"
                 className="mb-2 block text-sm font-semibold text-slate-700"
               >
-                Category name
+                Brand name
               </label>
               <input
                 required
-                name="category-name"
-                id="category-name"
+                name="brand-name"
+                id="brand-name"
                 value={name}
-                onChange={(event) => handleCategoryName(event.target.value)}
+                onChange={(event) => handleBrandName(event.target.value)}
                 aria-invalid={!!errors.name}
-                aria-describedby={
-                  errors.name ? "category-name-error" : undefined
-                }
+                aria-describedby={errors.name ? "brand-name-error" : undefined}
                 className={`w-full rounded-xl border bg-slate-50 px-3 py-3 text-sm outline-none ${
                   errors.name
                     ? "border-red-500 focus:ring-2 focus:ring-red-100"
@@ -241,7 +226,7 @@ export default function CategoryForm() {
 
               {errors.name && (
                 <p
-                  id="category-name-error"
+                  id="brand-name-error"
                   className="mt-1.5 text-xs font-medium text-red-600"
                 >
                   {errors.name}
@@ -249,48 +234,25 @@ export default function CategoryForm() {
               )}
             </div>
 
-            <div>
-              <label
-                htmlFor="parent-category"
-                className="mb-2 block text-sm font-semibold text-slate-700"
-              >
-                Parent category{" "}
-                <span className="font-normal text-slate-400">(optional)</span>
-              </label>
-              <select
-                name="parent-category"
-                id="parent-category"
-                value={parent}
-                onChange={(event) => handleParentCategory(event.target.value)}
-                className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-3 text-sm text-slate-800 outline-none focus:border-[#1f7a1f] focus:bg-white focus:ring-2 focus:ring-emerald-100 cursor-pointer"
-              >
-                <option value="">Top-level category</option>
-                {data?.map((category, i) => (
-                  <option key={i}>{category?.name}</option>
-                ))}
-              </select>
-            </div>
             <div className="md:col-span-2">
               <label
-                htmlFor="category-description"
+                htmlFor="brand-description"
                 className="mb-2 block text-sm font-semibold text-slate-700"
               >
                 Description
               </label>
               <textarea
-                id="category-description"
-                name="category-description"
+                id="brand-description"
+                name="brand-description"
                 value={description}
-                onChange={(event) =>
-                  handleCategoryDescription(event.target.value)
-                }
+                onChange={(event) => handleBrandDescription(event.target.value)}
                 rows={5}
                 required
                 aria-invalid={!!errors.description}
                 aria-describedby={
-                  errors.description ? "category-description-error" : undefined
+                  errors.description ? "brand-description-error" : undefined
                 }
-                placeholder="Tell customers what they will find in this category..."
+                placeholder="Tell customers what they will find in this brand..."
                 className={`w-full resize-none rounded-xl border bg-slate-50 px-3 py-3 text-sm text-slate-800 outline-none transition focus:bg-white focus:ring-2 focus:ring-emerald-100 ${
                   errors.description
                     ? "border-red-500 focus:ring-red-100"
@@ -299,7 +261,7 @@ export default function CategoryForm() {
               />
               {errors.description && (
                 <p
-                  id="category-description-error"
+                  id="brand-description-error"
                   className="mt-1.5 text-xs font-medium text-red-600"
                 >
                   {errors.description}
@@ -311,20 +273,20 @@ export default function CategoryForm() {
             </div>
             <div>
               <label
-                htmlFor="category-status"
+                htmlFor="brand-status"
                 className="mb-2 block text-sm font-semibold text-slate-700"
               >
                 Visibility
               </label>
               <select
                 required
-                name="category-status"
-                id="category-status"
+                name="brand-status"
+                id="brand-status"
                 value={status}
-                onChange={(event) => handleCategoryStatus(event.target.value)}
+                onChange={(event) => handleBrandStatus(event.target.value)}
                 aria-invalid={!!errors.status}
                 aria-describedby={
-                  errors.status ? "category-status-error" : undefined
+                  errors.status ? "brand-status-error" : undefined
                 }
                 className={`w-full rounded-xl border bg-slate-50 px-3 py-3 text-sm text-slate-800 outline-none focus:bg-white focus:ring-2 cursor-pointer ${
                   errors.status
@@ -337,7 +299,7 @@ export default function CategoryForm() {
               </select>
               {errors.status && (
                 <p
-                  id="category-status-error"
+                  id="brand-status-error"
                   className="mt-1.5 text-xs font-medium text-red-600"
                 >
                   {errors.status}
@@ -351,7 +313,7 @@ export default function CategoryForm() {
           <section className="rounded-2xl border border-[#dfeadf] bg-white p-5 shadow-sm">
             <div className="flex items-center justify-between">
               <div>
-                <h2 className="font-bold text-slate-900">Category image</h2>
+                <h2 className="font-bold text-slate-900">Brand image</h2>
                 <p className="mt-1 text-sm text-slate-500">
                   Shown in your shop navigation.
                 </p>
@@ -364,14 +326,14 @@ export default function CategoryForm() {
               className="mt-5 flex min-h-40 w-full flex-col items-center justify-center rounded-xl border-2 border-dashed border-emerald-200 bg-emerald-50/60 px-4 text-center transition hover:border-[#1f7a1f] hover:bg-emerald-50 cursor-pointer relative"
             >
               <label
-                htmlFor="category-image"
+                htmlFor="brand-image"
                 className="flex flex-col items-center justify-center"
               />
               <input
-                onChange={handleCategoryImage}
+                onChange={handleBrandImage}
                 type="file"
-                id="category-image"
-                name="category-image"
+                id="brand-image"
+                name="brand-image"
                 accept="image/png, image/jpeg, image/webp"
                 className="absolute top-0 left-0 h-full w-full cursor-pointer opacity-0"
               />
@@ -379,7 +341,7 @@ export default function CategoryForm() {
                 <ImagePlus size={20} />
               </div>
               <p className="mt-3 text-sm font-semibold text-slate-700">
-                Add a category image
+                Add a brand image
               </p>
               <p className="mt-1 text-xs text-slate-500">
                 PNG, JPG or WEBP up to 2MB
@@ -403,11 +365,11 @@ export default function CategoryForm() {
             <div className="bg-[#f6fbf4] p-5">
               <div className="flex items-center gap-3 rounded-xl bg-white p-3 shadow-sm">
                 <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-lime-100 text-lg font-bold text-lime-800">
-                  {categoryInitial}
+                  {brandInitial}
                 </div>
                 <div className="min-w-0">
                   <p className="truncate font-bold text-slate-900">
-                    {name || "Your category name"}
+                    {name || "Your brand name"}
                   </p>
                   <p className="mt-1 truncate text-xs text-slate-500">
                     {description || "A short description for customers"}
@@ -416,7 +378,7 @@ export default function CategoryForm() {
               </div>
               <div className="mt-4 flex items-center gap-2 text-xs text-slate-500">
                 <Sprout size={15} className="text-[#1f7a1f]" />
-                {parent ? `Inside ${parent}` : "Top-level category"}
+                <p>Visible in your storefront</p>
                 <span className="ml-auto rounded-full bg-emerald-100 px-2 py-1 font-semibold text-emerald-700">
                   {status}
                 </span>
