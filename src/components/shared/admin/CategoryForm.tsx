@@ -11,6 +11,7 @@ import {
   Sprout,
 } from "lucide-react";
 import { categorySchema } from "@/schemas/category.schema";
+import { useGetAllCategoryQuery } from "@/store/services/categoryApi";
 //
 const parentCategories = [
   "Vegetables",
@@ -20,6 +21,7 @@ const parentCategories = [
 ];
 //
 export default function CategoryForm() {
+  const { data, isLoading, isFetching, isError } = useGetAllCategoryQuery();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [parent, setParent] = useState("Top-level category");
@@ -32,7 +34,7 @@ export default function CategoryForm() {
     >
   >({});
   //
-
+  console.log(data);
   const categoryInitial = useMemo(
     () => name.trim().slice(0, 1).toUpperCase() || "C",
     [name],
@@ -265,8 +267,8 @@ export default function CategoryForm() {
                 className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-3 text-sm text-slate-800 outline-none focus:border-[#1f7a1f] focus:bg-white focus:ring-2 focus:ring-emerald-100 cursor-pointer"
               >
                 <option value="">Top-level category</option>
-                {parentCategories.map((category) => (
-                  <option key={category}>{category}</option>
+                {data?.map((category, i) => (
+                  <option key={i}>{category?.name}</option>
                 ))}
               </select>
             </div>

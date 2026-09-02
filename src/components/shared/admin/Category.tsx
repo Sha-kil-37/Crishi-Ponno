@@ -15,27 +15,23 @@ export default function Category({ category }: { category: Category }) {
       className="group rounded-xl border border-slate-200 p-4 transition hover:border-emerald-300 hover:shadow-md"
     >
       <div className="flex items-start justify-between gap-4">
-        <div className="flex min-w-0 items-center gap-3">
-          {/* {category.name.slice(0, 1)} */}
-          <div
-            className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl text-lg font-bold`}
-          >
+        <div className="flex min-w-0 items-center gap-4">
+          <div className={``}>
+            {/* {category.name.slice(0, 1)} */}
             <Image
               src={categoryImage}
               alt={category.name || "Category image"}
-              width={48}
-              height={48}
-              className="h-12 w-12 rounded-xl object-cover"
+              width={60}
+              height={60}
+              className="h-full w-full rounded-xl object-cover"
             />
           </div>
 
           <div className="min-w-0">
-            <h3 className="truncate font-bold text-slate-900">
-              {category.name}
+            <h3 className="font-bold text-xl">
+              {category.name.charAt(0).toUpperCase() + category.name.slice(1)}
             </h3>
-            <p className="mt-1 truncate text-sm text-slate-500">
-              {category.description}
-            </p>
+            <p className="mt-1">{category.description}</p>
           </div>
         </div>
         <button
@@ -46,17 +42,19 @@ export default function Category({ category }: { category: Category }) {
         </button>
       </div>
       <div className="mt-5 grid grid-cols-3 border-t border-slate-100 pt-4">
-        <div>
-          <p className="text-xs text-slate-400">Status</p>
+        <div className="flex items-center gap-x-2">
+          <p className="">Status :</p>
           <p
-            className={`mt-1 text-sm font-bold ${category.status === "Draft" ? "text-amber-700" : "text-emerald-700"}`}
+            className={`text-sm font-bold ${category.status === "Draft" ? "text-amber-700" : "text-emerald-700"}`}
           >
             {category.status}
           </p>
         </div>
       </div>
       <div className="mt-4 flex items-center justify-between border-t border-slate-100 pt-3">
-        <p className="text-xs text-slate-400">Updated :</p>
+        <p className="text-xs text-slate-400">
+          Last update : {new Date(category.createdAt).toLocaleDateString()}
+        </p>
         <div className="flex items-center gap-1">
           <Link
             href="/admin/categories/update"
