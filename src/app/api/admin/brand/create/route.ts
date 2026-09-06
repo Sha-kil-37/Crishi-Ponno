@@ -1,10 +1,10 @@
 import { NextResponse } from "next/server";
 import mongoose from "mongoose";
 import db from "@/lib/db";
-import Category from "@/models/admin/category/Category";
-import { categorySchema } from "@/schemas/category.schema";
+import { brandSchema } from "@/schemas/brand.schema";
 import { createSlug } from "@/lib/admin/createSlug";
 import cloudinary from "@/lib/cloudinary";
+import Brand from "@/models/admin/brand/Brand";
 //
 export async function POST(request: Request) {
   //
@@ -12,10 +12,9 @@ export async function POST(request: Request) {
     const formData = await request.formData();
     const image = formData.get("image");
     // Parse and validate the form data
-    const parsed = categorySchema.safeParse({
+    const parsed = brandSchema.safeParse({
       name: formData.get("name"),
       description: formData.get("description"),
-      parent: formData.get("parent"),
       status: formData.get("status"),
       image: image instanceof File ? image : null,
     });
@@ -31,19 +30,19 @@ export async function POST(request: Request) {
 
     await db();
 
-    // Check duplicate category
-    
-    const existingCategory = await Category.findOne({
+    // Check duplicate brand
+
+    const existingBrand = await Brand.findOne({
       $or: [
         { name: parsed.data.name },
         { slug: createSlug({ value: parsed.data.name }) },
       ],
     }).lean();
 
-    if (existingCategory) {
+    if (existingBrand) {
       return NextResponse.json(
         {
-          error: "A category with this name already exists.",
+          error: "A brand with this name already exists.",
         },
         { status: 409 },
       );
@@ -56,7 +55,7 @@ export async function POST(request: Request) {
     const uploadResult = await new Promise((resolve, reject) => {
       const uploadStream = cloudinary.uploader.upload_stream(
         {
-          folder: "crishi-ponno/categories",
+          folder: "crishi-ponno/brands",
           resource_type: "image",
         },
         (error, result) => {
@@ -78,11 +77,10 @@ export async function POST(request: Request) {
     // call db to ensure connection is established before proceeding
     await db();
     // Save Cloudinary information in MongoDB
-    const category = await Category.create({
+    const brand = await Brand.create({
       name: parsed.data.name,
-      parent: parsed.data.parent,
-      slug: createSlug({ value: parsed.data.name }),
       description: parsed.data.description,
+      slug: createSlug({ value: parsed.data.name }),
       status: parsed.data.status,
       image: {
         url: result.secure_url,
@@ -92,8 +90,8 @@ export async function POST(request: Request) {
     //
     return NextResponse.json(
       {
-        msg: "Category created successfully.",
-        category: category,
+        msg: "Brand created successfully.",
+        brand: brand,
       },
       { status: 201 },
     );
@@ -107,13 +105,13 @@ export async function POST(request: Request) {
       error.code === 11000
     ) {
       return NextResponse.json(
-        { error: "A category with this name already exists." },
+        { error: "A brand with this name already exists." },
         { status: 409 },
       );
     }
 
     return NextResponse.json(
-      { error: "Unable to create category." },
+      { error: "Unable to create brand." },
       { status: 500 },
     );
   }

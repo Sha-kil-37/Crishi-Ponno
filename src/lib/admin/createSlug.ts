@@ -7,6 +7,7 @@ export function createSlug({ value, separator = "-" }: SlugProps): string {
   if (!value) {
     return "";
   }
+
   return value
     .toLowerCase()
     .trim()

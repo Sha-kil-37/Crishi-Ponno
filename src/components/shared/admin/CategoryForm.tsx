@@ -11,12 +11,15 @@ import {
   Sprout,
 } from "lucide-react";
 import { categorySchema } from "@/schemas/category.schema";
-import { useGetAllCategoryQuery } from "@/store/services/categoryApi";
+import {
+  useAddCategoryMutation,
+  useGetAllCategoryQuery,
+} from "@/store/services/categoryApi";
 //
 
 //
 export default function CategoryForm() {
-  const { data, isLoading, isFetching, isError } = useGetAllCategoryQuery();
+  const { data } = useGetAllCategoryQuery();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [parent, setParent] = useState("Top-level category");
@@ -28,8 +31,10 @@ export default function CategoryForm() {
       Record<"name" | "description" | "parent" | "status" | "image", string>
     >
   >({});
+  const [addCategory, { isLoading }] = useAddCategoryMutation();
+
   //
-  console.log(data);
+
   const categoryInitial = useMemo(
     () => name.trim().slice(0, 1).toUpperCase() || "C",
     [name],
@@ -124,7 +129,7 @@ export default function CategoryForm() {
           });
           return;
         }
-
+        await addCategory(formData).unwrap();
         setName("");
         setDescription("");
         setParent("top-level category");
@@ -164,6 +169,7 @@ export default function CategoryForm() {
             Give products a clear and discoverable place in your shop.
           </p>
         </div>
+
         <div className="flex items-center gap-3">
           <button
             onClick={() => {
@@ -184,7 +190,7 @@ export default function CategoryForm() {
             className="inline-flex items-center gap-2 rounded-xl bg-[#1f7a1f] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#145a14] cursor-pointer"
           >
             <Save size={16} />
-            Save category
+            {isLoading ? "Saving..." : "Save Category"}
           </button>
         </div>
       </div>
