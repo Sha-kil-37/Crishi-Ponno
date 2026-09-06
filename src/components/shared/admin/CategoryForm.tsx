@@ -88,7 +88,7 @@ export default function CategoryForm() {
     setImage(file);
   };
   //  handle form submission
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     try {
       event.preventDefault();
       const category = categorySchema.safeParse({
@@ -117,18 +117,7 @@ export default function CategoryForm() {
       formData.append("parent", category.data.parent ?? "");
       formData.append("status", category.data.status);
       formData.append("image", category.data.image);
-      void fetch("/api/admin/category/create", {
-        method: "POST",
-        body: formData,
-      }).then(async (response) => {
-        if (!response.ok) {
-          const result = await response.json();
-          setErrors({
-            name:
-              response.status === 409 ? result.error : result.error?.name?.[0],
-          });
-          return;
-        }
+      try {
         await addCategory(formData).unwrap();
         setName("");
         setDescription("");
@@ -140,7 +129,18 @@ export default function CategoryForm() {
         setTimeout(() => {
           setIsSaved(false);
         }, 3000);
-      });
+      } catch (error) {
+        const result = error as {
+          data?: { error?: string | Record<string, string[]> };
+        };
+        const fieldError = result.data?.error;
+        const message =
+          typeof fieldError === "string"
+            ? fieldError
+            : fieldError?.name?.[0] || "Unable to create category.";
+
+        setErrors({ name: message });
+      }
     } catch (error) {
       console.error("Error submitting category form:", error);
       setErrors({
