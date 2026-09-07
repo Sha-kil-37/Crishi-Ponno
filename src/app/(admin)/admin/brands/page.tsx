@@ -1,15 +1,54 @@
+//
+"use client";
+//
 import Link from "next/link";
-import { FolderTree, Layers3, Plus, ShoppingBasket } from "lucide-react";
+import { useMemo, useState } from "react";
+import {
+  FolderTree,
+  Layers3,
+  Plus,
+  Search,
+  ShoppingBasket,
+} from "lucide-react";
+import Brand from "@/components/shared/admin/Brand";
+import { useGetAllBrandQuery } from "@/store/services/brandApi";
 //
 export default function Page() {
+  const { data, isLoading, isFetching, isError } = useGetAllBrandQuery();
+  console.log(isError);
+  const [query, setQuery] = useState("");
+  const [status, setStatus] = useState("All status");
+  const filteredBrands = useMemo(
+    () =>
+      data?.filter((brand) => {
+        const matchesQuery = `${brand.name} ${brand.description}`
+          .toLowerCase()
+          .includes(query.toLowerCase());
+
+        return (
+          matchesQuery && (status === "All status" || brand.status === status)
+        );
+      }) ?? [],
+    [data, query, status],
+  );
+
+  if (isLoading) {
+    return <p>Loading brands...</p>;
+  }
+
+  if (isError) {
+    return <p className="text-red-500">Failed to load brands.</p>;
+  }
+  //
   //
   return (
     <main className="space-y-6">
+      {isFetching && <p>Updating brands...</p>}
       <section className="relative overflow-hidden rounded-2xl bg-[#0f3d2e] px-6 py-7 text-white shadow-sm sm:px-8">
         <div className="relative z-10 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-2xl">
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#f6c453]">
-              Brands
+              Catalogue structure
             </p>
             <h1 className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">
               Keep your brands growing
@@ -24,16 +63,17 @@ export default function Page() {
             className="inline-flex w-fit items-center justify-center gap-2 rounded-xl bg-[#f6c453] px-4 py-2.5 text-sm font-bold text-[#163b1b] transition hover:bg-[#ffd875]"
           >
             <Plus size={17} />
-            Add Brand
+            Add brand
           </Link>
         </div>
         <div className="absolute -right-8 -top-20 h-56 w-56 rounded-full border-30 border-emerald-700/40" />
         <div className="absolute -bottom-24 right-40 h-40 w-40 rounded-full border-20 border-[#f6c453]/15" />
       </section>
+
       <section className="grid gap-4 sm:grid-cols-3">
         {[
           {
-            label: "Total Brands",
+            label: "Total brands",
             value: "12",
             icon: FolderTree,
             color: "bg-emerald-100 text-emerald-700",
@@ -67,17 +107,18 @@ export default function Page() {
           </div>
         ))}
       </section>
-      {/* <section className="rounded-2xl border border-[#dfeadf] bg-white p-4 shadow-sm sm:p-5">
+
+      <section className="rounded-2xl border border-[#dfeadf] bg-white p-4 shadow-sm sm:p-5">
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div>
-            <h2 className="text-lg font-bold text-slate-900">All categories</h2>
+            <h2 className="text-lg font-bold text-slate-900">All brands</h2>
             <p className="mt-1 text-sm text-slate-500">
               A clear home for every product line.
             </p>
           </div>
           <div className="flex flex-col gap-3 sm:flex-row">
             <label className="relative min-w-0 sm:w-72">
-              <span className="sr-only">Search categories</span>
+              <span className="sr-only">Search brands</span>
               <Search
                 className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
                 size={18}
@@ -85,7 +126,7 @@ export default function Page() {
               <input
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
-                placeholder="Search categories"
+                placeholder="Search brands"
                 className="w-full rounded-xl border border-slate-200 py-2.5 pl-10 pr-3 text-sm outline-none transition focus:border-[#1f7a1f] focus:ring-2 focus:ring-emerald-100"
               />
             </label>
@@ -105,16 +146,16 @@ export default function Page() {
         </div>
 
         <div className="mt-5 grid gap-4 xl:grid-cols-2">
-          {filteredCategories?.map((category) => (
-            <Category key={category.slug} category={category} />
+          {filteredBrands?.map((brand) => (
+            <Brand key={brand.slug} brand={brand} />
           ))}
         </div>
-        {filteredCategories?.length === 0 && (
+        {filteredBrands?.length === 0 && (
           <p className="py-10 text-center text-sm text-slate-500">
-            No categories match your search.
+            No brands match your search.
           </p>
         )}
-      </section> */}
+      </section>
     </main>
   );
 }

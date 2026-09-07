@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { categoryApi } from "./services/categoryApi";
+import { brandApi } from "./services/brandApi";
 //
 export const store = configureStore({
   reducer: {
@@ -7,11 +8,11 @@ export const store = configureStore({
     // cart: cartReducer,
 
     [categoryApi.reducerPath]: categoryApi.reducer,
-    // [productApi.reducerPath]: productApi.reducer,
+    [brandApi.reducerPath]: brandApi.reducer,
   },
 
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(categoryApi.middleware),
+    getDefaultMiddleware().concat(categoryApi.middleware).concat(brandApi.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

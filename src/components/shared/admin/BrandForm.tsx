@@ -11,10 +11,10 @@ import {
   Sprout,
 } from "lucide-react";
 import { brandSchema } from "@/schemas/brand.schema";
+import { useAddBrandMutation } from "@/store/services/brandApi";
 
 //
 export default function BrandForm() {
-  //   const { data, isLoading, isFetching, isError } = useGetAllCategoryQuery();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [status, setStatus] = useState<"Published" | "Draft">("Published");
@@ -23,6 +23,7 @@ export default function BrandForm() {
   const [errors, setErrors] = useState<
     Partial<Record<"name" | "description" | "status" | "image", string>>
   >({});
+  const [addBrand, { isLoading }] = useAddBrandMutation();
   //
 
   const brandInitial = useMemo(
@@ -75,12 +76,13 @@ export default function BrandForm() {
     setImage(file);
   };
   //  handle form submission
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     try {
       event.preventDefault();
       const brand = brandSchema.safeParse({
         name: name.trim(),
         description: description.trim(),
+        parent: parent || undefined,
         status: status,
         image: image,
       });
@@ -101,19 +103,8 @@ export default function BrandForm() {
       formData.append("description", brand.data.description);
       formData.append("status", brand.data.status);
       formData.append("image", brand.data.image);
-      void fetch("/api/admin/brand/create", {
-        method: "POST",
-        body: formData,
-      }).then(async (response) => {
-        if (!response.ok) {
-          const result = await response.json();
-          setErrors({
-            name:
-              response.status === 409 ? result.error : result.error?.name?.[0],
-          });
-          return;
-        }
-
+      try {
+        await addBrand(formData).unwrap();
         setName("");
         setDescription("");
         setStatus("Published");
@@ -123,7 +114,18 @@ export default function BrandForm() {
         setTimeout(() => {
           setIsSaved(false);
         }, 3000);
-      });
+      } catch (error) {
+        const result = error as {
+          data?: { error?: string | Record<string, string[]> };
+        };
+        const fieldError = result.data?.error;
+        const message =
+          typeof fieldError === "string"
+            ? fieldError
+            : fieldError?.name?.[0] || "Unable to create brand.";
+
+        setErrors({ name: message });
+      }
     } catch (error) {
       console.error("Error submitting brand form:", error);
       setErrors({
@@ -171,7 +173,7 @@ export default function BrandForm() {
             className="inline-flex items-center gap-2 rounded-xl bg-[#1f7a1f] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#145a14] cursor-pointer"
           >
             <Save size={16} />
-            Save brand
+            {isLoading ? "Saving..." : "Save Brand"}
           </button>
         </div>
       </div>
