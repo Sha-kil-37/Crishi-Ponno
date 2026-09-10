@@ -1,0 +1,11 @@
+// import { NextResponse } from "next/server";
+// import mongoose from "mongoose";
+// import db from "@/lib/db";
+// import { createSlug } from "@/lib/admin/createSlug";
+// import Product from "@/models/product/Product";
+// import { productSchema } from "@/schemas/product.schema";
+//
+export async function POST(request: Request) {
+  //
+  console.log("POST /api/admin/product/create");
+}

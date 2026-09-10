@@ -1,16 +1,9 @@
 "use client";
-
+//
 import Link from "next/link";
 import { useState } from "react";
-import {
-  ArrowUpRight,
-  Package,
-  PencilLine,
-  Plus,
-  Search,
-  Trash2,
-} from "lucide-react";
-
+import { ArrowUpRight, PencilLine, Plus, Trash2 } from "lucide-react";
+//
 import SearchBar from "@/components/shared/admin/SearchBar";
 import ProductCategorySelect, {
   ProductCategory,
