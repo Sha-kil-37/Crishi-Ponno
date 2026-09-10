@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import Brand from "@/models/admin/brand/Brand";
+import Brand from "@/models/brand/Brand";
 import db from "@/lib/db";
 //
 export async function GET() {

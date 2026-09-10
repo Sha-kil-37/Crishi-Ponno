@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import mongoose from "mongoose";
 import db from "@/lib/db";
-import Category from "@/models/admin/category/Category";
+import Category from "@/models/category/Category";
 import { categorySchema } from "@/schemas/category.schema";
 import { createSlug } from "@/lib/admin/createSlug";
 import cloudinary from "@/lib/cloudinary";
@@ -32,7 +32,7 @@ export async function POST(request: Request) {
     await db();
 
     // Check duplicate category
-    
+
     const existingCategory = await Category.findOne({
       $or: [
         { name: parsed.data.name },

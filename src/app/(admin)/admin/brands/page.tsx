@@ -15,7 +15,7 @@ import { useGetAllBrandQuery } from "@/store/services/brandApi";
 //
 export default function Page() {
   const { data, isLoading, isFetching, isError } = useGetAllBrandQuery();
-  console.log(isError);
+
   const [query, setQuery] = useState("");
   const [status, setStatus] = useState("All status");
   const filteredBrands = useMemo(

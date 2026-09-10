@@ -4,7 +4,7 @@ import db from "@/lib/db";
 import { brandSchema } from "@/schemas/brand.schema";
 import { createSlug } from "@/lib/admin/createSlug";
 import cloudinary from "@/lib/cloudinary";
-import Brand from "@/models/admin/brand/Brand";
+import Brand from "@/models/brand/Brand";
 //
 export async function POST(request: Request) {
   //
