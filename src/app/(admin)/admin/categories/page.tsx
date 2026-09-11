@@ -4,15 +4,17 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import {
+  ArrowUpRight,
   FolderTree,
   Layers3,
+  PencilLine,
   Plus,
   Search,
   ShoppingBasket,
+  Trash2,
 } from "lucide-react";
-import Category from "@/components/shared/admin/Category";
 import { useGetAllCategoryQuery } from "@/store/services/categoryApi";
-
+//
 export default function Page() {
   const { data, isLoading, isFetching, isError } = useGetAllCategoryQuery();
   const [query, setQuery] = useState("");
@@ -108,30 +110,33 @@ export default function Page() {
         ))}
       </section>
 
-      <section className="rounded-2xl border border-[#dfeadf] bg-white p-4 shadow-sm sm:p-5">
-        <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-          <div>
-            <h2 className="text-lg font-bold text-slate-900">All categories</h2>
-            <p className="mt-1 text-sm text-slate-500">
-              A clear home for every product line.
-            </p>
+      <section className="rounded-2xl border border-[#dfeadf] bg-white p-4 shadow-sm">
+        <div className="flex flex-col gap-4 xl:flex-row xl:items-center xl:justify-between">
+          <div className="w-full max-w-xl">
+            <form className="w-full">
+              <label htmlFor="search" className="sr-only">
+                Search
+              </label>
+              <div className="relative">
+                <Search className="w-7 h-7 absolute left-0 top-[50%] transform translate-y-[-50%]" />
+                <input
+                  value={query}
+                  onChange={(event) => setQuery(event.target.value)}
+                  placeholder="Search for categories ...."
+                  className="w-full h-full px-10 py-3 outline-none"
+                />
+              </div>
+            </form>
           </div>
-          <div className="flex flex-col gap-3 sm:flex-row">
-            <label className="relative min-w-0 sm:w-72">
-              <span className="sr-only">Search categories</span>
-              <Search
-                className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
-                size={18}
-              />
-              <input
-                value={query}
-                onChange={(event) => setQuery(event.target.value)}
-                placeholder="Search categories"
-                className="w-full rounded-xl border border-slate-200 py-2.5 pl-10 pr-3 text-sm outline-none transition focus:border-[#1f7a1f] focus:ring-2 focus:ring-emerald-100"
-              />
-            </label>
-            <label>
-              <span className="sr-only">Filter by status</span>
+
+          <form className="">
+            <div>
+              <label
+                htmlFor="product-status"
+                className="mb-2 block text-sm font-medium text-slate-600"
+              >
+                Status
+              </label>
               <select
                 value={status}
                 onChange={(event) => setStatus(event.target.value)}
@@ -141,20 +146,94 @@ export default function Page() {
                 <option>Published</option>
                 <option>Draft</option>
               </select>
-            </label>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <section className="overflow-hidden rounded-2xl border border-[#dfeadf] bg-white shadow-sm">
+        <div className="flex items-center justify-between border-b border-slate-200 px-5 py-4">
+          <div>
+            <h2 className="text-lg font-semibold text-slate-900">
+              Category list
+            </h2>
+            <p className="text-sm text-slate-500">Latest inventory updates</p>
           </div>
+          <button className="inline-flex items-center gap-2 rounded-lg border border-slate-200 px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50">
+            <ArrowUpRight size={16} />
+            Export
+          </button>
         </div>
 
-        <div className="mt-5 grid gap-4 xl:grid-cols-2">
-          {filteredCategories?.map((category) => (
-            <Category key={category.slug} category={category} />
-          ))}
+        <div className="overflow-x-auto">
+          <table className="min-w-full divide-y divide-slate-200">
+            <thead className="bg-slate-50 text-left text-sm text-slate-600">
+              <tr>
+                <th className="px-5 py-3 font-medium">Category</th>
+                <th className="px-5 py-3 font-medium">Description</th>
+                <th className="px-5 py-3 font-medium">Status</th>
+                <th className="px-5 py-3 font-medium">Created At</th>
+                <th className="px-5 py-3 font-medium">Last Updated</th>
+                <th className="px-5 py-3 font-medium text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-200 bg-white text-sm text-slate-700">
+              {filteredCategories?.map((category) => (
+                <tr key={category.name} className="hover:bg-slate-50">
+                  <td className="px-5 py-4">
+                    <div className="flex items-center gap-3">
+                      <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-100 to-lime-100 text-lg font-bold text-emerald-700">
+                        {category.name.slice(0, 2).toUpperCase()}
+                      </div>
+                      <div>
+                        <p className="font-semibold text-slate-900">
+                          {category.name}
+                        </p>
+                      </div>
+                    </div>
+                  </td>
+                  <td className="px-5 py-4">
+                    {(category.description ?? "").slice(0, 20)}
+                    {(category.description?.length ?? 0) > 20 && "..."}
+                  </td>
+                  <td className="px-5 py-4">{category.status}</td>
+                  <td className="px-5 py-4">
+                    {new Date(category.createdAt).toLocaleDateString("en-GB")}
+                  </td>
+                  <td className="px-5 py-4">
+                    {new Date(category.updatedAt).toLocaleDateString("en-GB")}
+                  </td>
+                  <td className="px-5 py-4">
+                    <div className="flex items-center justify-end gap-2">
+                      <button
+                        className="rounded-lg border border-slate-200 p-2 text-slate-600 transition hover:border-slate-300 hover:bg-slate-50"
+                        aria-label="Edit product"
+                      >
+                        <PencilLine size={16} />
+                      </button>
+                      <button
+                        className="rounded-lg border border-rose-200 bg-rose-50 p-2 text-rose-600 transition hover:bg-rose-100"
+                        aria-label="Delete product"
+                      >
+                        <Trash2 size={16} />
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+              {filteredCategories?.length === 0 && (
+                <tr>
+                  <td
+                    colSpan={6}
+                    className="py-10 text-center text-sm text-slate-500"
+                  >
+                    No categories match your search.
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
         </div>
-        {filteredCategories?.length === 0 && (
-          <p className="py-10 text-center text-sm text-slate-500">
-            No categories match your search.
-          </p>
-        )}
       </section>
     </main>
   );
