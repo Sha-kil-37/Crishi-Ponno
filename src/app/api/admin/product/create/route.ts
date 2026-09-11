@@ -7,5 +7,5 @@
 //
 export async function POST(request: Request) {
   //
-  console.log("POST /api/admin/product/create");
+  console.log(request);
 }

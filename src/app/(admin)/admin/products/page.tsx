@@ -80,24 +80,31 @@ export default function Page() {
 
   return (
     <main className="space-y-6">
-      <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-        <div>
-          <p className="text-sm font-medium uppercase tracking-[0.2em] text-[#1f7a1f]">
-            Inventory control
-          </p>
-          <h1 className="mt-2 text-3xl font-bold text-slate-900">
-            Manage your agricultural products
-          </h1>
+      <section className="relative overflow-hidden rounded-2xl bg-[#0f3d2e] px-6 py-7 text-white shadow-sm sm:px-8">
+        <div className="relative z-10 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+          <div className="max-w-2xl">
+            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#f6c453]">
+              Catalogue structure
+            </p>
+            <h1 className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">
+              Keep your products growing
+            </h1>
+            <p className="mt-2 max-w-xl text-sm leading-6 text-emerald-50/75">
+              Manage your product catalogue, categories, and brands to ensure
+              your customers have access to the best agricultural products.
+            </p>
+          </div>
+          <Link
+            href="/admin/products/create"
+            className="inline-flex w-fit items-center justify-center gap-2 rounded-xl bg-[#f6c453] px-4 py-2.5 text-sm font-bold text-[#163b1b] transition hover:bg-[#ffd875]"
+          >
+            <Plus size={17} />
+            Add product
+          </Link>
         </div>
-
-        <Link
-          href="/admin/products/create"
-          className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#1f7a1f] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#145a14]"
-        >
-          <Plus size={16} />
-          Add Product
-        </Link>
-      </div>
+        <div className="absolute -right-8 -top-20 h-56 w-56 rounded-full border-30 border-emerald-700/40" />
+        <div className="absolute -bottom-24 right-40 h-40 w-40 rounded-full border-20 border-[#f6c453]/15" />
+      </section>
 
       <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
         {[

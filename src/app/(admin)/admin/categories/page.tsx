@@ -196,7 +196,17 @@ export default function Page() {
                     {(category.description ?? "").slice(0, 20)}
                     {(category.description?.length ?? 0) > 20 && "..."}
                   </td>
-                  <td className="px-5 py-4">{category.status}</td>
+                  <td className="px-5 py-4">
+                    <span
+                      className={`inline-flex rounded-full px-2.5 py-1 text-xs font-semibold ${
+                        category.status === "Published"
+                          ? "bg-emerald-100 text-emerald-700"
+                          : "bg-slate-100 text-slate-700"
+                      }`}
+                    >
+                      {category.status}
+                    </span>
+                  </td>
                   <td className="px-5 py-4">
                     {new Date(category.createdAt).toLocaleDateString("en-GB")}
                   </td>

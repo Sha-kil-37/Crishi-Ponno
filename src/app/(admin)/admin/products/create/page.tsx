@@ -1,7 +1,8 @@
-import React from "react";
-
+import ProductForm from "@/components/shared/admin/ProductForm";
+//
 function Page() {
-  return <div>page</div>;
+  //
+  return <ProductForm />;
 }
 
 export default Page;

@@ -17,16 +17,26 @@ export const productSchema = z.object({
     .string()
     .trim()
     .min(5, "Short description must be at least 5 characters")
-    .max(200, "Short description cannot exceed 200 characters"),
-  price: z.number().min(0, "Price must be a positive number"),
+    .max(100, "Short description cannot exceed 100 characters"),
+  price: z
+    .number()
+    .min(0, "Price must be a positive number")
+    .max(1000000, "Price cannot exceed 1,000,000"),
+  status: z.enum([
+    "Out of Stock",
+    "In Stock",
+    "Low Stock",
+    "Pre Order",
+    "Discontinued",
+  ]),
   image: z
     .instanceof(File, { message: "Product image is required" })
+    .refine((file) => file.size <= 5 * 1024 * 1024, {
+      message: "Product image must be less than 5MB",
+    })
     .refine(
-      (file) => file.size <= 5 * 1024 * 1024,
-      { message: "Product image must be less than 5MB" }
-    )    .refine(
       (file) => ["image/png", "image/jpeg", "image/webp"].includes(file.type),
-      { message: "Only PNG, JPG or WEBP images are allowed" }
+      { message: "Only PNG, JPG or WEBP images are allowed" },
     ),
 });
 //
