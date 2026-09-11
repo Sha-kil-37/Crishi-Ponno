@@ -46,6 +46,10 @@ const ProductSchema = new Schema(
       ref: "Category",
       required: true,
     },
+    status: {
+      type: String,
+      required: true,
+    },
     image: {
       url: {
         type: String,
@@ -56,11 +60,6 @@ const ProductSchema = new Schema(
         required: true,
       },
     },
-    // category: {
-    //   type: Schema.Types.ObjectId,
-    //   ref: "Category",
-    //   required: true,
-    // },
   },
   { timestamps: true },
 );

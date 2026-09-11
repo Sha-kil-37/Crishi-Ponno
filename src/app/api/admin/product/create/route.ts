@@ -7,5 +7,10 @@
 //
 export async function POST(request: Request) {
   //
-  console.log(request);
+  try {
+    const formData = await request.formData();
+    console.log(formData);
+  } catch (error) {
+    console.log(error);
+  }
 }

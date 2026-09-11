@@ -13,11 +13,13 @@ import {
 import { productSchema } from "@/schemas/product.schema";
 import { useGetAllBrandQuery } from "@/store/services/brandApi";
 import { useGetAllCategoryQuery } from "@/store/services/categoryApi";
+import { useAddProductMutation } from "@/store/services/productApi";
 
 //
 
 //
 export default function ProductForm() {
+  const [addProduct, { isLoading }] = useAddProductMutation();
   const {
     data: brands,
     isLoading: isBrandsLoading,
@@ -38,8 +40,13 @@ export default function ProductForm() {
   const [brand, setBrand] = useState("");
   const [category, setCategory] = useState("");
   const [status, setStatus] = useState<
-    "Out of Stock" | "In Stock" | "Low Stock" | "Pre Order" | "Discontinued"
-  >();
+    | "Out of Stock"
+    | "In Stock"
+    | "Low Stock"
+    | "Pre Order"
+    | "Discontinued"
+    | undefined
+  >(undefined);
   const [isSaved, setIsSaved] = useState(false);
   const [image, setImage] = useState<File | null>(null);
   const [errors, setErrors] = useState<
@@ -139,16 +146,16 @@ export default function ProductForm() {
   //  handle form submission
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(
-      name,
-      description,
-      shortDescription,
-      price,
-      status,
-      image,
-      brand,
-      category,
-    );
+    // console.log(
+    //   name,
+    //   description,
+    //   shortDescription,
+    //   price,
+    //   status,
+    //   image,
+    //   brand,
+    //   category,
+    // );
     try {
       event.preventDefault();
       const product = productSchema.safeParse({
@@ -161,51 +168,59 @@ export default function ProductForm() {
         status: status,
         image: image,
       });
-      console.log(product);
-      // if (!product.success) {
-      //   const fieldErrors = product.error.flatten().fieldErrors;
-      //   setErrors({
-      //     name: fieldErrors.name?.[0],
-      //     description: fieldErrors.description?.[0],
-      //     shortDescription: fieldErrors.shortDescription?.[0],
-      //     price: fieldErrors.price?.[0],
-      //     status: fieldErrors.status?.[0],
-      //     image: fieldErrors.image?.[0],
-      //   });
-      //   return;
-      // }
-      // //
 
-      // const formData = new FormData();
-      // formData.append("name", product.data.name);
-      // formData.append("description", product.data.description);
-      // formData.append("status", product.data.status);
-      // formData.append("image", product.data.image);
-      // try {
-      //   // await addCategory(formData).unwrap();
-      //   setName("");
-      //   setDescription("");
-      //   setShortDescription("");
-      //   setPrice(0);
-      //   setStatus("In Stock");
-      //   setImage(null);
-      //   setErrors({});
-      //   setIsSaved(true);
-      //   setTimeout(() => {
-      //     setIsSaved(false);
-      //   }, 3000);
-      // } catch (error) {
-      //   const result = error as {
-      //     data?: { error?: string | Record<string, string[]> };
-      //   };
-      //   const fieldError = result.data?.error;
-      //   const message =
-      //     typeof fieldError === "string"
-      //       ? fieldError
-      //       : fieldError?.name?.[0] || "Unable to create product.";
+      if (!product.success) {
+        const fieldErrors = product.error.flatten().fieldErrors;
+        setErrors({
+          name: fieldErrors.name?.[0],
+          description: fieldErrors.description?.[0],
+          shortDescription: fieldErrors.shortDescription?.[0],
+          price: fieldErrors.price?.[0],
+          status: fieldErrors.status?.[0],
+          brand: fieldErrors.brand?.[0],
+          category: fieldErrors.brand?.[0],
+          image: fieldErrors.image?.[0],
+        });
+        return;
+      }
+      //
 
-      //   setErrors({ name: message });
-      // }
+      const formData = new FormData();
+      formData.append("name", product.data.name);
+      formData.append("description", product.data.description);
+      formData.append("shortDescription", product.data.shortDescription);
+      formData.append("price", String(product.data.price));
+      formData.append("status", product.data.status);
+      formData.append("brand", product.data.brand);
+      formData.append("category", product.data.category);
+      formData.append("image", product.data.image);
+      try {
+        await addProduct(formData).unwrap();
+        setName("");
+        setDescription("");
+        setShortDescription("");
+        setImage(null);
+        setPrice("");
+        setStatus(undefined);
+        setBrand("");
+        setCategory("");
+        setErrors({});
+        setIsSaved(true);
+        setTimeout(() => {
+          setIsSaved(false);
+        }, 3000);
+      } catch (error) {
+        const result = error as {
+          data?: { error?: string | Record<string, string[]> };
+        };
+        const fieldError = result.data?.error;
+        const message =
+          typeof fieldError === "string"
+            ? fieldError
+            : fieldError?.name?.[0] || "Unable to create product.";
+
+        setErrors({ name: message });
+      }
     } catch (error) {
       console.error("Error submitting product form:", error);
       setErrors({
@@ -240,7 +255,7 @@ export default function ProductForm() {
               setName("");
               setDescription("");
               setShortDescription("");
-              setPrice(0);
+              setPrice("");
               setStatus("In Stock");
               setImage(null);
               setErrors({});
@@ -621,7 +636,7 @@ export default function ProductForm() {
                   </p>
                 </div>
               </div>
-              <div className="mt-4 flex items-center gap-2 text-xs text-slate-500">
+              <div className="mt-4 flex items-center gap-2 ">
                 <Sprout size={15} className="text-[#1f7a1f]" />
                 <p className="truncate">
                   {shortDescription || "A short description for customers"}
@@ -643,8 +658,9 @@ export default function ProductForm() {
                 >
                   {status}
                 </span>
-                <span>{category}</span>
-                <span>{brand}</span>
+                {/* <span>
+
+                </span> */}
               </div>
             </div>
           </section>
