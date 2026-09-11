@@ -146,16 +146,6 @@ export default function ProductForm() {
   //  handle form submission
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // console.log(
-    //   name,
-    //   description,
-    //   shortDescription,
-    //   price,
-    //   status,
-    //   image,
-    //   brand,
-    //   category,
-    // );
     try {
       event.preventDefault();
       const product = productSchema.safeParse({
@@ -210,6 +200,7 @@ export default function ProductForm() {
           setIsSaved(false);
         }, 3000);
       } catch (error) {
+        console.log(error);
         const result = error as {
           data?: { error?: string | Record<string, string[]> };
         };
@@ -218,7 +209,6 @@ export default function ProductForm() {
           typeof fieldError === "string"
             ? fieldError
             : fieldError?.name?.[0] || "Unable to create product.";
-
         setErrors({ name: message });
       }
     } catch (error) {
@@ -270,7 +260,7 @@ export default function ProductForm() {
             className="inline-flex items-center gap-2 rounded-xl bg-[#1f7a1f] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#145a14] cursor-pointer"
           >
             <Save size={16} />
-            Save Product
+            {isLoading ? "Saving..." : "Save Product"}
           </button>
         </div>
       </div>
@@ -278,7 +268,7 @@ export default function ProductForm() {
       {isSaved && (
         <div className="flex items-center gap-2 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-semibold text-emerald-800 mt-5">
           <Check size={17} />
-          Category details are ready to be connected to your API.
+          Product details are ready to be connected to your API.
         </div>
       )}
       <form

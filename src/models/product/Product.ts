@@ -20,7 +20,9 @@ const ProductSchema = new Schema(
       type: String,
       required: true,
       unique: true,
+      uppercase: true,
       trim: true,
+      index: true,
     },
     description: {
       type: String,

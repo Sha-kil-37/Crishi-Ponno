@@ -25,7 +25,7 @@ export async function POST(request: Request) {
         { status: 400 },
       );
     }
-
+    const slug = createSlug({ value: parsed.data.name });
     //  Connect to MongoDB
 
     await db();
@@ -33,10 +33,7 @@ export async function POST(request: Request) {
     // Check duplicate brand
 
     const existingBrand = await Brand.findOne({
-      $or: [
-        { name: parsed.data.name },
-        { slug: createSlug({ value: parsed.data.name }) },
-      ],
+      $or: [{ name: parsed.data.name }, { slug: slug }],
     }).lean();
 
     if (existingBrand) {
@@ -80,7 +77,7 @@ export async function POST(request: Request) {
     const brand = await Brand.create({
       name: parsed.data.name,
       description: parsed.data.description,
-      slug: createSlug({ value: parsed.data.name }),
+      slug: slug,
       status: parsed.data.status,
       image: {
         url: result.secure_url,

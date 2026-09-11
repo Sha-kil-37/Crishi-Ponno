@@ -26,18 +26,13 @@ export async function POST(request: Request) {
         { status: 400 },
       );
     }
-
+    // slug
+    const slug = createSlug({ value: parsed.data.name });
     //  Connect to MongoDB
-
     await db();
-
     // Check duplicate category
-
     const existingCategory = await Category.findOne({
-      $or: [
-        { name: parsed.data.name },
-        { slug: createSlug({ value: parsed.data.name }) },
-      ],
+      $or: [{ name: parsed.data.name }, { slug: slug }],
     }).lean();
 
     if (existingCategory) {
@@ -75,13 +70,14 @@ export async function POST(request: Request) {
       secure_url: string;
       public_id: string;
     };
+
     // call db to ensure connection is established before proceeding
     await db();
     // Save Cloudinary information in MongoDB
     const category = await Category.create({
       name: parsed.data.name,
       parent: parsed.data.parent,
-      slug: createSlug({ value: parsed.data.name }),
+      slug: slug,
       description: parsed.data.description,
       status: parsed.data.status,
       image: {
