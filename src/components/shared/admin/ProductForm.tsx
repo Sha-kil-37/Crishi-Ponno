@@ -11,18 +11,35 @@ import {
   Sprout,
 } from "lucide-react";
 import { productSchema } from "@/schemas/product.schema";
+import { useGetAllBrandQuery } from "@/store/services/brandApi";
+import { useGetAllCategoryQuery } from "@/store/services/categoryApi";
 
 //
 
 //
 export default function ProductForm() {
+  const {
+    data: brands,
+    isLoading: isBrandsLoading,
+    isFetching: isBrandsFetching,
+    isError: isBrandsError,
+  } = useGetAllBrandQuery();
+
+  const {
+    data: categories,
+    isLoading: isCategoriesLoading,
+    isFetching: isCategoriesFetching,
+    isError: isCategoriesError,
+  } = useGetAllCategoryQuery();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [shortDescription, setShortDescription] = useState("");
   const [price, setPrice] = useState<number | "">("");
+  const [brand, setBrand] = useState("");
+  const [category, setCategory] = useState("");
   const [status, setStatus] = useState<
     "Out of Stock" | "In Stock" | "Low Stock" | "Pre Order" | "Discontinued"
-  >("In Stock");
+  >();
   const [isSaved, setIsSaved] = useState(false);
   const [image, setImage] = useState<File | null>(null);
   const [errors, setErrors] = useState<
@@ -33,6 +50,8 @@ export default function ProductForm() {
         | "shortDescription"
         | "price"
         | "status"
+        | "brand"
+        | "category"
         | "image",
         string
       >
@@ -72,6 +91,16 @@ export default function ProductForm() {
       setErrors((prev) => ({ ...prev, price: undefined }));
     }
   };
+  // handle product brand
+  const handleProductBrand = (value: string) => {
+    setBrand(value);
+    setErrors((prev) => ({ ...prev, brand: undefined }));
+  };
+  // handle product category
+  const handleProductCategory = (value: string) => {
+    setCategory(value);
+    setErrors((prev) => ({ ...prev, category: undefined }));
+  };
   // handle product status
   const handleProductStatus = (value: string) => {
     if (
@@ -110,7 +139,16 @@ export default function ProductForm() {
   //  handle form submission
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // console.log(name, description, shortDescription, price, status, image);
+    console.log(
+      name,
+      description,
+      shortDescription,
+      price,
+      status,
+      image,
+      brand,
+      category,
+    );
     try {
       event.preventDefault();
       const product = productSchema.safeParse({
@@ -118,6 +156,8 @@ export default function ProductForm() {
         description: description.trim(),
         shortDescription: shortDescription.trim(),
         price: price,
+        category: category,
+        brand: brand,
         status: status,
         image: image,
       });
@@ -186,7 +226,6 @@ export default function ProductForm() {
             <ArrowLeft size={16} />
             Back to product
           </Link>
-
           <h1 className="mt-2 text-3xl font-bold tracking-tight text-slate-900">
             Create a product
           </h1>
@@ -245,7 +284,6 @@ export default function ProductForm() {
               </p>
             </div>
           </div>
-
           <div className="grid gap-5 md:grid-cols-2">
             <div>
               <label
@@ -314,7 +352,6 @@ export default function ProductForm() {
                 </p>
               )}
             </div>
-
             <div className="">
               <label
                 htmlFor="product-short-description"
@@ -354,7 +391,6 @@ export default function ProductForm() {
                 {shortDescription.length}/100
               </p>
             </div>
-
             <div className="">
               <label
                 htmlFor="product-description"
@@ -394,13 +430,12 @@ export default function ProductForm() {
                 {description.length}/500
               </p>
             </div>
-
             <div>
               <label
                 htmlFor="product-status"
                 className="mb-2 block text-sm font-semibold text-slate-700"
               >
-                status
+                Status
               </label>
               <select
                 required
@@ -418,6 +453,7 @@ export default function ProductForm() {
                     : "border-slate-200 focus:border-[#1f7a1f] focus:ring-emerald-100"
                 }`}
               >
+                <option>select a status</option>
                 <option>In Stock</option>
                 <option>Out of Stock</option>
                 <option>Low Stock</option>
@@ -430,6 +466,88 @@ export default function ProductForm() {
                   className="mt-1.5 text-xs font-medium text-red-600"
                 >
                   {errors.status}
+                </p>
+              )}
+            </div>
+            <div>
+              <label
+                htmlFor="product-status"
+                className="mb-2 block text-sm font-semibold text-slate-700"
+              >
+                Brand
+              </label>
+              <select
+                required
+                name="product-brand"
+                id="product-brand"
+                value={brand}
+                onChange={(event) => handleProductBrand(event.target.value)}
+                aria-invalid={!!errors.brand}
+                aria-describedby={
+                  errors.brand ? "product-brand-error" : undefined
+                }
+                className={`w-full rounded-xl border bg-slate-50 px-3 py-3 text-sm text-slate-800 outline-none focus:bg-white focus:ring-2 cursor-pointer ${
+                  errors.brand
+                    ? "border-red-500 focus:ring-red-100"
+                    : "border-slate-200 focus:border-[#1f7a1f] focus:ring-emerald-100"
+                }`}
+              >
+                <option>select a brand</option>
+                {brands?.map((brand) => {
+                  return (
+                    <option value={brand._id} key={brand._id}>
+                      {brand.name}
+                    </option>
+                  );
+                })}
+              </select>
+              {errors.brand && (
+                <p
+                  id="product-brand-error"
+                  className="mt-1.5 text-xs font-medium text-red-600"
+                >
+                  {errors.brand}
+                </p>
+              )}
+            </div>
+            <div>
+              <label
+                htmlFor="product-category"
+                className="mb-2 block text-sm font-semibold text-slate-700"
+              >
+                Category
+              </label>
+              <select
+                required
+                name="product-category"
+                id="product-category"
+                value={category}
+                onChange={(event) => handleProductCategory(event.target.value)}
+                aria-invalid={!!errors.category}
+                aria-describedby={
+                  errors.category ? "product-category-error" : undefined
+                }
+                className={`w-full rounded-xl border bg-slate-50 px-3 py-3 text-sm text-slate-800 outline-none focus:bg-white focus:ring-2 cursor-pointer ${
+                  errors.category
+                    ? "border-red-500 focus:ring-red-100"
+                    : "border-slate-200 focus:border-[#1f7a1f] focus:ring-emerald-100"
+                }`}
+              >
+                <option>select a category</option>
+                {categories?.map((category) => {
+                  return (
+                    <option value={category._id} key={category._id}>
+                      {category.name}
+                    </option>
+                  );
+                })}
+              </select>
+              {errors.category && (
+                <p
+                  id="product-category-error"
+                  className="mt-1.5 text-xs font-medium text-red-600"
+                >
+                  {errors.category}
                 </p>
               )}
             </div>
@@ -525,6 +643,8 @@ export default function ProductForm() {
                 >
                   {status}
                 </span>
+                <span>{category}</span>
+                <span>{brand}</span>
               </div>
             </div>
           </section>

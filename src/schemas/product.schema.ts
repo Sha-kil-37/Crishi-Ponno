@@ -29,6 +29,8 @@ export const productSchema = z.object({
     "Pre Order",
     "Discontinued",
   ]),
+  brand: z.string(),
+  category: z.string(),
   image: z
     .instanceof(File, { message: "Product image is required" })
     .refine((file) => file.size <= 5 * 1024 * 1024, {

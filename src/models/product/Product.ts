@@ -1,4 +1,4 @@
-import { model, models, Schema } from "mongoose";
+import mongoose, { model, models, Schema } from "mongoose";
 //
 //
 const ProductSchema = new Schema(
@@ -33,6 +33,17 @@ const ProductSchema = new Schema(
     },
     price: {
       type: Number,
+      required: true,
+      min: 0,
+    },
+    brand: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Brand",
+      required: true,
+    },
+    category: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Category",
       required: true,
     },
     image: {
