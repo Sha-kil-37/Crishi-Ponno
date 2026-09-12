@@ -21,6 +21,19 @@ export const productSchema = z.object({
     .number()
     .min(0, "Price must be a positive number")
     .max(1000000, "Price cannot exceed 1,000,000"),
+  quantity: z
+    .number()
+    .min(0, "Quantity must be a positive number")
+    .max(1000000, "Quantity cannot exceed 1,000,000"),
+  costPrice: z
+    .number()
+    .min(0, "Cost price must be a positive number")
+    .max(1000000, "Cost price cannot exceed 1,000,000"),
+  unit: z
+    .string()
+    .trim()
+    .min(2, "Product unit must be at least 2 characters")
+    .max(50, "Product unit cannot exceed 50 characters"),
   status: z.enum([
     "Out of Stock",
     "In Stock",

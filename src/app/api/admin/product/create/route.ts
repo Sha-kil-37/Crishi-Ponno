@@ -18,6 +18,9 @@ export async function POST(request: Request) {
       description: formData.get("description"),
       shortDescription: formData.get("shortDescription"),
       price: Number(formData.get("price")),
+      quantity: Number(formData.get("quantity")),
+      costPrice: Number(formData.get("costPrice")),
+      unit: formData.get("unit"),
       status: formData.get("status"),
       brand: formData.get("brand"),
       category: formData.get("category"),
@@ -40,6 +43,10 @@ export async function POST(request: Request) {
     });
     // price
     const price = Number(parsed.data.price);
+    // quantity
+    const quantity = Number(parsed.data.quantity);
+    // cost price
+    const costPrice = Number(parsed.data.costPrice);
     // category
     const category = new mongoose.Types.ObjectId(parsed.data.category);
     //
@@ -97,6 +104,9 @@ export async function POST(request: Request) {
       description: parsed.data.description,
       shortDescription: parsed.data.shortDescription,
       price: price,
+      quantity: quantity,
+      costPrice: costPrice,
+      unit: parsed.data.unit,
       brand: brand,
       category: category,
       status: parsed.data.status,

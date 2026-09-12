@@ -34,19 +34,15 @@ export default function ProductForm() {
     isError: isCategoriesError,
   } = useGetAllCategoryQuery();
   const [name, setName] = useState("");
+  const [unit, setUnit] = useState("");
   const [description, setDescription] = useState("");
   const [shortDescription, setShortDescription] = useState("");
   const [price, setPrice] = useState<number | "">("");
+  const [quantity, setQuantity] = useState<number | "">("");
+  const [costPrice, setCostPrice] = useState<number | "">("");
   const [brand, setBrand] = useState("");
   const [category, setCategory] = useState("");
-  const [status, setStatus] = useState<
-    | "Out of Stock"
-    | "In Stock"
-    | "Low Stock"
-    | "Pre Order"
-    | "Discontinued"
-    | undefined
-  >(undefined);
+  const [status, setStatus] = useState("");
   const [isSaved, setIsSaved] = useState(false);
   const [image, setImage] = useState<File | null>(null);
   const [errors, setErrors] = useState<
@@ -56,9 +52,12 @@ export default function ProductForm() {
         | "description"
         | "shortDescription"
         | "price"
+        | "costPrice"
         | "status"
         | "brand"
         | "category"
+        | "quantity"
+        | "unit"
         | "image",
         string
       >
@@ -98,6 +97,35 @@ export default function ProductForm() {
       setErrors((prev) => ({ ...prev, price: undefined }));
     }
   };
+  // handle product quantity
+  const handleProductQuantity = (value: string) => {
+    const quantityValue = parseFloat(value);
+    if (
+      !isNaN(quantityValue) &&
+      quantityValue >= 0 &&
+      quantityValue <= 1000000
+    ) {
+      setQuantity(quantityValue);
+      setErrors((prev) => ({ ...prev, quantity: undefined }));
+    }
+  };
+  // handle product cost price
+  const handleCostPrice = (value: string) => {
+    const costPriceValue = parseFloat(value);
+    if (
+      !isNaN(costPriceValue) &&
+      costPriceValue >= 0 &&
+      costPriceValue <= 1000000
+    ) {
+      setCostPrice(costPriceValue);
+      setErrors((prev) => ({ ...prev, costPrice: undefined }));
+    }
+  };
+  // handle product unit
+  const handleProductUnit = (value: string) => {
+    setUnit(value);
+    setErrors((prev) => ({ ...prev, unit: undefined }));
+  };
   // handle product brand
   const handleProductBrand = (value: string) => {
     setBrand(value);
@@ -110,16 +138,8 @@ export default function ProductForm() {
   };
   // handle product status
   const handleProductStatus = (value: string) => {
-    if (
-      value === "Out of Stock" ||
-      value === "In Stock" ||
-      value === "Low Stock" ||
-      value === "Pre Order" ||
-      value === "Discontinued"
-    ) {
-      setStatus(value);
-      setErrors((prev) => ({ ...prev, status: undefined }));
-    }
+    setStatus(value);
+    setErrors((prev) => ({ ...prev, status: undefined }));
   };
   //  handle image input
   const handleProductImage = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -153,6 +173,9 @@ export default function ProductForm() {
         description: description.trim(),
         shortDescription: shortDescription.trim(),
         price: price,
+        costPrice: costPrice,
+        quantity: quantity,
+        unit: unit,
         category: category,
         brand: brand,
         status: status,
@@ -166,6 +189,9 @@ export default function ProductForm() {
           description: fieldErrors.description?.[0],
           shortDescription: fieldErrors.shortDescription?.[0],
           price: fieldErrors.price?.[0],
+          costPrice: fieldErrors.costPrice?.[0],
+          quantity: fieldErrors.quantity?.[0],
+          unit: fieldErrors.unit?.[0],
           status: fieldErrors.status?.[0],
           brand: fieldErrors.brand?.[0],
           category: fieldErrors.brand?.[0],
@@ -180,10 +206,14 @@ export default function ProductForm() {
       formData.append("description", product.data.description);
       formData.append("shortDescription", product.data.shortDescription);
       formData.append("price", String(product.data.price));
+      formData.append("quantity", String(product.data.quantity));
+      formData.append("costPrice", String(product.data.costPrice));
+      formData.append("unit", product.data.unit.toLowerCase());
       formData.append("status", product.data.status);
       formData.append("brand", product.data.brand);
       formData.append("category", product.data.category);
       formData.append("image", product.data.image);
+      //
       try {
         await addProduct(formData).unwrap();
         setName("");
@@ -191,7 +221,10 @@ export default function ProductForm() {
         setShortDescription("");
         setImage(null);
         setPrice("");
-        setStatus(undefined);
+        setCostPrice("");
+        setQuantity("");
+        setUnit("");
+        setStatus("");
         setBrand("");
         setCategory("");
         setErrors({});
@@ -246,7 +279,10 @@ export default function ProductForm() {
               setDescription("");
               setShortDescription("");
               setPrice("");
-              setStatus("In Stock");
+              setCostPrice("");
+              setQuantity("");
+              setUnit("");
+              setStatus("");
               setImage(null);
               setErrors({});
             }}
@@ -553,6 +589,116 @@ export default function ProductForm() {
                   className="mt-1.5 text-xs font-medium text-red-600"
                 >
                   {errors.category}
+                </p>
+              )}
+            </div>
+            <div>
+              <label
+                htmlFor="product-quantity"
+                className="mb-2 block text-sm font-semibold text-slate-700"
+              >
+                Product Quantity
+              </label>
+              <input
+                type="number"
+                required
+                name="product-quantity"
+                id="product-quantity"
+                value={quantity}
+                onChange={(event) => handleProductQuantity(event.target.value)}
+                aria-invalid={!!errors.quantity}
+                aria-describedby={
+                  errors.quantity ? "product-quantity-error" : undefined
+                }
+                className={`w-full rounded-xl border bg-slate-50 px-3 py-3 text-sm outline-none ${
+                  errors.quantity
+                    ? "border-red-500 focus:ring-2 focus:ring-red-100"
+                    : "border-slate-200 focus:border-[#1f7a1f] focus:ring-2 focus:ring-emerald-100"
+                }`}
+              />
+
+              {errors.quantity && (
+                <p
+                  id="product-quantity-error"
+                  className="mt-1.5 text-xs font-medium text-red-600"
+                >
+                  {errors.quantity}
+                </p>
+              )}
+            </div>
+            <div>
+              <label
+                htmlFor="product-cost-price"
+                className="mb-2 block text-sm font-semibold text-slate-700"
+              >
+                Product Cost
+              </label>
+              <input
+                type="number"
+                required
+                name="product-cost-price"
+                id="product-cost-price"
+                value={costPrice}
+                onChange={(event) => handleCostPrice(event.target.value)}
+                aria-invalid={!!errors.costPrice}
+                aria-describedby={
+                  errors.costPrice ? "product-cost-price-error" : undefined
+                }
+                className={`w-full rounded-xl border bg-slate-50 px-3 py-3 text-sm outline-none ${
+                  errors.costPrice
+                    ? "border-red-500 focus:ring-2 focus:ring-red-100"
+                    : "border-slate-200 focus:border-[#1f7a1f] focus:ring-2 focus:ring-emerald-100"
+                }`}
+              />
+
+              {errors.costPrice && (
+                <p
+                  id="product-cost-price-error"
+                  className="mt-1.5 text-xs font-medium text-red-600"
+                >
+                  {errors.costPrice}
+                </p>
+              )}
+            </div>
+            <div>
+              <label
+                htmlFor="product-unit"
+                className="mb-2 block text-sm font-semibold text-slate-700"
+              >
+                Unit
+              </label>
+              <select
+                required
+                name="product-unit"
+                id="product-unit"
+                value={unit}
+                onChange={(event) => handleProductUnit(event.target.value)}
+                aria-invalid={!!errors.unit}
+                aria-describedby={
+                  errors.unit ? "product-unit-error" : undefined
+                }
+                className={`w-full rounded-xl border bg-slate-50 px-3 py-3 text-sm text-slate-800 outline-none focus:bg-white focus:ring-2 cursor-pointer ${
+                  errors.unit
+                    ? "border-red-500 focus:ring-red-100"
+                    : "border-slate-200 focus:border-[#1f7a1f] focus:ring-emerald-100"
+                }`}
+              >
+                <option>select an unit</option>
+                <option>Kg</option>
+                <option>Gm</option>
+                <option>Liter</option>
+                <option>Ml</option>
+                <option>Piece</option>
+                <option>Pack</option>
+                <option>Bag</option>
+                <option>Box</option>
+              </select>
+              {errors.unit && (
+                <p
+                  id="product-unit-error"
+                  className="mt-1.5 text-xs font-medium text-red-600"
+                >
+                  {errors.unit}
                 </p>
               )}
             </div>

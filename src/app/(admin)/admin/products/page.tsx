@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { ArrowUpRight, PencilLine, Plus, Trash2 } from "lucide-react";
-//
+import { useGetAllProductQuery } from "@/store/services/productApi";
 import SearchBar from "@/components/shared/admin/SearchBar";
 import ProductCategorySelect, {
   ProductCategory,
@@ -74,10 +74,12 @@ const products = [
 ];
 
 export default function Page() {
+  const { data, isLoading, isFetching, isError } = useGetAllProductQuery();
   const [category, setCategory] = useState("");
   const [brand, setBrand] = useState("");
   const [status, setStatus] = useState("");
-
+  console.log(data);
+  //
   return (
     <main className="space-y-6">
       <section className="relative overflow-hidden rounded-2xl bg-[#0f3d2e] px-6 py-7 text-white shadow-sm sm:px-8">

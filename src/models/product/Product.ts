@@ -38,6 +38,27 @@ const ProductSchema = new Schema(
       required: true,
       min: 0,
     },
+    costPrice: {
+      type: Number,
+      required: true,
+      min: 0,
+    },
+    discount: {
+      type: Number,
+      min: 0,
+      default: null,
+    },
+    //
+    unit: {
+      type: String,
+      enum: ["kg", "gm", "liter", "ml", "piece", "pack", "bag", "box"],
+      required: true,
+    },
+    quantity: {
+      type: Number,
+      required: true,
+      min: 0,
+    },
     brand: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Brand",
