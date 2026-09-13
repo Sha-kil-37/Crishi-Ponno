@@ -150,11 +150,11 @@ export default function Page() {
               <tr>
                 <th className="px-5 py-3 font-medium">Product</th>
                 <th className="px-5 py-3 font-medium">Description</th>
-                <th className="px-5 py-3 font-medium">Quantity</th>
-                <th className="px-5 py-3 font-medium">Status</th>
-                <th className="px-5 py-3 font-medium">Price</th>
-                <th className="px-5 py-3 font-medium">Brand</th>
                 <th className="px-5 py-3 font-medium">Category</th>
+                <th className="px-5 py-3 font-medium">Brand</th>
+                <th className="px-5 py-3 font-medium">Quantity</th>
+                <th className="px-5 py-3 font-medium">Price</th>
+                <th className="px-5 py-3 font-medium">Status</th>
                 <th className="px-5 py-3 font-medium">Created At</th>
                 <th className="px-5 py-3 font-medium">Last Updated</th>
                 <th className="px-5 py-3 font-medium text-right">Actions</th>
@@ -179,7 +179,10 @@ export default function Page() {
                     {(product.shortDescription ?? "").slice(0, 20)}
                     {(product.shortDescription?.length ?? 0) > 20 && "..."}
                   </td>
+                  <td className="px-5 py-4">{product.category.name}</td>
+                  <td className="px-5 py-4">{product.brand.name}</td>
                   <td className="px-5 py-4">{product.quantity}</td>
+                  <td className="px-5 py-4">{product.price}</td>
                   <td className="px-5 py-4">
                     <span
                       className={`inline-flex rounded-full px-2.5 py-1 text-xs font-semibold ${
@@ -199,9 +202,6 @@ export default function Page() {
                       {product.status}
                     </span>
                   </td>
-                  <td className="px-5 py-4">{product.price}</td>
-                  <td className="px-5 py-4">{product.brand}</td>
-                  <td className="px-5 py-4">{product.category}</td>
                   <td className="px-5 py-4">
                     {new Date(product.createdAt).toLocaleDateString("en-GB")}
                   </td>

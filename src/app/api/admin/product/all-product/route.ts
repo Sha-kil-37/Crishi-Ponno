@@ -1,21 +1,25 @@
 import { NextResponse } from "next/server";
 import Product from "@/models/product/Product";
+import "@/models/brand/Brand";
+import "@/models/category/Category";
 import db from "@/lib/db";
 //
 export async function GET() {
+  //
   try {
     await db();
+    const products = await Product.find({})
+      .populate("brand", "name")
+      .populate("category", "name");
+    //
 
-    const allProduct = await Product.find({});
-    console.log(allProduct)
-    // .sort({ createdAt: -1 }).lean();
     return NextResponse.json({
       success: true,
-      data: allProduct,
+      data: products,
     });
   } catch (error) {
     console.error("GET /api/admin/product/all-product error:", error);
-    //
+
     return NextResponse.json(
       {
         success: false,

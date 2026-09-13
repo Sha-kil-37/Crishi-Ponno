@@ -1,4 +1,9 @@
 //
+export interface ProductReference {
+  _id: string;
+  name: string;
+}
+//
 export interface Product {
   _id: string;
   name: string;
@@ -10,8 +15,8 @@ export interface Product {
   quantity: number;
   costPrice: number;
   unit: string;
-  brand: string;
-  category: string;
+  brand: ProductReference;
+  category: ProductReference;
   image?: {
     public_id?: string;
     url?: string;

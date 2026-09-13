@@ -10,6 +10,7 @@ import { Category } from "@/types/NavCategory";
 import Header from "@/components/layout/Header";
 import Navbar from "@/components/layout/nav/Navbar";
 import Banner from "@/components/shared/Banner";
+import ProductGrid from "@/components/shared/ProductGrid";
 import Footer from "@/components/layout/Footer";
 
 //
@@ -105,6 +106,7 @@ export default function Page() {
         <Header />
         <Navbar categories={categories} showNavboxSearch={showNavboxSearch} />
         <Banner bannerRef={bannerRef} showNavboxSearch={showNavboxSearch} />
+        <ProductGrid />
         <Footer />
         <Dialog />
         <Toaster />
