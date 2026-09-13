@@ -1,87 +1,41 @@
+//
 "use client";
 //
 import Link from "next/link";
-import { useState } from "react";
-import { ArrowUpRight, PencilLine, Plus, Trash2 } from "lucide-react";
+import { useMemo, useState } from "react";
+import { ArrowUpRight, PencilLine, Plus, Search, Trash2 } from "lucide-react";
 import { useGetAllProductQuery } from "@/store/services/productApi";
-import SearchBar from "@/components/shared/admin/SearchBar";
-import ProductCategorySelect, {
-  ProductCategory,
-} from "@/components/shared/admin/ProductCategorySelect";
-import ProductBrandSelect, {
-  ProductBrand,
-} from "@/components/shared/admin/ProductBrandSelect";
-import ProductStatusSelect, {
-  ProductStatus,
-} from "@/components/shared/admin/ProductStatusSelect";
-
-const brands: ProductBrand[] = [
-  { _id: "1", name: "Brand A" },
-  { _id: "2", name: "Brand B" },
-  { _id: "3", name: "AgriGrow" },
-];
-
-const categories: ProductCategory[] = [
-  { _id: "1", name: "Seeds" },
-  { _id: "2", name: "Fertilizers" },
-  { _id: "3", name: "Pesticides" },
-  { _id: "4", name: "Agricultural Tools" },
-];
-
-const statuses: ProductStatus[] = [
-  { _id: "1", name: "In Stock" },
-  { _id: "2", name: "Out of Stock" },
-  { _id: "3", name: "Discontinued" },
-];
-
-const products = [
-  {
-    name: "Hybrid Rice Seed",
-    category: "Seeds",
-    brand: "AgriGrow",
-    stock: 120,
-    price: 480,
-    status: "In Stock",
-    color: "bg-emerald-100 text-emerald-700",
-  },
-  {
-    name: "Organic Compost",
-    category: "Fertilizers",
-    brand: "Brand A",
-    stock: 48,
-    price: 760,
-    status: "Low Stock",
-    color: "bg-amber-100 text-amber-700",
-  },
-  {
-    name: "Neem Spray",
-    category: "Pesticides",
-    brand: "Brand B",
-    stock: 84,
-    price: 390,
-    status: "In Stock",
-    color: "bg-emerald-100 text-emerald-700",
-  },
-  {
-    name: "Garden Hoe",
-    category: "Agricultural Tools",
-    brand: "AgriGrow",
-    stock: 14,
-    price: 920,
-    status: "Out of Stock",
-    color: "bg-rose-100 text-rose-700",
-  },
-];
-
+//
 export default function Page() {
   const { data, isLoading, isFetching, isError } = useGetAllProductQuery();
-  const [category, setCategory] = useState("");
-  const [brand, setBrand] = useState("");
-  const [status, setStatus] = useState("");
-  console.log(data);
+  const [query, setQuery] = useState("");
+  const [status, setStatus] = useState("All Status");
+  const filteredProducts = useMemo(
+    () =>
+      data?.filter((product) => {
+        const matchesQuery = `${product.name} ${product.description}`
+          .toLowerCase()
+          .includes(query.toLowerCase());
+
+        return (
+          matchesQuery && (status === "All Status" || product.status === status)
+        );
+      }) ?? [],
+    [data, query, status],
+  );
+
+  if (isLoading) {
+    return <p>Loading products...</p>;
+  }
+
+  if (isError) {
+    return <p className="text-red-500">Failed to load products.</p>;
+  }
+  //
   //
   return (
     <main className="space-y-6">
+      {isFetching && <p>Updating products...</p>}
       <section className="relative overflow-hidden rounded-2xl bg-[#0f3d2e] px-6 py-7 text-white shadow-sm sm:px-8">
         <div className="relative z-10 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-2xl">
@@ -89,11 +43,11 @@ export default function Page() {
               Catalogue structure
             </p>
             <h1 className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">
-              Keep your products growing
+              Keep your product growing
             </h1>
             <p className="mt-2 max-w-xl text-sm leading-6 text-emerald-50/75">
-              Manage your product catalogue, categories, and brands to ensure
-              your customers have access to the best agricultural products.
+              Organise the marketplace so customers can find the right products
+              for their next harvest.
             </p>
           </div>
           <Link
@@ -135,38 +89,23 @@ export default function Page() {
       <section className="rounded-2xl border border-[#dfeadf] bg-white p-4 shadow-sm">
         <div className="flex flex-col gap-4 xl:flex-row xl:items-center xl:justify-between">
           <div className="w-full max-w-xl">
-            <SearchBar />
+            <form className="w-full">
+              <label htmlFor="search" className="sr-only">
+                Search
+              </label>
+              <div className="relative">
+                <Search className="w-7 h-7 absolute left-0 top-[50%] transform translate-y-[-50%]" />
+                <input
+                  value={query}
+                  onChange={(event) => setQuery(event.target.value)}
+                  placeholder="Search for categories ...."
+                  className="w-full h-full px-10 py-3 outline-none"
+                />
+              </div>
+            </form>
           </div>
 
-          <form className="grid w-full gap-3 md:grid-cols-3 xl:max-w-2xl">
-            <div>
-              <label
-                htmlFor="product-category"
-                className="mb-2 block text-sm font-medium text-slate-600"
-              >
-                Category
-              </label>
-              <ProductCategorySelect
-                categories={categories}
-                value={category}
-                onValueChange={setCategory}
-              />
-            </div>
-
-            <div>
-              <label
-                htmlFor="product-brand"
-                className="mb-2 block text-sm font-medium text-slate-600"
-              >
-                Brand
-              </label>
-              <ProductBrandSelect
-                brands={brands}
-                value={brand}
-                onValueChange={setBrand}
-              />
-            </div>
-
+          <form className="">
             <div>
               <label
                 htmlFor="product-status"
@@ -174,11 +113,18 @@ export default function Page() {
               >
                 Status
               </label>
-              <ProductStatusSelect
-                statuses={statuses}
+              <select
                 value={status}
-                onValueChange={setStatus}
-              />
+                onChange={(event) => setStatus(event.target.value)}
+                className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-700 outline-none focus:border-[#1f7a1f] sm:w-36"
+              >
+                <option>All Status</option>
+                <option>In Stock</option>
+                <option>Out of Stock</option>
+                <option>Low Stock</option>
+                <option>Pre Order</option>
+                <option>Discontinued</option>
+              </select>
             </div>
           </form>
         </div>
@@ -188,7 +134,7 @@ export default function Page() {
         <div className="flex items-center justify-between border-b border-slate-200 px-5 py-4">
           <div>
             <h2 className="text-lg font-semibold text-slate-900">
-              Products list
+              Product list
             </h2>
             <p className="text-sm text-slate-500">Latest inventory updates</p>
           </div>
@@ -203,16 +149,20 @@ export default function Page() {
             <thead className="bg-slate-50 text-left text-sm text-slate-600">
               <tr>
                 <th className="px-5 py-3 font-medium">Product</th>
-                <th className="px-5 py-3 font-medium">Category</th>
-                <th className="px-5 py-3 font-medium">Stock</th>
-                <th className="px-5 py-3 font-medium">Price</th>
+                <th className="px-5 py-3 font-medium">Description</th>
+                <th className="px-5 py-3 font-medium">Quantity</th>
                 <th className="px-5 py-3 font-medium">Status</th>
+                <th className="px-5 py-3 font-medium">Price</th>
+                <th className="px-5 py-3 font-medium">Brand</th>
+                <th className="px-5 py-3 font-medium">Category</th>
+                <th className="px-5 py-3 font-medium">Created At</th>
+                <th className="px-5 py-3 font-medium">Last Updated</th>
                 <th className="px-5 py-3 font-medium text-right">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-200 bg-white text-sm text-slate-700">
-              {products.map((product) => (
-                <tr key={product.name} className="hover:bg-slate-50">
+              {filteredProducts?.map((product) => (
+                <tr key={product._id} className="hover:bg-slate-50">
                   <td className="px-5 py-4">
                     <div className="flex items-center gap-3">
                       <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-100 to-lime-100 text-lg font-bold text-emerald-700">
@@ -222,24 +172,41 @@ export default function Page() {
                         <p className="font-semibold text-slate-900">
                           {product.name}
                         </p>
-                        <p className="text-xs text-slate-500">
-                          {product.brand}
-                        </p>
                       </div>
                     </div>
                   </td>
-
-                  <td className="px-5 py-4">{product.category}</td>
-                  <td className="px-5 py-4">{product.stock}</td>
-                  <td className="px-5 py-4 font-semibold text-slate-900">
-                    ৳{product.price}
+                  <td className="px-5 py-4">
+                    {(product.shortDescription ?? "").slice(0, 20)}
+                    {(product.shortDescription?.length ?? 0) > 20 && "..."}
                   </td>
+                  <td className="px-5 py-4">{product.quantity}</td>
                   <td className="px-5 py-4">
                     <span
-                      className={`inline-flex rounded-full px-2.5 py-1 text-xs font-semibold ${product.color}`}
+                      className={`inline-flex rounded-full px-2.5 py-1 text-xs font-semibold ${
+                        product.status === "In Stock"
+                          ? "bg-emerald-200 text-white"
+                          : product.status === "Out of Stock"
+                            ? "bg-red-500 text-white"
+                            : product.status === "Low Stock"
+                              ? "bg-red-300 text-white"
+                              : product.status === "Pre Order"
+                                ? "bg-blue-300 text-white"
+                                : product.status === "Discontinued"
+                                  ? "bg-yellow-100 text-white"
+                                  : ""
+                      }`}
                     >
                       {product.status}
                     </span>
+                  </td>
+                  <td className="px-5 py-4">{product.price}</td>
+                  <td className="px-5 py-4">{product.brand}</td>
+                  <td className="px-5 py-4">{product.category}</td>
+                  <td className="px-5 py-4">
+                    {new Date(product.createdAt).toLocaleDateString("en-GB")}
+                  </td>
+                  <td className="px-5 py-4">
+                    {new Date(product.updatedAt).toLocaleDateString("en-GB")}
                   </td>
                   <td className="px-5 py-4">
                     <div className="flex items-center justify-end gap-2">
@@ -259,6 +226,16 @@ export default function Page() {
                   </td>
                 </tr>
               ))}
+              {filteredProducts?.length === 0 && (
+                <tr>
+                  <td
+                    colSpan={6}
+                    className="py-10 text-center text-sm text-slate-500"
+                  >
+                    No products match your search.
+                  </td>
+                </tr>
+              )}
             </tbody>
           </table>
         </div>

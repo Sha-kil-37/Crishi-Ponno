@@ -7,6 +7,7 @@ export async function GET() {
     await db();
 
     const allProduct = await Product.find({});
+    console.log(allProduct)
     // .sort({ createdAt: -1 }).lean();
     return NextResponse.json({
       success: true,

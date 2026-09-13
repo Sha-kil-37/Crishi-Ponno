@@ -83,6 +83,35 @@ const ProductSchema = new Schema(
         required: true,
       },
     },
+    //
+    metaTitle: {
+      type: String,
+      default: null,
+    },
+    metaDescription: {
+      type: String,
+      default: null,
+    },
+    keywords: {
+      type: Array,
+      default: null,
+    },
+    views: {
+      type: String,
+      default: null,
+    },
+    salesCount: {
+      type: String,
+      default: null,
+    },
+    averageRating: {
+      type: String,
+      default: null,
+    },
+    tags: {
+      type: Array,
+      default: null,
+    },
   },
   { timestamps: true },
 );
