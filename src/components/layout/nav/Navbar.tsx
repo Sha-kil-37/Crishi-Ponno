@@ -15,9 +15,11 @@ import {
   Menu,
   MoonStar,
   Sun,
+  Bell,
+  Camera,
+  Search,
 } from "lucide-react";
 import { Category } from "@/types/NavCategory";
-import SearchBox from "@/components/shared/SearchBox";
 import NavCategoryMenu from "./NavCategoryMenu";
 import BecomeASupplier from "@/components/shared/BecomeASupplier";
 import FindFactory from "@/components/shared/FindFactory";
@@ -26,11 +28,10 @@ import OrderProtection from "@/components/shared/OrderProtection";
 import GoogleButton from "@/components/utils/GoogleButton";
 //
 interface NavbarProps {
-  showNavboxSearch: boolean;
   categories: Category[];
 }
 //
-export default function Navbar({ showNavboxSearch, categories }: NavbarProps) {
+export default function Navbar({ categories }: NavbarProps) {
   //
   const { openDialog } = useDialog();
   const { theme, setTheme } = useTheme();
@@ -78,16 +79,108 @@ export default function Navbar({ showNavboxSearch, categories }: NavbarProps) {
     });
   };
   //
-
+  // handle file upload
+  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      console.log(file);
+    }
+  };
+  // handle search input
+  const handleSearchInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(event.target.value);
+  };
+  // handle search box
+  const handleSearch = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    console.log("search in progress");
+  };
   //
   return (
     <nav className="w-full z-50 sticky top-0 left-0 border-b backdrop-blur-md border-[#dcebdc] pt-3">
-      <div className="mx-auto w-7xl grid grid-cols-3 items-center">
-        <div>
+      <div className="mx-auto w-7xl">
+        <div className="flex justify-between">
           <Link href="/" className="text-2xl font-bold text-[#1f7a1f]">
             কৃষি পন্য
           </Link>
-          <ul className="flex gap-x-6">
+         
+            <form
+              onSubmit={handleSearch}
+              className="animated-border shadow-[0_10px_30px_rgba(15,61,46,0.08)] flex justify-center overflow-x-hidden"
+            >
+              <div className="w-full flex ">
+                <div className="p-2">
+                  <label htmlFor="searchValue">
+                    <input
+                      id="searchValue"
+                      name="searchValue"
+                      onChange={handleSearchInput}
+                      type="text"
+                      placeholder="Search for products"
+                      className="outline-none inline-block"
+                    />
+                  </label>
+                </div>
+                <div className="p-2">
+                  <label className="cursor-pointer" htmlFor="fileUpload">
+                    <input
+                      onChange={handleFileUpload}
+                      maxLength={1}
+                      id="fileUpload"
+                      name="fileUpload"
+                      type="file"
+                      accept="image/*"
+                      className="hidden"
+                    />
+                    <Camera className="inline-block" />
+                  </label>
+                </div>
+
+                <button
+                  type="submit"
+                  // disabled={loading}
+                  className="px-2 cursor-pointer"
+                >
+                  <Search className="h-full w-full" />
+                </button>
+              </div>
+            </form>
+          
+          <ul className="flex items-center justify-between">
+            <li className="relative group transition duration-500 cursor-pointer">
+              <Bell />
+              <div className="top-[120%] left-[50%] absolute bg-white border border-[#dcebdc] shadow-[0_10px_30px_rgba(15,61,46,0.08)] p-6 hidden group-hover:block rounded-xl xl:w-60 transform -translate-x-1/2 after:content-[''] after:absolute after:top-[-8px] after:left-[50%] after:bg-white after:w-4 after:h-4 after:rotate-45 after:-translate-x-1/2 after:border-t after:border-l after:border-[#dcebdc]">
+                <p className="font-medium inline-block">Notification</p>
+              </div>
+            </li>
+            <li className="relative group transition duration-500 cursor-pointer">
+              <ShoppingCart />
+              <div className="top-[120%] left-[50%] absolute bg-white border border-[#dcebdc] shadow-[0_10px_30px_rgba(15,61,46,0.08)] p-6 hidden group-hover:block rounded-xl xl:w-60 transform -translate-x-1/2 after:content-[''] after:absolute after:top-[-8px] after:left-[50%] after:bg-white after:w-4 after:h-4 after:rotate-45 after:-translate-x-1/2 after:border-t after:border-l after:border-[#dcebdc]">
+                <p className="font-medium inline-block">Your cart is empty</p>
+              </div>
+            </li>
+            <button
+              type="button"
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              className="cursor-pointer flex gap-x-2 items-center rounded-full px-3 py-2 border border-[#dcebdc] bg-white hover:bg-[#f6fbf4] text-[#163b1b]"
+            >
+              {mounted && theme === "dark" ? (
+                <Sun size={18} />
+              ) : (
+                <MoonStar size={18} />
+              )}
+            </button>
+            <button
+              onClick={handleOpenSignIn}
+              className="cursor-pointer flex gap-x-2 items-center rounded-full px-3 py-2 hover:bg-[#f6fbf4]"
+            >
+              <User />
+            </button>
+          </ul>
+        </div>
+
+        <div className="">
+          <ul className="flex justify-between">
             <li
               onMouseEnter={() => setIsOpenCategory(true)}
               onMouseLeave={() => setIsOpenCategory(false)}
@@ -126,71 +219,6 @@ export default function Navbar({ showNavboxSearch, categories }: NavbarProps) {
               }
               Order Protections
             </li>
-          </ul>
-        </div>
-
-        <div className="flex justify-center">
-          <AnimatePresence>
-            {showNavboxSearch && (
-              <motion.div
-                initial={{
-                  opacity: 0,
-                  y: -20,
-                  scale: 0.95,
-                }}
-                animate={{
-                  opacity: 1,
-                  y: 0,
-                  scale: 1,
-                }}
-                exit={{
-                  opacity: 0,
-                  y: -20,
-                  scale: 0.95,
-                }}
-                transition={{
-                  duration: 0.25,
-                }}
-                // className="w-full max-w-xl"
-              >
-                <SearchBox compact />
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
-
-        <div className="">
-          <ul className="flex gap-x-8 items-center">
-            <li className="relative group transition duration-500 cursor-pointer">
-              <ShoppingCart />
-              <div className="top-[120%] left-[50%] absolute bg-white border border-[#dcebdc] shadow-[0_10px_30px_rgba(15,61,46,0.08)] p-6 hidden group-hover:block rounded-xl xl:w-60 transform -translate-x-1/2 after:content-[''] after:absolute after:top-[-8px] after:left-[50%] after:bg-white after:w-4 after:h-4 after:rotate-45 after:-translate-x-1/2 after:border-t after:border-l after:border-[#dcebdc]">
-                <p className="font-medium inline-block">Your cart is empty</p>
-              </div>
-            </li>
-            <button
-              type="button"
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="cursor-pointer flex gap-x-2 items-center rounded-full px-3 py-2 border border-[#dcebdc] bg-white hover:bg-[#f6fbf4] text-[#163b1b]"
-            >
-              {mounted && theme === "dark" ? (
-                <Sun size={18} />
-              ) : (
-                <MoonStar size={18} />
-              )}
-              <span>
-                {mounted && theme === "dark" ? "Light mode" : "Dark mode"}
-              </span>
-            </button>
-            <button
-              onClick={handleOpenSignIn}
-              className="cursor-pointer flex gap-x-2 items-center rounded-full px-3 py-2 hover:bg-[#f6fbf4]"
-            >
-              <User />
-              <span>Sign In</span>
-            </button>
-          </ul>
-
-          <ul className="flex gap-x-6">
             <li
               className="py-3 cursor-pointer"
               onMouseEnter={() => setIsOpenBecomeASupplier(true)}
@@ -221,4 +249,6 @@ export default function Navbar({ showNavboxSearch, categories }: NavbarProps) {
       </div>
     </nav>
   );
+}
+{
 }
