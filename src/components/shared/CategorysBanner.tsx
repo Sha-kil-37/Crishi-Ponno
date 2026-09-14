@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ArrowUpRight, Leaf } from "lucide-react";
 import { useGetAllCategoryQuery } from "@/store/services/categoryApi";
 import { useMemo } from "react";
-
+//
 function CategorysBanner() {
   const {
     data: categories,
@@ -11,13 +11,14 @@ function CategorysBanner() {
     isError: isCategoriesError,
   } = useGetAllCategoryQuery();
   //
-    const filteredCategories = useMemo(
-      () => (categories ?? []).filter((category) => category.status === "Published"),
-      [categories],
-    );
+  const filteredCategories = useMemo(
+    () =>
+      (categories ?? []).filter((category) => category.status === "Published"),
+    [categories],
+  );
   if (isCategoriesLoading) {
     return (
-      <section
+      <main
         className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8"
         aria-label="Loading categories"
       >
@@ -29,28 +30,28 @@ function CategorysBanner() {
             />
           ))}
         </div>
-      </section>
+      </main>
     );
   }
 
   if (isCategoriesError) {
     return (
-      <section className="mx-auto max-w-7xl px-4 py-10 text-center sm:px-6 lg:px-8">
+      <main className="mx-auto max-w-7xl px-4 py-10 text-center sm:px-6 lg:px-8">
         <p className="text-sm text-[#64746a]">
           Categories are temporarily unavailable. Please try again shortly.
         </p>
-      </section>
+      </main>
     );
   }
 
-    if (!filteredCategories.length) {
+  if (!filteredCategories.length) {
     return null;
   }
   //
   return (
-    <section className="relative overflow-hidden bg-[#f7fbf3] py-12 sm:py-16">
+    <main className="relative overflow-hidden bg-[#f7fbf3]">
       <div className="pointer-events-none absolute -right-20 top-0 h-64 w-64 rounded-full bg-[#e4f1d8] opacity-70 blur-3xl" />
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="relative mx-auto max-w-7xl">
         <div className="mb-7 flex items-end justify-between gap-4">
           <div>
             <div className="mb-2 flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-[#c27b1a]">
@@ -110,7 +111,7 @@ function CategorysBanner() {
           ))}
         </div>
       </div>
-    </section>
+    </main>
   );
 }
 
