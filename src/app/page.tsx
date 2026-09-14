@@ -103,8 +103,8 @@ export default function Page() {
     <section>
       <DialogProvider>
         <Header />
-        <Navbar categories={categories} showNavboxSearch={showNavboxSearch} />
-        <Banner bannerRef={bannerRef} showNavboxSearch={showNavboxSearch} />
+        <Navbar categories={categories} />
+        <Banner />
         <Footer />
         <Dialog />
         <Toaster />

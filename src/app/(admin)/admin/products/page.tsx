@@ -179,8 +179,8 @@ export default function Page() {
                     {(product.shortDescription ?? "").slice(0, 20)}
                     {(product.shortDescription?.length ?? 0) > 20 && "..."}
                   </td>
-                  <td className="px-5 py-4">{product.category.name}</td>
-                  <td className="px-5 py-4">{product.brand.name}</td>
+                  <td className="px-5 py-4">{product.category?.name}</td>
+                  <td className="px-5 py-4">{product.brand?.name}</td>
                   <td className="px-5 py-4">{product.quantity}</td>
                   <td className="px-5 py-4">{product.price}</td>
                   <td className="px-5 py-4">

@@ -139,14 +139,14 @@ export default function Navbar({ categories }: NavbarProps) {
                 <button
                   type="submit"
                   // disabled={loading}
-                  className="px-2 cursor-pointer"
+                  className="px-2 cursor-pointer bg-[#E4E4E4]"
                 >
                   <Search className="h-full w-full" />
                 </button>
               </div>
             </form>
           
-          <ul className="flex items-center justify-between">
+          <ul className="flex items-center justify-between gap-x-4">
             <li className="relative group transition duration-500 cursor-pointer">
               <Bell />
               <div className="top-[120%] left-[50%] absolute bg-white border border-[#dcebdc] shadow-[0_10px_30px_rgba(15,61,46,0.08)] p-6 hidden group-hover:block rounded-xl xl:w-60 transform -translate-x-1/2 after:content-[''] after:absolute after:top-[-8px] after:left-[50%] after:bg-white after:w-4 after:h-4 after:rotate-45 after:-translate-x-1/2 after:border-t after:border-l after:border-[#dcebdc]">
@@ -162,7 +162,7 @@ export default function Navbar({ categories }: NavbarProps) {
             <button
               type="button"
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="cursor-pointer flex gap-x-2 items-center rounded-full px-3 py-2 border border-[#dcebdc] bg-white hover:bg-[#f6fbf4] text-[#163b1b]"
+              className="cursor-pointer"
             >
               {mounted && theme === "dark" ? (
                 <Sun size={18} />
@@ -172,7 +172,7 @@ export default function Navbar({ categories }: NavbarProps) {
             </button>
             <button
               onClick={handleOpenSignIn}
-              className="cursor-pointer flex gap-x-2 items-center rounded-full px-3 py-2 hover:bg-[#f6fbf4]"
+              className="cursor-pointer"
             >
               <User />
             </button>
@@ -250,5 +250,4 @@ export default function Navbar({ categories }: NavbarProps) {
     </nav>
   );
 }
-{
-}
+
