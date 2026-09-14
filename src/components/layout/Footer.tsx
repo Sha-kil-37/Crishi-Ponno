@@ -63,7 +63,7 @@ const paymentMethod = [
 export default function Footer() {
   //
   return (
-    <footer className="border-t backdrop-blur-md border-[#dcebdc] pt-8 bg-[#F8F8F8]">
+    <footer className="border-t backdrop-blur-md border-[#dcebdc] pt-8 bg-[#F5F5F5]">
       <div className="mx-auto max-w-7xl ">
         <div className="grid grid-cols-5">
           {footerLinks.map((section) => (

@@ -49,7 +49,7 @@ function CategorysBanner() {
   }
   //
   return (
-    <main className="relative overflow-hidden bg-[#f7fbf3]">
+    <main className="relative overflow-hidden py-6">
       <div className="pointer-events-none absolute -right-20 top-0 h-64 w-64 rounded-full bg-[#e4f1d8] opacity-70 blur-3xl" />
       <div className="relative mx-auto max-w-7xl">
         <div className="mb-7 flex items-end justify-between gap-4">

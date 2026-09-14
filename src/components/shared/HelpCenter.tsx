@@ -22,7 +22,7 @@ export default function HelpCenter() {
       transition={{
         duration: 0.2,
       }}
-      className="absolute left-0 top-full  w-full bg-gray-200"
+      className="absolute left-0 top-full  w-full bg-[#F5F5F5]"
     >
       <div className="w-7xl mx-auto">
         <h2 className="text-center">Help Center</h2>

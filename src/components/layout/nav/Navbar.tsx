@@ -139,7 +139,7 @@ export default function Navbar({ categories }: NavbarProps) {
                 <button
                   type="submit"
                   // disabled={loading}
-                  className="px-2 cursor-pointer bg-[#E4E4E4]"
+                  className="px-2 cursor-pointer bg-[#F5F5F5]"
                 >
                   <Search className="h-full w-full" />
                 </button>

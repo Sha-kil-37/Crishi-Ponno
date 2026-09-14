@@ -20,7 +20,7 @@ export default function FindFactory() {
       transition={{
         duration: 0.2,
       }}
-      className="absolute left-0 top-full w-full bg-gray-200"
+      className="absolute left-0 top-full w-full bg-[#F5F5F5]"
     >
       <div className="mx-auto w-7xl">
         <h2 className="text-center">Find Factorys</h2>

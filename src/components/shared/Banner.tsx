@@ -8,7 +8,8 @@ export default function Banner() {
   return (
     <div>
       <CategorysBanner />
-      <div className="rounded-md bg-[#E4E4E4] mx-auto max-w-7xl flex justify-between p-6">
+
+      <div className="rounded-md bg-[#F5F5F5] mx-auto max-w-7xl flex justify-between p-6">
         <div>
           <h2 className="text-3xl font-bold">Shopping made easy</h2>
           <p>Enjoy reliability, secure deliveries and hassle-free returns.</p>
@@ -19,6 +20,7 @@ export default function Banner() {
           </button>
         </div>
       </div>
+      <div className="py-6"></div>
     </div>
   );
 }
