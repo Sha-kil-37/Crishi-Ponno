@@ -77,7 +77,7 @@ const slides: Slide[] = [
     badge: "Farm smarter",
     icon: Tractor,
     image:
-      "https://images.unsplash.com/photo-1592982537447-6f7a7b6a2c6b?auto=format&fit=crop&w=1800&q=88",
+      "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?auto=format&fit=crop&w=1800&q=88",
   },
 
   {
@@ -155,7 +155,7 @@ function BannerSlider() {
 
   return (
     <section
-      className="relative isolate min-h-[560px] overflow-hidden bg-[#123b25] sm:min-h-[620px] lg:min-h-[660px]"
+      className="relative isolate min-h-[560px] overflow-hidden sm:min-h-[620px] lg:min-h-[660px]"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
       aria-roledescription="carousel"
@@ -198,13 +198,13 @@ function BannerSlider() {
           DARK GREEN OVERLAY
       ====================================================== */}
 
-      <div className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(5,38,23,0.96)_0%,rgba(5,38,23,0.88)_35%,rgba(5,38,23,0.55)_65%,rgba(5,38,23,0.25)_100%)]" />
+      {/* <div className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(5,38,23,0.96)_0%,rgba(5,38,23,0.88)_35%,rgba(5,38,23,0.55)_65%,rgba(5,38,23,0.25)_100%)]" /> */}
 
       {/* Bottom cinematic gradient */}
-      <div className="absolute inset-x-0 bottom-0 -z-10 h-64 bg-[linear-gradient(0deg,rgba(4,29,18,0.82),transparent)]" />
+      {/* <div className="absolute inset-x-0 bottom-0 -z-10 h-64 bg-[linear-gradient(0deg,rgba(4,29,18,0.82),transparent)]" /> */}
 
       {/* Soft green atmosphere */}
-      <div className="absolute left-1/3 top-1/2 -z-10 h-[500px] w-[500px] -translate-y-1/2 rounded-full bg-green-400/10 blur-[120px]" />
+      {/* <div className="absolute left-1/3 top-1/2 -z-10 h-[500px] w-[500px] -translate-y-1/2 rounded-full bg-green-400/10 blur-[120px]" /> */}
 
       {/* =====================================================
           CONTENT
