@@ -5,7 +5,7 @@ import { ArrowUpRight, Leaf } from "lucide-react";
 import { useGetAllCategoryQuery } from "@/store/services/categoryApi";
 import { useMemo } from "react";
 
-function CategorysBanner() {
+function BannerCategorys() {
   const {
     data: categories,
     isLoading: isCategoriesLoading,
@@ -51,7 +51,7 @@ function CategorysBanner() {
   }
 
   return (
-    <main className="relative overflow-hidden py-8">
+    <main className="relative overflow-hidden">
       {/* Background decoration */}
       <div className="pointer-events-none absolute -right-20 top-0 h-64 w-64 rounded-full bg-[#e4f1d8] opacity-70 blur-3xl" />
 
@@ -118,7 +118,7 @@ function CategorysBanner() {
                   href={`/?category=${encodeURIComponent(category.slug)}`}
                   className="block text-base  text-[#163b2a] transition-colors duration-200 hover:text-[#1f7a1f] sm:text-lg"
                 >
-                  {category.name.toUpperCase()}
+                  {category.name}
                 </Link>
               </div>
             </div>
@@ -138,4 +138,4 @@ function CategorysBanner() {
   );
 }
 
-export default CategorysBanner;
+export default BannerCategorys;

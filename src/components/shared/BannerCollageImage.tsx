@@ -102,7 +102,7 @@ export default function BannerCollageImage() {
               href="/products"
               className="group inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-[#1f7a3a] transition hover:bg-lime-100"
             >
-              Find Products
+              Find Your Needs
               <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
             </Link>
           </div>
@@ -121,11 +121,12 @@ export default function BannerCollageImage() {
                 y: 20,
                 scale: 0.95,
               }}
-              animate={{
+              whileInView={{
                 opacity: 1,
                 y: 0,
                 scale: 1,
               }}
+              viewport={{ amount: 0.2, once: false }}
               transition={{
                 duration: 0.6,
                 delay: index * 0.12,

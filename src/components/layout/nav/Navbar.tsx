@@ -1,5 +1,6 @@
 "use client";
 //
+import logo from "../../../../public/meta/logo.png";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -26,6 +27,7 @@ import FindFactory from "@/components/shared/FindFactory";
 import HelpCenter from "@/components/shared/HelpCenter";
 import OrderProtection from "@/components/shared/OrderProtection";
 import GoogleButton from "@/components/utils/GoogleButton";
+import Image from "next/image";
 //
 interface NavbarProps {
   categories: Category[];
@@ -100,52 +102,53 @@ export default function Navbar({ categories }: NavbarProps) {
     <nav className="w-full z-50 sticky top-0 left-0 border-b backdrop-blur-md border-[#dcebdc] pt-3">
       <div className="mx-auto w-7xl">
         <div className="flex justify-between">
-          <Link href="/" className="text-2xl font-bold text-[#1f7a1f]">
-            কৃষি পন্য
+          <Link href="/" className="font-bold textxl" >
+          Logo
+            {/* <Image className="h-auto w-auto"  src={logo} alt="logo" /> */}
           </Link>
-         
-            <form
-              onSubmit={handleSearch}
-              className="animated-border shadow-[0_10px_30px_rgba(15,61,46,0.08)] flex justify-center overflow-x-hidden"
-            >
-              <div className="w-full flex ">
-                <div className="p-2">
-                  <label htmlFor="searchValue">
-                    <input
-                      id="searchValue"
-                      name="searchValue"
-                      onChange={handleSearchInput}
-                      type="text"
-                      placeholder="Search for products"
-                      className="outline-none inline-block"
-                    />
-                  </label>
-                </div>
-                <div className="p-2">
-                  <label className="cursor-pointer" htmlFor="fileUpload">
-                    <input
-                      onChange={handleFileUpload}
-                      maxLength={1}
-                      id="fileUpload"
-                      name="fileUpload"
-                      type="file"
-                      accept="image/*"
-                      className="hidden"
-                    />
-                    <Camera className="inline-block" />
-                  </label>
-                </div>
 
-                <button
-                  type="submit"
-                  // disabled={loading}
-                  className="px-2 cursor-pointer bg-[#F5F5F5]"
-                >
-                  <Search className="h-full w-full" />
-                </button>
+          <form
+            onSubmit={handleSearch}
+            className="animated-border shadow-[0_10px_30px_rgba(15,61,46,0.08)] flex justify-center overflow-x-hidden"
+          >
+            <div className="w-full flex ">
+              <div className="p-2">
+                <label htmlFor="searchValue">
+                  <input
+                    id="searchValue"
+                    name="searchValue"
+                    onChange={handleSearchInput}
+                    type="text"
+                    placeholder="Search for products"
+                    className="outline-none inline-block"
+                  />
+                </label>
               </div>
-            </form>
-          
+              <div className="p-2">
+                <label className="cursor-pointer" htmlFor="fileUpload">
+                  <input
+                    onChange={handleFileUpload}
+                    maxLength={1}
+                    id="fileUpload"
+                    name="fileUpload"
+                    type="file"
+                    accept="image/*"
+                    className="hidden"
+                  />
+                  <Camera className="inline-block" />
+                </label>
+              </div>
+
+              <button
+                type="submit"
+                // disabled={loading}
+                className="px-2 cursor-pointer bg-[#F5F5F5]"
+              >
+                <Search className="h-full w-full" />
+              </button>
+            </div>
+          </form>
+
           <ul className="flex items-center justify-between gap-x-4">
             <li className="relative group transition duration-500 cursor-pointer">
               <Bell />
@@ -170,10 +173,7 @@ export default function Navbar({ categories }: NavbarProps) {
                 <MoonStar size={18} />
               )}
             </button>
-            <button
-              onClick={handleOpenSignIn}
-              className="cursor-pointer"
-            >
+            <button onClick={handleOpenSignIn} className="cursor-pointer">
               <User />
             </button>
           </ul>
@@ -250,4 +250,3 @@ export default function Navbar({ categories }: NavbarProps) {
     </nav>
   );
 }
-
