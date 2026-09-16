@@ -75,11 +75,11 @@ function CategorysBanner() {
           </div>
 
           <Link
-            href="/?view=categories"
-            className="hidden shrink-0 items-center gap-1 text-sm font-semibold text-[#1f7a1f] transition hover:text-[#0f3d2e] sm:flex"
+            href="/products"
+            className="group inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-[#1f7a3a] transition hover:bg-lime-100"
           >
-            View all
-            <ArrowUpRight size={17} />
+            view all
+            <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
           </Link>
         </div>
 
@@ -113,7 +113,6 @@ function CategorysBanner() {
                 </span>
               </Link>
 
-            
               <div className="mt-3 px-1">
                 <Link
                   href={`/?category=${encodeURIComponent(category.slug)}`}
