@@ -62,10 +62,7 @@ function BannerCategorys() {
   const sliderCategories = [...filteredCategories, ...filteredCategories];
   //
   return (
-    <main className="relative overflow-hidden">
-      {/* Background decoration */}
-      <div className="pointer-events-none absolute -right-20 top-0 h-64 w-64 rounded-full bg-[#e4f1d8] opacity-70 blur-3xl" />
-
+    <main className="relative overflow-hidden py-15">
       <div className="relative w-full">
         {/* Header */}
         <div className="mb-7 flex items-end justify-between gap-4 mx-auto w-7xl">
