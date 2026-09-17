@@ -16,6 +16,9 @@ import equevment from "../../../public/images/banner/equevment.png";
 import advice from "../../../public/images/banner/advice.png";
 import poultry from "../../../public/images/banner/poultry.png";
 import fish from "../../../public/images/banner/fish.jpg";
+import MultiSlider from "./MultiSlider";
+//
+
 //
 export default function Banner() {
   //
@@ -188,7 +191,7 @@ export default function Banner() {
           </motion.div>
         ))}
       </div>
-
+      <MultiSlider />
       <BannerTranding />
     </div>
   );
