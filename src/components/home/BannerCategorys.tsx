@@ -62,7 +62,7 @@ function BannerCategorys() {
   const sliderCategories = [...filteredCategories, ...filteredCategories];
   //
   return (
-    <main className="relative overflow-hidden py-10">
+    <main className="relative overflow-hidden">
       {/* Background decoration */}
       <div className="pointer-events-none absolute -right-20 top-0 h-64 w-64 rounded-full bg-[#e4f1d8] opacity-70 blur-3xl" />
 
@@ -99,9 +99,9 @@ function BannerCategorys() {
             INFINITE CATEGORY SLIDER
         ====================================================== */}
 
-        <div className="group/slider relative overflow-hidden">
+        <div className="slider-viewport relative overflow-hidden">
           {/* Moving track */}
-          <div className="flex w-max gap-4 sm:gap-5 animate-category-slider group-hover/slider:[animation-play-state:paused]">
+          <div className="flex w-max gap-4 sm:gap-5 animate-category-slider">
             {sliderCategories.map((category, index) => (
               <div
                 key={`${category._id}-${index}`}
@@ -177,6 +177,10 @@ function BannerCategorys() {
         .animate-category-slider {
           animation: category-slider 55s linear infinite;
           will-change: transform;
+        }
+
+        .slider-viewport:hover .animate-category-slider {
+          animation-play-state: paused;
         }
 
         @media (prefers-reduced-motion: reduce) {
