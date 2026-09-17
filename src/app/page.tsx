@@ -2,10 +2,9 @@
 import { DialogProvider } from "@/hooks/client/useDialog";
 import Dialog from "@/components/utils/dialog";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { Toaster } from "@/components/utils/sonner";
 import { toast } from "sonner";
-import { useNavboxSearch } from "@/hooks/client/useNavboxSearch";
 import { Category } from "@/types/NavCategory";
 import Header from "@/components/layout/Header";
 import Navbar from "@/components/layout/nav/Navbar";
@@ -14,8 +13,6 @@ import Footer from "@/components/layout/Footer";
 
 //
 export default function Page() {
-  const bannerRef = useRef<HTMLDivElement | null>(null);
-  const showNavboxSearch = useNavboxSearch(bannerRef);
   const router = useRouter();
   const searchParams = useSearchParams();
   const isAuthSuccess = searchParams.get("auth") === "success";

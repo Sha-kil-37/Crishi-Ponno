@@ -60,15 +60,15 @@ function BannerCategorys() {
    * This creates the seamless infinite effect.
    */
   const sliderCategories = [...filteredCategories, ...filteredCategories];
-
+  //
   return (
     <main className="relative overflow-hidden">
       {/* Background decoration */}
       <div className="pointer-events-none absolute -right-20 top-0 h-64 w-64 rounded-full bg-[#e4f1d8] opacity-70 blur-3xl" />
 
-      <div className="relative mx-auto max-w-7xl">
+      <div className="relative w-full">
         {/* Header */}
-        <div className="mb-7 flex items-end justify-between gap-4">
+        <div className="mb-7 flex items-end justify-between gap-4 mx-auto w-7xl">
           <div>
             <div className="mb-2 flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-[#c27b1a]">
               <Leaf size={15} strokeWidth={2.5} />
@@ -116,7 +116,7 @@ function BannerCategorys() {
                 {/* Image */}
                 <Link
                   href={`/?category=${encodeURIComponent(category.slug)}`}
-                  className="relative block aspect-[4/3] overflow-hidden rounded-2xl bg-[#dcebdc] shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+                  className="relative block aspect-[4/3] overflow-hidden  bg-[#dcebdc] shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
                 >
                   {category.image?.url ? (
                     <img
