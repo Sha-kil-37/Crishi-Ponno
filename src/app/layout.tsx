@@ -26,7 +26,10 @@ export default function RootLayout({
       suppressHydrationWarning
       className={cn("font-sans", geist.variable)}
     >
-      <body className="transition-colors duration-200 ease-in-out">
+      <body
+        suppressHydrationWarning
+        className="transition-colors duration-200 ease-in-out"
+      >
         <ReduxProvider>
           <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
             {children}
