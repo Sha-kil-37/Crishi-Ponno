@@ -1,6 +1,6 @@
 "use client";
 //
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { Category } from "@/types/NavCategory";
 import CategorySidebar from "./CategorySidebar";
 import CategoryContent from "./CategoryContent";

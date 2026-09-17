@@ -1,7 +1,7 @@
 "use client";
 //
 import logo from "../../../../public/meta/logo.png";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion } from "motion/react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
@@ -102,8 +102,8 @@ export default function Navbar({ categories }: NavbarProps) {
     <nav className="w-full z-50 sticky top-0 left-0 border-b backdrop-blur-md border-[#dcebdc] pt-3">
       <div className="mx-auto w-7xl">
         <div className="flex justify-between">
-          <Link href="/" className="font-bold textxl" >
-          Logo
+          <Link href="/" className="font-bold textxl">
+            Logo
             {/* <Image className="h-auto w-auto"  src={logo} alt="logo" /> */}
           </Link>
 

@@ -1,118 +1,118 @@
 "use client";
 //
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
 import { useEffect, useState } from "react";
+//
+// slider data
+const slides = [
+  {
+    id: 1,
+    title: "Fresh Vegetables",
+    subtitle: "Fresh vegetables directly from local farms.",
+    heroImage: "/images/vegetables-banner.jpg",
 
+    cards: [
+      {
+        id: 11,
+        title: "Fresh Vegetables",
+        description: "Fresh vegetables directly from local farms.",
+        image: "/images/vegetables.jpg",
+      },
+      {
+        id: 12,
+        title: "Organic Fruits",
+        description: "Naturally grown seasonal fruits.",
+        image: "/images/fruits.jpg",
+      },
+      {
+        id: 13,
+        title: "Plants & Gardening",
+        description: "Healthy plants for your garden.",
+        image: "/images/plants.jpg",
+      },
+      {
+        id: 14,
+        title: "Seeds",
+        description: "Quality seeds for better cultivation.",
+        image: "/images/seeds.jpg",
+      },
+    ],
+  },
+
+  {
+    id: 2,
+    title: "Plants & Gardening",
+    subtitle: "Healthy plants for your home and farm.",
+    heroImage: "/images/plants-banner.jpg",
+
+    cards: [
+      {
+        id: 21,
+        title: "Plants & Gardening",
+        description: "Healthy plants for your garden.",
+        image: "/images/plants.jpg",
+      },
+      {
+        id: 22,
+        title: "Agriculture Equipment",
+        description: "Modern tools for farmers.",
+        image: "/images/equipment.jpg",
+      },
+      {
+        id: 23,
+        title: "Organic Products",
+        description: "Natural products from rural producers.",
+        image: "/images/organic.jpg",
+      },
+      {
+        id: 24,
+        title: "Seeds",
+        description: "Quality seeds for better cultivation.",
+        image: "/images/seeds.jpg",
+      },
+    ],
+  },
+
+  {
+    id: 3,
+    title: "Organic & Rural Products",
+    subtitle: "Natural products from trusted local producers.",
+    heroImage: "/images/organic-banner.jpg",
+
+    cards: [
+      {
+        id: 31,
+        title: "Organic Products",
+        description: "Natural products from rural producers.",
+        image: "/images/organic.jpg",
+      },
+      {
+        id: 32,
+        title: "Fish Production",
+        description: "Products for modern fish farming.",
+        image: "/images/fish.jpg",
+      },
+      {
+        id: 33,
+        title: "Poultry & Livestock",
+        description: "Products and solutions for livestock.",
+        image: "/images/livestock.jpg",
+      },
+      {
+        id: 34,
+        title: "Agriculture Advice",
+        description: "Helpful information for farmers.",
+        image: "/images/advice.jpg",
+      },
+    ],
+  },
+];
 export default function MultiSlider() {
   /* =========================================================
      SLIDER DATA
   ========================================================= */
-
-  const slides = [
-    {
-      id: 1,
-      title: "Fresh Vegetables",
-      subtitle: "Fresh vegetables directly from local farms.",
-      heroImage: "/images/vegetables-banner.jpg",
-
-      cards: [
-        {
-          id: 11,
-          title: "Fresh Vegetables",
-          description: "Fresh vegetables directly from local farms.",
-          image: "/images/vegetables.jpg",
-        },
-        {
-          id: 12,
-          title: "Organic Fruits",
-          description: "Naturally grown seasonal fruits.",
-          image: "/images/fruits.jpg",
-        },
-        {
-          id: 13,
-          title: "Plants & Gardening",
-          description: "Healthy plants for your garden.",
-          image: "/images/plants.jpg",
-        },
-        {
-          id: 14,
-          title: "Seeds",
-          description: "Quality seeds for better cultivation.",
-          image: "/images/seeds.jpg",
-        },
-      ],
-    },
-
-    {
-      id: 2,
-      title: "Plants & Gardening",
-      subtitle: "Healthy plants for your home and farm.",
-      heroImage: "/images/plants-banner.jpg",
-
-      cards: [
-        {
-          id: 21,
-          title: "Plants & Gardening",
-          description: "Healthy plants for your garden.",
-          image: "/images/plants.jpg",
-        },
-        {
-          id: 22,
-          title: "Agriculture Equipment",
-          description: "Modern tools for farmers.",
-          image: "/images/equipment.jpg",
-        },
-        {
-          id: 23,
-          title: "Organic Products",
-          description: "Natural products from rural producers.",
-          image: "/images/organic.jpg",
-        },
-        {
-          id: 24,
-          title: "Seeds",
-          description: "Quality seeds for better cultivation.",
-          image: "/images/seeds.jpg",
-        },
-      ],
-    },
-
-    {
-      id: 3,
-      title: "Organic & Rural Products",
-      subtitle: "Natural products from trusted local producers.",
-      heroImage: "/images/organic-banner.jpg",
-
-      cards: [
-        {
-          id: 31,
-          title: "Organic Products",
-          description: "Natural products from rural producers.",
-          image: "/images/organic.jpg",
-        },
-        {
-          id: 32,
-          title: "Fish Production",
-          description: "Products for modern fish farming.",
-          image: "/images/fish.jpg",
-        },
-        {
-          id: 33,
-          title: "Poultry & Livestock",
-          description: "Products and solutions for livestock.",
-          image: "/images/livestock.jpg",
-        },
-        {
-          id: 34,
-          title: "Agriculture Advice",
-          description: "Helpful information for farmers.",
-          image: "/images/advice.jpg",
-        },
-      ],
-    },
-  ];
 
   /* =========================================================
      STATE
@@ -132,7 +132,7 @@ export default function MultiSlider() {
   const bottomTransition = {
     duration: 0.65,
     delay: 0,
-    ease: [0.4, 0, 0.2, 1],
+    ease: [0.4, 0, 0.2, 1] as [number, number, number, number],
   };
 
   /*
@@ -142,7 +142,7 @@ export default function MultiSlider() {
   const topTransition = {
     duration: 1.15,
     delay: 0.15,
-    ease: [0.4, 0, 0.2, 1],
+    ease: [0.4, 0, 0.2, 1] as [number, number, number, number],
   };
 
   /*
@@ -174,7 +174,7 @@ export default function MultiSlider() {
      SELECT SLIDE
   ========================================================= */
 
-  const goToSlide = (index) => {
+  const goToSlide = (index: number) => {
     setActiveIndex(index);
   };
 
@@ -203,8 +203,8 @@ export default function MultiSlider() {
   ========================================================= */
 
   return (
-    <section className="w-full overflow-hidden bg-white py-12">
-      <div className="mx-auto w-full max-w-[1800px] px-2 md:px-4">
+    <section className="w-full overflow-hidden py-12">
+      <div className="mx-auto w-full ">
         {/* =====================================================
             TOP HERO SLIDER
         ===================================================== */}
@@ -218,8 +218,8 @@ export default function MultiSlider() {
             transition={topTransition}
           >
             {slides.map((slide, index) => (
-              <div key={slide.id} className="min-w-full px-1 md:px-2">
-                <article className="group relative aspect-[2.4/1] min-h-[280px] overflow-hidden rounded-2xl bg-gray-100 md:aspect-[3/1]">
+              <div key={slide.id} className="min-w-full">
+                <article className="group relative aspect-[2.4/1] min-h-[280px] overflow-hidden  bg-gray-100 md:aspect-[3/1]">
                   {/* Hero Image */}
                   <Image
                     src={slide.heroImage}
@@ -273,12 +273,12 @@ export default function MultiSlider() {
             transition={bottomTransition}
           >
             {slides.map((slide) => (
-              <div key={slide.id} className="min-w-full px-1 md:px-2">
+              <div key={slide.id} className="min-w-full">
                 <div className="grid grid-cols-2 gap-2 md:grid-cols-4 md:gap-3">
                   {slide.cards.map((card) => (
                     <article
                       key={card.id}
-                      className="group relative aspect-[1.7/1] overflow-hidden rounded-xl bg-gray-100"
+                      className="group relative aspect-[1.7/1] overflow-hidden bg-[#F5F5F5]"
                     >
                       {/* Card Image */}
                       <Image
@@ -290,7 +290,7 @@ export default function MultiSlider() {
                       />
 
                       {/* Card Gradient */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent" />
+                      {/* <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent" /> */}
 
                       {/* Card Content */}
                       <div className="absolute inset-x-0 bottom-0 p-3 md:p-4">
@@ -316,14 +316,14 @@ export default function MultiSlider() {
 
         <div className="mt-5 flex items-center justify-center gap-4">
           {/* Previous Button */}
-          <button
+          {/* <button
             type="button"
             onClick={previousSlide}
             aria-label="Previous slide"
             className="flex h-9 w-9 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-700 transition hover:bg-gray-100"
           >
             <ChevronLeft size={18} strokeWidth={1.8} />
-          </button>
+          </button> */}
 
           {/* Pagination */}
           <div
@@ -357,14 +357,14 @@ export default function MultiSlider() {
           </div>
 
           {/* Next Button */}
-          <button
+          {/* <button
             type="button"
             onClick={nextSlide}
             aria-label="Next slide"
             className="flex h-9 w-9 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-700 transition hover:bg-gray-100"
           >
             <ChevronRight size={18} strokeWidth={1.8} />
-          </button>
+          </button> */}
 
           {/* Play / Pause */}
           <button

@@ -1,13 +1,12 @@
 "use client";
 import BannerSlider from "./BannerSlider";
-import BannerCollageImage from "./BannerCollageImage";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import BannerTranding from "./BannerTranding";
 import BannerCategorys from "./BannerCategorys";
 import banner from "../../../public/images/banner/banner.png";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import fruitsandvegetables from "../../../public/images/banner/fruits&vegetables.png";
 import plantsandgardening from "../../../public/images/banner/plants&gardening.png";
 import organicandrural from "../../../public/images/banner/organic&rural.png";
@@ -142,7 +141,7 @@ export default function Banner() {
           </Link>
         </div>
       </div>
-      <BannerCollageImage />
+
       <div className="grid grid-cols-1 gap-2 md:grid-cols-2 px-2">
         {bannerItems.map((item, i) => (
           <motion.div

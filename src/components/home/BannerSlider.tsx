@@ -210,7 +210,7 @@ function BannerSlider() {
           CONTENT
       ====================================================== */}
 
-      <div className="mx-auto flex min-h-[560px] max-w-7xl flex-col justify-between px-5 py-10 sm:min-h-[620px] sm:px-8 sm:py-14 lg:min-h-[660px] lg:px-12 lg:py-16">
+      <div className="mx-auto flex min-h-[560px] max-w-7xl flex-col justify-between  py-10 sm:min-h-[620px]  sm:py-14 lg:min-h-[660px]  lg:py-16">
         <div className="max-w-3xl pt-4 text-white sm:pt-8 lg:pt-10">
           {/* Badge */}
           <div
