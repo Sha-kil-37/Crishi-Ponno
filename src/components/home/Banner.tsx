@@ -16,7 +16,7 @@ import equevment from "../../../public/images/banner/equevment.png";
 import advice from "../../../public/images/banner/advice.png";
 import poultry from "../../../public/images/banner/poultry.png";
 import fish from "../../../public/images/banner/fish.jpg";
-
+//
 export default function Banner() {
   //
   const bannerItems = [
@@ -188,6 +188,7 @@ export default function Banner() {
           </motion.div>
         ))}
       </div>
+
       <BannerTranding />
     </div>
   );

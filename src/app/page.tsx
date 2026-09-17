@@ -9,7 +9,7 @@ import { useNavboxSearch } from "@/hooks/client/useNavboxSearch";
 import { Category } from "@/types/NavCategory";
 import Header from "@/components/layout/Header";
 import Navbar from "@/components/layout/nav/Navbar";
-import Banner from "@/components/shared/Banner";
+import Banner from "@/components/home/Banner";
 import Footer from "@/components/layout/Footer";
 
 //
