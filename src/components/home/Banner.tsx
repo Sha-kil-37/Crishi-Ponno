@@ -2,7 +2,7 @@
 import BannerSlider from "./BannerSlider";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
-import BannerTranding from "./BannerTranding";
+import Tranding from "./Tranding";
 import BannerCategorys from "./BannerCategorys";
 import banner from "../../../public/images/banner/banner.png";
 import Image from "next/image";
@@ -191,7 +191,7 @@ export default function Banner() {
         ))}
       </div>
       <MultiSlider />
-      <BannerTranding />
+      <Tranding />
     </div>
   );
 }
