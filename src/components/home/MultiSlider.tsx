@@ -234,8 +234,8 @@ export default function MultiSlider() {
                   {/* <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/25 to-transparent" /> */}
 
                   {/* Hero Content */}
-                  <div className="absolute inset-y-0 left-0 flex max-w-xl flex-col justify-center px-7 text-white md:px-12 lg:px-16">
-                    <p className="mb-2 text-xs font-medium uppercase tracking-[0.2em] text-white/80 md:text-sm">
+                  <div className="absolute inset-y-0 left-0 flex max-w-xl flex-col justify-center px-7  md:px-12 lg:px-16">
+                    <p className="mb-2 text-xs font-medium uppercase tracking-[0.2em]  md:text-sm">
                       Crishi Ponno
                     </p>
 
@@ -243,7 +243,7 @@ export default function MultiSlider() {
                       {slide.title}
                     </h2>
 
-                    <p className="mt-3 max-w-md text-sm leading-6 text-white/85 md:text-base">
+                    <p className="mt-3 max-w-md text-sm leading-6  md:text-base">
                       {slide.subtitle}
                     </p>
 
