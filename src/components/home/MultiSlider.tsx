@@ -219,7 +219,7 @@ export default function MultiSlider() {
           >
             {slides.map((slide, index) => (
               <div key={slide.id} className="min-w-full">
-                <article className="group relative aspect-[2.4/1] min-h-[280px] overflow-hidden  bg-gray-100 md:aspect-[3/1]">
+                <article className="group relative aspect-[2.4/1] min-h-[280px] overflow-hidden  bg-[#F5F5F5] md:aspect-[3/1]">
                   {/* Hero Image */}
                   <Image
                     src={slide.heroImage}
@@ -231,7 +231,7 @@ export default function MultiSlider() {
                   />
 
                   {/* Dark Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/25 to-transparent" />
+                  {/* <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/25 to-transparent" /> */}
 
                   {/* Hero Content */}
                   <div className="absolute inset-y-0 left-0 flex max-w-xl flex-col justify-center px-7 text-white md:px-12 lg:px-16">
@@ -294,11 +294,11 @@ export default function MultiSlider() {
 
                       {/* Card Content */}
                       <div className="absolute inset-x-0 bottom-0 p-3 md:p-4">
-                        <h3 className="text-sm font-semibold text-white md:text-base">
+                        <h3 className="">
                           {card.title}
                         </h3>
 
-                        <p className="mt-1 line-clamp-1 text-xs text-white/80 md:text-sm">
+                        <p className="mt-1 line-clamp-1 ">
                           {card.description}
                         </p>
                       </div>

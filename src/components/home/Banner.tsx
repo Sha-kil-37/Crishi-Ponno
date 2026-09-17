@@ -150,7 +150,7 @@ export default function Banner() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.15 }}
             transition={{ duration: 0.5 }}
-            className="group relative min-h-[420px] overflow-hidden bg-neutral-100 md:min-h-[520px]"
+            className="group relative min-h-[420px] overflow-hidden  md:min-h-[520px]"
           >
             {/* Background Image */}
             <Image
@@ -163,7 +163,7 @@ export default function Banner() {
             />
 
             {/* Overlay */}
-            <div className="absolute inset-0 bg-black/20 transition-colors duration-500 group-hover:bg-black/30" />
+            <div className="absolute inset-0 bg-[#dcebdc] transition-colors duration-500 group-hover:bg-[#F5F5F5]" />
 
             {/* Content */}
             <div className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center text-white">
