@@ -100,12 +100,6 @@ function BannerCategorys() {
         ====================================================== */}
 
         <div className="group/slider relative overflow-hidden">
-          {/* Left fade */}
-          <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-16 bg-linear-to-r from-white to-transparent" />
-
-          {/* Right fade */}
-          <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-16 bg-linear-to-l from-white to-transparent" />
-
           {/* Moving track */}
           <div className="flex w-max gap-4 sm:gap-5 animate-category-slider group-hover/slider:[animation-play-state:paused]">
             {sliderCategories.map((category, index) => (
