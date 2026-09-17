@@ -121,7 +121,7 @@ export default function Banner() {
       </div>
       <BannerCategorys />
 
-      <div className="flex justify-between p-8 bg-[#F5F5F5] w-7xl mx-auto rounded-xl my-4">
+      <div className="flex justify-between p-12 bg-[#F5F5F5] w-7xl mx-auto rounded-xl my-10">
         <div>
           <h2 className="text-3xl font-bold tracking-tight">
             Make shopping easier.
