@@ -246,8 +246,7 @@ export default function Trending() {
           product?.status !== "Out of Stock" &&
           product?.status !== "Discontinued",
       )
-      .sort((a, b) => Number(b?.salesCount || 0) - Number(a?.salesCount || 0))
-      .slice(0, 6);
+      .sort((a, b) => Number(b?.salesCount || 0) - Number(a?.salesCount || 0));
   }, [products]);
 
   const pageSize = 3;
