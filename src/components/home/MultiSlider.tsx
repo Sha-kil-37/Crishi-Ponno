@@ -19,25 +19,21 @@ const slides = [
       "linear-gradient(135deg, #F8FBF3 0%, #E8F3DF 50%, #C8E6B8 100%)",
     cards: [
       {
-      
         title: "Fresh Vegetables",
         description: "Fresh vegetables directly from local farms.",
         image: "/images/vegetables.jpg",
       },
       {
-       
         title: "Organic Fruits",
         description: "Naturally grown seasonal fruits.",
         image: "/images/fruits.jpg",
       },
       {
-       
         title: "Plants & Gardening",
         description: "Healthy plants for your garden.",
         image: "/images/plants.jpg",
       },
       {
-      
         title: "Seeds",
         description: "Quality seeds for better cultivation.",
         image: "/images/seeds.jpg",
@@ -53,25 +49,21 @@ const slides = [
       "linear-gradient(135deg, #FFF8E7 0%, #F4E7C1 50%, #DCE8B8 100%)",
     cards: [
       {
-       
         title: "Plants & Gardening",
         description: "Healthy plants for your garden.",
         image: "/images/plants.jpg",
       },
       {
-       
         title: "Agriculture Equipment",
         description: "Modern tools for farmers.",
         image: "/images/equipment.jpg",
       },
       {
-       
         title: "Organic Products",
         description: "Natural products from rural producers.",
         image: "/images/organic.jpg",
       },
       {
-      
         title: "Seeds",
         description: "Quality seeds for better cultivation.",
         image: "/images/seeds.jpg",
@@ -88,25 +80,21 @@ const slides = [
       "linear-gradient(135deg, #EEF8F5 0%, #D3ECE0 50%, #A8D5C0 100%)",
     cards: [
       {
-        
         title: "Organic Products",
         description: "Natural products from rural producers.",
         image: "/images/organic.jpg",
       },
       {
-       
         title: "Fish Production",
         description: "Products for modern fish farming.",
         image: "/images/fish.jpg",
       },
       {
-        
         title: "Poultry & Livestock",
         description: "Products and solutions for livestock.",
         image: "/images/livestock.jpg",
       },
       {
-       
         title: "Agriculture Advice",
         description: "Helpful information for farmers.",
         image: "/images/advice.jpg",
@@ -265,9 +253,9 @@ export default function MultiSlider() {
               LEFT / RIGHT SLIDE FADE
           ========================================================= */}
 
-          <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-[15%] bg-gradient-to-r from-white/70 to-transparent" />
+          {/* <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-[15%] bg-gradient-to-r from-white/70 to-transparent" />
 
-          <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-[15%] bg-gradient-to-l from-white/70 to-transparent" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-[15%] bg-gradient-to-l from-white/70 to-transparent" /> */}
         </div>
 
         {/* =====================================================
@@ -288,27 +276,25 @@ export default function MultiSlider() {
             {slides.map((slide) => (
               <div key={slide.id} className="min-w-full">
                 <div className="grid grid-cols-2 gap-2 md:grid-cols-4 md:gap-3">
-                  {slide.cards.map((card) => (
+                  {slide.cards.map((card, i) => (
                     <article
-                      key={card.id}
+                      key={i}
                       className="group relative aspect-[1.7/1] overflow-hidden bg-[#F5F5F5]"
                     >
-                      <Image
+                      {/* <Image
                         src={card.image}
                         alt={card.title}
                         fill
                         sizes="(max-width: 768px) 50vw, 25vw"
                         className="object-cover transition-transform duration-700 group-hover:scale-105"
-                      />
+                      /> */}
 
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
-
-                      <div className="absolute inset-x-0 bottom-0 p-3 text-white md:p-4">
+                      <div className="absolute inset-x-0 bottom-0 p-3 md:p-4">
                         <h3 className="text-sm font-semibold md:text-base">
                           {card.title}
                         </h3>
 
-                        <p className="mt-1 line-clamp-1 text-xs text-white/80 md:text-sm">
+                        <p className="mt-1 ">
                           {card.description}
                         </p>
                       </div>
