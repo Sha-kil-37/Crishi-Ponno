@@ -1,39 +1,43 @@
 "use client";
-//
+
 import Image from "next/image";
 import { motion } from "motion/react";
-import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
-import { useEffect, useState } from "react";
-//
-// slider data
+import { Pause, Play } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+
+// =========================================================
+// SLIDER DATA
+// =========================================================
+
 const slides = [
   {
     id: 1,
-    title: "Fresh Vegetables",
-    subtitle: "Fresh vegetables directly from local farms.",
-    heroImage: "/images/vegetables-banner.jpg",
-
+    title: "Discover Freshness, Save 20%",
+    subtitle:
+      "Explore fresh fruits, vegetables, plants, and trusted agricultural products—now at special prices",
+    background:
+      "linear-gradient(135deg, #F8FBF3 0%, #E8F3DF 50%, #C8E6B8 100%)",
     cards: [
       {
-        id: 11,
+      
         title: "Fresh Vegetables",
         description: "Fresh vegetables directly from local farms.",
         image: "/images/vegetables.jpg",
       },
       {
-        id: 12,
+       
         title: "Organic Fruits",
         description: "Naturally grown seasonal fruits.",
         image: "/images/fruits.jpg",
       },
       {
-        id: 13,
+       
         title: "Plants & Gardening",
         description: "Healthy plants for your garden.",
         image: "/images/plants.jpg",
       },
       {
-        id: 14,
+      
         title: "Seeds",
         description: "Quality seeds for better cultivation.",
         image: "/images/seeds.jpg",
@@ -43,31 +47,31 @@ const slides = [
 
   {
     id: 2,
-    title: "Plants & Gardening",
-    subtitle: "Healthy plants for your home and farm.",
-    heroImage: "/images/plants-banner.jpg",
-
+    title: "Find something affordable for every need.",
+    subtitle: "Quality agricultural products at prices you’ll love.",
+    background:
+      "linear-gradient(135deg, #FFF8E7 0%, #F4E7C1 50%, #DCE8B8 100%)",
     cards: [
       {
-        id: 21,
+       
         title: "Plants & Gardening",
         description: "Healthy plants for your garden.",
         image: "/images/plants.jpg",
       },
       {
-        id: 22,
+       
         title: "Agriculture Equipment",
         description: "Modern tools for farmers.",
         image: "/images/equipment.jpg",
       },
       {
-        id: 23,
+       
         title: "Organic Products",
         description: "Natural products from rural producers.",
         image: "/images/organic.jpg",
       },
       {
-        id: 24,
+      
         title: "Seeds",
         description: "Quality seeds for better cultivation.",
         image: "/images/seeds.jpg",
@@ -77,31 +81,32 @@ const slides = [
 
   {
     id: 3,
-    title: "Organic & Rural Products",
-    subtitle: "Natural products from trusted local producers.",
-    heroImage: "/images/organic-banner.jpg",
-
+    title: "Get more with an Crishi Ponno account",
+    subtitle:
+      "Enjoy exclusive deals, easy ordering, and more with your Crishi Ponno account.",
+    background:
+      "linear-gradient(135deg, #EEF8F5 0%, #D3ECE0 50%, #A8D5C0 100%)",
     cards: [
       {
-        id: 31,
+        
         title: "Organic Products",
         description: "Natural products from rural producers.",
         image: "/images/organic.jpg",
       },
       {
-        id: 32,
+       
         title: "Fish Production",
         description: "Products for modern fish farming.",
         image: "/images/fish.jpg",
       },
       {
-        id: 33,
+        
         title: "Poultry & Livestock",
         description: "Products and solutions for livestock.",
         image: "/images/livestock.jpg",
       },
       {
-        id: 34,
+       
         title: "Agriculture Advice",
         description: "Helpful information for farmers.",
         image: "/images/advice.jpg",
@@ -109,155 +114,160 @@ const slides = [
     ],
   },
 ];
+
 export default function MultiSlider() {
-  /* =========================================================
-     SLIDER DATA
-  ========================================================= */
-
-  /* =========================================================
-     STATE
-  ========================================================= */
-
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
+  const [containerWidth, setContainerWidth] = useState(0);
 
-  /* =========================================================
-     ANIMATION CONFIGURATION
-  ========================================================= */
+  const containerRef = useRef<HTMLDivElement | null>(null);
 
-  /*
-   * Bottom slider:
-   * Starts immediately and moves faster.
-   */
-  const bottomTransition = {
-    duration: 0.65,
-    delay: 0,
-    ease: [0.4, 0, 0.2, 1] as [number, number, number, number],
-  };
-
-  /*
-   * Top slider:
-   * Starts slightly later and moves slower.
-   */
-  const topTransition = {
-    duration: 1.15,
-    delay: 0.15,
-    ease: [0.4, 0, 0.2, 1] as [number, number, number, number],
-  };
-
-  /*
-   * Time between automatic slides.
-   */
-  const AUTOPLAY_DURATION = 5000;
-
-  /* =========================================================
-     NEXT SLIDE
-  ========================================================= */
-
-  const nextSlide = () => {
-    setActiveIndex((current) =>
-      current === slides.length - 1 ? 0 : current + 1,
-    );
-  };
-
-  /* =========================================================
-     PREVIOUS SLIDE
-  ========================================================= */
-
-  const previousSlide = () => {
-    setActiveIndex((current) =>
-      current === 0 ? slides.length - 1 : current - 1,
-    );
-  };
-
-  /* =========================================================
-     SELECT SLIDE
-  ========================================================= */
-
-  const goToSlide = (index: number) => {
-    setActiveIndex(index);
-  };
-
-  /* =========================================================
-     AUTOPLAY
-  ========================================================= */
+  // =========================================================
+  // MEASURE SLIDER WIDTH
+  // =========================================================
 
   useEffect(() => {
-    if (!isPlaying) {
-      return;
-    }
+    const element = containerRef.current;
+
+    if (!element) return;
+
+    const updateWidth = () => {
+      setContainerWidth(element.offsetWidth);
+    };
+
+    updateWidth();
+
+    const observer = new ResizeObserver(updateWidth);
+
+    observer.observe(element);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
+  // =========================================================
+  // AUTOPLAY
+  // =========================================================
+
+  useEffect(() => {
+    if (!isPlaying) return;
 
     const interval = window.setInterval(() => {
       setActiveIndex((current) =>
         current === slides.length - 1 ? 0 : current + 1,
       );
-    }, AUTOPLAY_DURATION);
+    }, 3000);
 
     return () => {
       window.clearInterval(interval);
     };
   }, [isPlaying]);
 
-  /* =========================================================
-     RENDER
-  ========================================================= */
+  // =========================================================
+  // SLIDE POSITION
+  //
+  // 15% left space
+  // 70% active slide
+  // 15% right space
+  // =========================================================
+
+  const slideWidth = containerWidth * 0.7;
+
+  const translateX = containerWidth * 0.15 - activeIndex * slideWidth;
+
+  // =========================================================
+  // SELECT SLIDE
+  // =========================================================
+
+  const goToSlide = (index: number) => {
+    setActiveIndex(index);
+  };
 
   return (
     <section className="w-full overflow-hidden py-12">
-      <div className="mx-auto w-full ">
+      <div className="w-full">
         {/* =====================================================
-            TOP HERO SLIDER
+            HERO SLIDER
         ===================================================== */}
 
-        <div className="relative overflow-hidden">
+        <div ref={containerRef} className="relative w-full overflow-hidden">
           <motion.div
             className="flex will-change-transform"
             animate={{
-              x: `-${activeIndex * 100}%`,
+              x: translateX,
             }}
-            transition={topTransition}
+            transition={{
+              duration: 0.8,
+              ease: [0.4, 0, 0.2, 1],
+            }}
           >
-            {slides.map((slide, index) => (
-              <div key={slide.id} className="min-w-full">
-                <article className="group relative aspect-[2.4/1] min-h-[280px] overflow-hidden  bg-[#F5F5F5] md:aspect-[3/1]">
-                  {/* Hero Image */}
-                  <Image
-                    src={slide.heroImage}
-                    alt={slide.title}
-                    fill
-                    priority={index === 0}
-                    sizes="100vw"
-                    className="object-cover transition-transform duration-700 group-hover:scale-[1.02]"
-                  />
+            {slides.map((slide, index) => {
+              const isActive = index === activeIndex;
 
-                  {/* Dark Overlay */}
-                  {/* <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/25 to-transparent" /> */}
+              return (
+                <div
+                  key={slide.id}
+                  className="shrink-0"
+                  style={{
+                    width: "70%",
+                  }}
+                >
+                  <motion.article
+                    animate={{
+                      scale: isActive ? 1 : 0.94,
+                      opacity: isActive ? 1 : 0.55,
+                    }}
+                    transition={{
+                      duration: 0.6,
+                      ease: [0.4, 0, 0.2, 1],
+                    }}
+                    className="group relative mx-0 aspect-[2.4/1] min-h-[280px] overflow-hidden md:aspect-[3/1]"
+                    style={{
+                      background: slide.background,
+                    }}
+                  >
+                    {/* =================================================
+                        DECORATIVE BACKGROUND
+                    ================================================= */}
 
-                  {/* Hero Content */}
-                  <div className="absolute inset-y-0 left-0 flex max-w-xl flex-col justify-center px-7  md:px-12 lg:px-16">
-                    <p className="mb-2 text-xs font-medium uppercase tracking-[0.2em]  md:text-sm">
-                      Crishi Ponno
-                    </p>
+                    <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-white/20 blur-3xl" />
 
-                    <h2 className="text-3xl font-bold tracking-tight md:text-5xl lg:text-6xl">
-                      {slide.title}
-                    </h2>
+                    <div className="pointer-events-none absolute -bottom-24 -left-20 h-72 w-72 rounded-full bg-white/20 blur-3xl" />
 
-                    <p className="mt-3 max-w-md text-sm leading-6  md:text-base">
-                      {slide.subtitle}
-                    </p>
+                    {/* =================================================
+                        HERO CONTENT
+                    ================================================= */}
 
-                    <button
-                      type="button"
-                      className="mt-5 w-fit rounded-full bg-white px-6 py-3 text-sm font-medium text-black transition hover:bg-white/90"
-                    >
-                      Explore now
-                    </button>
-                  </div>
-                </article>
-              </div>
-            ))}
+                    <div className="absolute inset-y-0 left-0 flex max-w-xl flex-col justify-center px-7 md:px-12 lg:px-16">
+                      <h2 className="text-3xl font-bold tracking-tight md:text-5xl lg:text-6xl">
+                        {slide.title}
+                      </h2>
+
+                      <p className="mt-3 max-w-md text-sm leading-6 md:text-base">
+                        {slide.subtitle}
+                      </p>
+
+                      <button
+                        type="button"
+                        className="mt-5 w-fit rounded-full bg-white px-6 py-3 text-sm font-medium text-black shadow-sm transition hover:bg-white/90"
+                      >
+                        Explore now
+                      </button>
+                    </div>
+                  </motion.article>
+                </div>
+              );
+            })}
           </motion.div>
+
+          {/* =========================================================
+              LEFT / RIGHT SLIDE FADE
+          ========================================================= */}
+
+          <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-[15%] bg-gradient-to-r from-white/70 to-transparent" />
+
+          <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-[15%] bg-gradient-to-l from-white/70 to-transparent" />
         </div>
 
         {/* =====================================================
@@ -270,7 +280,10 @@ export default function MultiSlider() {
             animate={{
               x: `-${activeIndex * 100}%`,
             }}
-            transition={bottomTransition}
+            transition={{
+              duration: 0.65,
+              ease: [0.4, 0, 0.2, 1],
+            }}
           >
             {slides.map((slide) => (
               <div key={slide.id} className="min-w-full">
@@ -280,7 +293,6 @@ export default function MultiSlider() {
                       key={card.id}
                       className="group relative aspect-[1.7/1] overflow-hidden bg-[#F5F5F5]"
                     >
-                      {/* Card Image */}
                       <Image
                         src={card.image}
                         alt={card.title}
@@ -289,16 +301,14 @@ export default function MultiSlider() {
                         className="object-cover transition-transform duration-700 group-hover:scale-105"
                       />
 
-                      {/* Card Gradient */}
-                      {/* <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent" /> */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
 
-                      {/* Card Content */}
-                      <div className="absolute inset-x-0 bottom-0 p-3 md:p-4">
-                        <h3 className="">
+                      <div className="absolute inset-x-0 bottom-0 p-3 text-white md:p-4">
+                        <h3 className="text-sm font-semibold md:text-base">
                           {card.title}
                         </h3>
 
-                        <p className="mt-1 line-clamp-1 ">
+                        <p className="mt-1 line-clamp-1 text-xs text-white/80 md:text-sm">
                           {card.description}
                         </p>
                       </div>
@@ -311,21 +321,10 @@ export default function MultiSlider() {
         </div>
 
         {/* =====================================================
-            ONE SHARED CONTROL
+            CONTROLS
         ===================================================== */}
 
         <div className="mt-5 flex items-center justify-center gap-4">
-          {/* Previous Button */}
-          {/* <button
-            type="button"
-            onClick={previousSlide}
-            aria-label="Previous slide"
-            className="flex h-9 w-9 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-700 transition hover:bg-gray-100"
-          >
-            <ChevronLeft size={18} strokeWidth={1.8} />
-          </button> */}
-
-          {/* Pagination */}
           <div
             className="flex items-center gap-2"
             role="tablist"
@@ -356,17 +355,6 @@ export default function MultiSlider() {
             })}
           </div>
 
-          {/* Next Button */}
-          {/* <button
-            type="button"
-            onClick={nextSlide}
-            aria-label="Next slide"
-            className="flex h-9 w-9 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-700 transition hover:bg-gray-100"
-          >
-            <ChevronRight size={18} strokeWidth={1.8} />
-          </button> */}
-
-          {/* Play / Pause */}
           <button
             type="button"
             onClick={() => setIsPlaying((current) => !current)}

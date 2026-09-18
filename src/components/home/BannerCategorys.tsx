@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowUpRight, Leaf } from "lucide-react";
 import { useGetAllCategoryQuery } from "@/store/services/categoryApi";
 import { useMemo } from "react";
+import Image from "next/image";
 
 function BannerCategorys() {
   const {
@@ -110,9 +111,11 @@ function BannerCategorys() {
                   className="relative block aspect-[4/3] overflow-hidden  bg-[#dcebdc] shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
                 >
                   {category.image?.url ? (
-                    <img
-                      src={category.image.url}
+                    <Image
+                      src={category.image?.url}
                       alt={category.name}
+                      width={100}
+                      height={100}
                       loading="lazy"
                       className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover/card:scale-110"
                     />
