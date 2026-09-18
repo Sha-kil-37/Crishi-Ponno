@@ -92,7 +92,7 @@ function FeaturedProduct({ product }) {
         />
       </motion.div>
 
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+      {/* <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" /> */}
 
       {/* Category */}
       <div className="absolute left-6 top-6 z-20 flex items-center gap-2 rounded-full bg-white/85 px-4 py-2 text-xs font-semibold uppercase tracking-[0.15em] text-green-800 backdrop-blur-md sm:left-8 sm:top-8">
@@ -160,7 +160,7 @@ function SecondaryProduct({ product, index }) {
         className="object-cover transition-transform duration-700 group-hover:scale-105"
       />
 
-      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/5" />
+      {/* <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/5" /> */}
 
       {/* Number */}
       <span className="absolute left-6 top-6 z-10 text-xs font-semibold tracking-[0.2em] text-white/70">
