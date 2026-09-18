@@ -98,7 +98,7 @@ function BannerCategorys() {
 
         <div className="slider-viewport relative overflow-hidden">
           {/* Moving track */}
-          <div className="flex w-max gap-4 sm:gap-5 animate-category-slider">
+          <div className="flex w-max gap-1 animate-category-slider">
             {sliderCategories.map((category, index) => (
               <div
                 key={`${category._id}-${index}`}

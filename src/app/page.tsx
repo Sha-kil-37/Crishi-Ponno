@@ -102,6 +102,7 @@ export default function Page() {
         <Header />
         <Navbar categories={categories} />
         <Banner />
+
         <Footer />
         <Dialog />
         <Toaster />

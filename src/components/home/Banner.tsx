@@ -169,6 +169,12 @@ export default function Banner() {
           </motion.div>
         ))}
       </div>
+      
+
+      <BannerCategorys />
+      <Feature/>
+      <MultiSlider />
+      <Tranding />
       <div className="flex justify-between p-12 bg-[#F5F5F5] w-7xl mx-auto rounded-xl my-10">
         <div>
           <h2 className="text-3xl font-bold tracking-tight">
@@ -189,11 +195,6 @@ export default function Banner() {
           </Link>
         </div>
       </div>
-
-      <BannerCategorys />
-      <Feature/>
-      <MultiSlider />
-      <Tranding />
     </div>
   );
 }
