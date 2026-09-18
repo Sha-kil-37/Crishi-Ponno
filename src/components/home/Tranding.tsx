@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { useMemo, useState } from "react";
 import { useGetAllProductQuery } from "@/store/services/productApi";
+import type { Product } from "@/types/product/product";
 //
 /* =========================================================
    HELPERS
@@ -19,13 +20,27 @@ import { useGetAllProductQuery } from "@/store/services/productApi";
 
 const FALLBACK_IMAGE = "/meta/logo.png";
 
-function getImage(product) {
-  if (typeof product?.image?.url === "string" && product.image.url.length > 0) {
-    return product.image.url;
+type TrendingProduct = Omit<Product, "category" | "image"> & {
+  id?: string;
+  image?: Product["image"] | string;
+  images?: Array<string | { url?: string }>;
+  category?: Product["category"] | string;
+  salesCount?: number | string;
+};
+
+function getImage(product: TrendingProduct) {
+  const image = product?.image;
+
+  if (
+    typeof image === "object" &&
+    typeof image?.url === "string" &&
+    image.url.length > 0
+  ) {
+    return image.url;
   }
 
-  if (typeof product?.image === "string" && product.image.length > 0) {
-    return product.image;
+  if (typeof image === "string" && image.length > 0) {
+    return image;
   }
 
   if (Array.isArray(product?.images) && typeof product.images[0] === "string") {
@@ -35,7 +50,7 @@ function getImage(product) {
   return FALLBACK_IMAGE;
 }
 
-function getCategory(product) {
+function getCategory(product: TrendingProduct) {
   if (typeof product?.category === "object") {
     return product.category?.name || "Agriculture";
   }
@@ -43,11 +58,11 @@ function getCategory(product) {
   return "Agriculture";
 }
 
-function getSlug(product) {
+function getSlug(product: TrendingProduct) {
   return product?.slug || product?._id || product?.id;
 }
 
-function formatPrice(price) {
+function formatPrice(price: number) {
   return new Intl.NumberFormat("en-BD", {
     style: "currency",
     currency: "BDT",
@@ -59,7 +74,7 @@ function formatPrice(price) {
    FEATURED PRODUCT
 ========================================================= */
 
-function FeaturedProduct({ product }) {
+function FeaturedProduct({ product }: { product?: TrendingProduct }) {
   // console.log(product.image.url);
   if (!product) return null;
 
@@ -134,7 +149,13 @@ function FeaturedProduct({ product }) {
    SECONDARY PRODUCT
 ========================================================= */
 
-function SecondaryProduct({ product, index }) {
+function SecondaryProduct({
+  product,
+  index,
+}: {
+  product?: TrendingProduct;
+  index: number;
+}) {
   if (!product) return null;
 
   const image = getImage(product);
@@ -240,7 +261,7 @@ export default function Trending() {
    */
 
   const trendingProducts = useMemo(() => {
-    return [...products]
+    return ([...products] as TrendingProduct[])
       .filter(
         (product) =>
           product?.status !== "Out of Stock" &&
