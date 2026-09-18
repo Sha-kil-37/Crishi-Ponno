@@ -16,6 +16,7 @@ import advice from "../../../public/images/banner/advice.png";
 import poultry from "../../../public/images/banner/poultry.png";
 import fish from "../../../public/images/banner/fish.jpg";
 import MultiSlider from "./MultiSlider";
+import Feature from "./Feature";
 //
 
 //
@@ -119,28 +120,6 @@ export default function Banner() {
           </div>
         </div>
       </div>
-      <BannerCategorys />
-
-      <div className="flex justify-between p-12 bg-[#F5F5F5] w-7xl mx-auto rounded-xl my-10">
-        <div>
-          <h2 className="text-3xl font-bold tracking-tight">
-            Make shopping easier.
-          </h2>
-          <p className="mt-1">
-            Enjoy the benefits of reliability, safe delivery, and hassle-free
-            returns.
-          </p>
-        </div>
-        <div>
-          <Link
-            href=""
-            className="group inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-[#1f7a3a] transition hover:bg-lime-100"
-          >
-            start now
-            <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-          </Link>
-        </div>
-      </div>
 
       <div className="grid grid-cols-1 gap-2 md:grid-cols-2 px-2">
         {bannerItems.map((item, i) => (
@@ -163,7 +142,7 @@ export default function Banner() {
             />
 
             {/* Overlay */}
-            <div className="absolute inset-0 bg-[#dcebdc] transition-colors duration-500 group-hover:bg-[#F5F5F5]" />
+            <div className="absolute inset-0 bg-black/20 transition-colors duration-500 group-hover:bg-[#F5F5F5]" />
 
             {/* Content */}
             <div className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center text-white">
@@ -190,6 +169,29 @@ export default function Banner() {
           </motion.div>
         ))}
       </div>
+      <div className="flex justify-between p-12 bg-[#F5F5F5] w-7xl mx-auto rounded-xl my-10">
+        <div>
+          <h2 className="text-3xl font-bold tracking-tight">
+            Make shopping easier.
+          </h2>
+          <p className="mt-1">
+            Enjoy the benefits of reliability, safe delivery, and hassle-free
+            returns.
+          </p>
+        </div>
+        <div>
+          <Link
+            href=""
+            className="group inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-[#1f7a3a] transition hover:bg-lime-100"
+          >
+            start now
+            <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+          </Link>
+        </div>
+      </div>
+
+      <BannerCategorys />
+      <Feature/>
       <MultiSlider />
       <Tranding />
     </div>
