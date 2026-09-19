@@ -1,11 +1,11 @@
 import Sidebar from "@/components/layout/admin/Sidebar";
 import type { ReactNode } from "react";
 //
-interface AdminLayoutProps {
+interface Props {
   children: ReactNode;
 }
 //
-export default function AdminLayout({ children }: AdminLayoutProps) {
+export default function Layout({ children }: Props) {
   //
 
   //

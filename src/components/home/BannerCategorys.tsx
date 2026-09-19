@@ -139,7 +139,7 @@ function BannerCategorys() {
                 <div className="mt-3 px-1">
                   <Link
                     href={`/?category=${encodeURIComponent(category.slug)}`}
-                    className="block truncate text-base font-medium text-[#163b2a] transition-colors duration-200 hover:text-[#1f7a1f] sm:text-lg"
+                    className="block truncate text-base font-medium  transition-colors duration-200 hover:text-[#1f7a1f] sm:text-lg"
                   >
                     {category.name}
                   </Link>

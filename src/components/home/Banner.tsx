@@ -1,10 +1,10 @@
 "use client";
+//
 import BannerSlider from "./BannerSlider";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import Tranding from "./Tranding";
 import BannerCategorys from "./BannerCategorys";
-import banner from "../../../public/images/banner/banner.png";
 import Image from "next/image";
 import { motion } from "motion/react";
 import fruitsandvegetables from "../../../public/images/banner/fruits&vegetables.png";
@@ -17,6 +17,7 @@ import poultry from "../../../public/images/banner/poultry.png";
 import fish from "../../../public/images/banner/fish.jpg";
 import MultiSlider from "./MultiSlider";
 import Feature from "./Feature";
+import BannerAbout from "./BannerAbout";
 //
 
 //
@@ -92,35 +93,7 @@ export default function Banner() {
   return (
     <div>
       <BannerSlider />
-      <div className="my-4">
-        <div className="bg-[#F5F5F5] w-full pt-8">
-          <h2 className="text-center font-bold text-5xl">কৃষি পন্য</h2>
-          <h3 className="text-center text-2xl font-medium mt-5">
-            Hello, hello.
-          </h3>
-          <p className="max-w-[500px] mx-auto  text-center">
-            Lorem ipsum dtatibus provident. Lorem ipsum dtatibus provident. bus
-            provident.
-          </p>
-          <div className="flex gap-x-4 justify-center mt-5">
-            <button className="px-4 py-2 bg-blue-500 white rounded-full text-white font-medium">
-              About More
-            </button>
-            <button className="px-4 py-2 bg-white rounded-full font-medium">
-              View Product
-            </button>
-          </div>
-          <div className="overflow-hidden mx-auto h-auto max-w-200 mt-10">
-            <Image
-              className="h-full w-full object-cover"
-              src={banner}
-              alt="banner"
-              loading="eager"
-            />
-          </div>
-        </div>
-      </div>
-
+      <BannerAbout />
       <div className="grid grid-cols-1 gap-2 md:grid-cols-2 px-2">
         {bannerItems.map((item, i) => (
           <motion.div
@@ -145,7 +118,7 @@ export default function Banner() {
             <div className="absolute inset-0 bg-black/20 transition-colors duration-500 group-hover:bg-[#F5F5F5]" />
 
             {/* Content */}
-            <div className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center text-white">
+            <div className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center ">
               <p className="mb-2 text-sm font-medium uppercase tracking-[0.2em]">
                 Crishi Ponno
               </p>
@@ -154,7 +127,7 @@ export default function Banner() {
                 {item.title}
               </h2>
 
-              <p className="mt-3 max-w-md text-sm text-white/90 sm:text-base">
+              <p className="mt-3 max-w-md text-sm  sm:text-base">
                 {item.description}
               </p>
 
@@ -169,10 +142,8 @@ export default function Banner() {
           </motion.div>
         ))}
       </div>
-      
-
       <BannerCategorys />
-      <Feature/>
+      <Feature />
       <MultiSlider />
       <Tranding />
       <div className="flex justify-between p-12 bg-[#F5F5F5] w-7xl mx-auto rounded-xl my-10">

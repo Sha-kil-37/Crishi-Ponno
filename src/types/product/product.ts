@@ -15,6 +15,10 @@ export interface Product {
   quantity: number;
   costPrice: number;
   unit: string;
+  discount: number;
+  metaTitle: string;
+  metaDescription: string;
+  keywords: string[];
   brand: ProductReference;
   category: ProductReference;
   image?: {

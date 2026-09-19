@@ -27,7 +27,6 @@ import FindFactory from "@/components/shared/FindFactory";
 import HelpCenter from "@/components/shared/HelpCenter";
 import OrderProtection from "@/components/shared/OrderProtection";
 import GoogleButton from "@/components/utils/GoogleButton";
-import Image from "next/image";
 //
 interface NavbarProps {
   categories: Category[];
