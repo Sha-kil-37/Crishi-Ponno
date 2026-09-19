@@ -1,16 +1,8 @@
 "use client";
-import { DialogProvider } from "@/hooks/client/useDialog";
-import Dialog from "@/components/utils/dialog";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
-import { Toaster } from "@/components/utils/sonner";
-import { toast } from "sonner";
-import { Category } from "@/types/NavCategory";
-import Header from "@/components/layout/Header";
-import Navbar from "@/components/layout/nav/Navbar";
 import Banner from "@/components/home/Banner";
-import Footer from "@/components/layout/Footer";
-
+import { Toaster } from "sonner";
 //
 export default function Page() {
   const router = useRouter();
@@ -22,14 +14,14 @@ export default function Page() {
       return;
     }
     //
-    toast.success("Sign in success", {
-      position: "top-center",
-      // description: "Sign in success",
-      action: {
-        label: "✕",
-        onClick: () => console.log("Undo"),
-      },
-    });
+    // Toaster.success("Sign in success", {
+    //   position: "top-center",
+    //   // description: "Sign in success",
+    //   action: {
+    //     label: "✕",
+    //     onClick: () => console.log("Undo"),
+    //   },
+    // });
     //
     router.replace("/", { scroll: false });
     router.refresh();
@@ -37,75 +29,12 @@ export default function Page() {
     return;
   }, [isAuthSuccess, router]);
   //
-  const categories: Category[] = [
-    {
-      id: "vegetables",
-      title: "Vegetables",
-      children: [
-        {
-          title: "Fresh Vegetables",
-          items: ["Potato", "Tomato", "Onion", "Brinjal", "Carrot"],
-        },
-        {
-          title: "Organic",
-          items: ["Organic Potato", "Organic Tomato"],
-        },
-      ],
-    },
-    {
-      id: "fruits",
-      title: "Fruits",
-      children: [
-        {
-          title: "Fresh Fruits",
-          items: ["Apple", "Jack Fruit", "Banana", "Pine Apple", "Mango"],
-        },
-        {
-          title: "Organic Fruits",
-          items: ["Papaya", "Lemon"],
-        },
-      ],
-    },
-    {
-      id: "tress",
-      title: "Tress",
-      children: [
-        {
-          title: "Seedlings grown from seeds",
-          items: ["Oak", "Maple", "Birch", "Willow", "Cherry Blossom"],
-        },
-        {
-          title: "Seedlings produced by grafting method",
-          items: ["Banyan", "Mango", "Eucalyptus"],
-        },
-      ],
-    },
-    {
-      id: "agricultural equipment",
-      title: "Agricultural Equipment",
-      children: [
-        {
-          title: "Heavy equipment",
-          items: ["Tractor", "Crawler Tractor", "Plow", "Rotavator"],
-        },
-        {
-          title: "General equipment",
-          items: ["Hoe"],
-        },
-      ],
-    },
-  ];
+
   //
   return (
-    <section>
-      <DialogProvider>
-        <Header />
-        <Navbar categories={categories} />
-        <Banner />
-        <Footer />
-        <Dialog />
-        <Toaster />
-      </DialogProvider>
-    </section>
+    <div>
+      <Banner />
+    </div>
   );
 }
+//

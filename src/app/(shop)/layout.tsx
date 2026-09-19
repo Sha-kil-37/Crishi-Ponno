@@ -4,7 +4,7 @@ interface Props {
   children: ReactNode;
 }
 //
-export default function AdminLayout({ children }: Props) {
+export default function ShopLayout({ children }: Props) {
   //
 
   //
