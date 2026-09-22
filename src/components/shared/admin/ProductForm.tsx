@@ -683,15 +683,15 @@ export default function ProductForm() {
                     : "border-slate-200 focus:border-[#1f7a1f] focus:ring-emerald-100"
                 }`}
               >
-                <option>select an unit</option>
-                <option>Kg</option>
-                <option>Gm</option>
-                <option>Liter</option>
-                <option>Ml</option>
-                <option>Piece</option>
-                <option>Pack</option>
-                <option>Bag</option>
-                <option>Box</option>
+                <option value="">Select a unit</option>
+                <option value="kg">Kg</option>
+                <option value="gm">Gm</option>
+                <option value="liter">Liter</option>
+                <option value="ml">Ml</option>
+                <option value="piece">Piece</option>
+                <option value="pack">Pack</option>
+                <option value="bag">Bag</option>
+                <option value="box">Box</option>
               </select>
               {errors.unit && (
                 <p

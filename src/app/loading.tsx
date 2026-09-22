@@ -1,14 +1,12 @@
-export default function Loading() {
-  //
-  // for (let index = 0; index < 10; index++) {
-  //   console.log(index);
-  // }
+function Loading() {
   return (
-    <section className="h-screen flex items-center justify-center bg-black">
-      <div className="text-center">
-        <h1 className="text-5xl text-blue-500 font-bold">Loading...</h1>
-        <p>Please wait while we fetch the data. This may take a few moments.</p>
+    <section className="flex justify-center items-center bg-[#F5F5F5] h-screen">
+      <div>
+        <h1 className="font-bold text-2xl">loading...</h1>
+        <p>please wait</p>
       </div>
     </section>
   );
 }
+
+export default Loading;
