@@ -18,6 +18,7 @@ import fish from "../../../public/images/banner/fish.jpg";
 import MultiSlider from "./MultiSlider";
 import Feature from "./Feature";
 import BannerAbout from "./BannerAbout";
+import Blogs from "./Blogs";
 //
 
 //
@@ -147,6 +148,7 @@ export default function Banner() {
       <Feature />
       <MultiSlider />
       <Tranding />
+      <Blogs />
       <div className="flex justify-between p-12 bg-[#F5F5F5] w-7xl mx-auto rounded-xl my-10">
         <div>
           <h2 className="text-3xl font-bold tracking-tight">
