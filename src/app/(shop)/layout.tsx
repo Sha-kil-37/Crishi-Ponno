@@ -14,12 +14,5 @@ export default function ShopRootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <html lang="en" suppressHydrationWarning>
-      <body suppressHydrationWarning>
-        {/* Shop-specific UI */}
-        {children}
-      </body>
-    </html>
-  );
+  return children;
 }

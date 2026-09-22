@@ -161,7 +161,7 @@ export default function Banner() {
         </div>
         <div>
           <Link
-            href=""
+            href="/shop"
             className="group inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-[#1f7a3a] transition hover:bg-lime-100"
           >
             start now

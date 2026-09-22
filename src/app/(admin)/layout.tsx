@@ -13,12 +13,5 @@ export default function AdminRootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <html lang="en" suppressHydrationWarning>
-      <body suppressHydrationWarning>
-        {/* Admin-specific UI */}
-        <ReduxProvider>{children}</ReduxProvider>
-      </body>
-    </html>
-  );
+  return <ReduxProvider>{children}</ReduxProvider>;
 }
