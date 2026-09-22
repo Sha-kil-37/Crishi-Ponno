@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import ReduxProvider from "@/components/utils/providers/ReduxProvider";
 import "../../styles/globals.css";
 //
 export const metadata: Metadata = {
@@ -16,7 +17,7 @@ export default function AdminRootLayout({
     <html lang="en" suppressHydrationWarning>
       <body suppressHydrationWarning>
         {/* Admin-specific UI */}
-        {children}
+        <ReduxProvider>{children}</ReduxProvider>
       </body>
     </html>
   );
