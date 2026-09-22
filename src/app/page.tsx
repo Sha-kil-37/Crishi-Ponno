@@ -89,18 +89,20 @@ export default function Page() {
 
   //
   return (
-    <ReduxProvider>
-      <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
-        <DialogProvider>
-          <Header />
-          <Navbar categories={categories} />
-          <Banner />
-          <Footer />
-          <Dialog />
-          <Toaster />
-        </DialogProvider>
-      </ThemeProvider>
-    </ReduxProvider>
+    <>
+      <ReduxProvider>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
+          <DialogProvider>
+            <Header />
+            <Navbar categories={categories} />
+            <Banner />
+            <Footer />
+            <Dialog />
+            <Toaster />
+          </DialogProvider>
+        </ThemeProvider>
+      </ReduxProvider>
+    </>
   );
 }
 //
