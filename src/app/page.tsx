@@ -14,14 +14,14 @@ export default function Page() {
       return;
     }
     //
-    // Toaster.success("Sign in success", {
-    //   position: "top-center",
-    //   // description: "Sign in success",
-    //   action: {
-    //     label: "✕",
-    //     onClick: () => console.log("Undo"),
-    //   },
-    // });
+    Toaster.success("Sign in success", {
+      position: "top-center",
+      // description: "Sign in success",
+      action: {
+        label: "✕",
+        onClick: () => console.log("Undo"),
+      },
+    });
     //
     router.replace("/", { scroll: false });
     router.refresh();
