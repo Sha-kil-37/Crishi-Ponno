@@ -62,7 +62,7 @@ function ProductCard({ product }: ProductProps) {
 
   return (
     <motion.article variants={itemVariants} className="group">
-      <div className="overflow-hidden rounded-xl transition hover:-translate-y-1 hover:shadow-lg">
+      <div className="overflow-hidden rounded-xl transition ">
         <Link href={`/products/${product.slug}`} className="block">
           <div className="relative aspect-square overflow-hidden bg-[#F5F5F5]">
             <Image

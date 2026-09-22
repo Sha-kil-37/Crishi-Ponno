@@ -62,7 +62,7 @@ const paymentMethod = [
 export default function Footer() {
   return (
     <footer className="mt-16 border-t border-[#dcebdc] bg-[#0f2f26] text-[#ecf7f1]">
-      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl">
         <div className="grid gap-10 lg:grid-cols-[1.1fr_2.2fr] lg:items-start">
           <div className="space-y-5">
             <div className="flex items-center gap-3">
