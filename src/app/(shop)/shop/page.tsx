@@ -1,15 +1,11 @@
 "use client";
 
-import Footer from "@/components/layout/Footer";
-import Header from "@/components/layout/Header";
-import Navbar from "@/components/layout/nav/Navbar";
-import Products from "@/components/shop/Products";
-import Dialog from "@/components/utils/dialog";
-import ReduxProvider from "@/components/utils/providers/ReduxProvider";
-import { DialogProvider } from "@/hooks/client/useDialog";
 import { Category } from "@/types/NavCategory";
-import { ThemeProvider } from "next-themes";
-import { Toaster } from "sonner";
+
+
+
+//
+
 const categories: Category[] = [
   {
     id: "vegetables",
@@ -62,22 +58,7 @@ const categories: Category[] = [
 //
 function Page() {
   //
-  return (
-    <>
-      <ReduxProvider>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
-          <DialogProvider>
-            <Header />
-            <Navbar categories={categories} />
-            <Products />
-            <Footer />
-            <Dialog />
-            <Toaster />
-          </DialogProvider>
-        </ThemeProvider>
-      </ReduxProvider>
-    </>
-  );
+  return <h2>this is admin shop page</h2>;
 }
 
 export default Page;

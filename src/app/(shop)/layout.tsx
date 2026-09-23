@@ -1,5 +1,10 @@
 import type { Metadata } from "next";
+import ReduxProvider from "@/components/utils/providers/ReduxProvider";
 import "../../styles/globals.css";
+import { ThemeProvider } from "next-themes";
+import Dialog from "@/components/utils/dialog";
+import { Toaster } from "sonner";
+import { DialogProvider } from "@/hooks/client/useDialog";
 
 //
 export const metadata: Metadata = {
@@ -14,5 +19,17 @@ export default function ShopRootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return children;
+  return (
+    <>
+      <ReduxProvider>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
+          <DialogProvider>
+            {children}
+            <Dialog />
+            <Toaster position="top-right" richColors />
+          </DialogProvider>
+        </ThemeProvider>
+      </ReduxProvider>
+    </>
+  );
 }
