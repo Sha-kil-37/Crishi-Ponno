@@ -1,6 +1,7 @@
 "use client";
 
-import Products from "@/components/shop/Products";
+import Products from "@/components/shop/product/Products";
+
 
 //
 function Page() {
