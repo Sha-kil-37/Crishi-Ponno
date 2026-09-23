@@ -1,7 +1,7 @@
 "use client";
-
-import Sidebar from "@/components/layout/admin/Sidebar";
 //
+import Header from "@/components/layout/admin/Header";
+import Sidebar from "@/components/layout/admin/Sidebar";
 import Dialog from "@/components/utils/dialog";
 import ReduxProvider from "@/components/utils/providers/ReduxProvider";
 import { DialogProvider } from "@/hooks/client/useDialog";
@@ -18,7 +18,8 @@ function Page() {
           <DialogProvider>
             <div className="flex min-h-screen">
               <Sidebar />
-              <main className="min-w-0 flex-1">
+              <main className="min-w-0">
+                <Header />
                 <h2>
                   Lorem ipsum dolor sit, amet consectetur adipisicing elit.
                   Facere dolorum ut qui nulla maxime ex provident quod quidem
@@ -61,7 +62,8 @@ function Page() {
                 </h2>
               </main>
             </div>
-            <Dialog /> <Toaster position="top-right" richColors />
+            <Dialog />
+            <Toaster position="top-right" richColors />
           </DialogProvider>
         </ThemeProvider>
       </ReduxProvider>

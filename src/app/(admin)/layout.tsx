@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import ReduxProvider from "@/components/utils/providers/ReduxProvider";
 import "../../styles/globals.css";
+import { ThemeProvider } from "next-themes";
+
 //
 export const metadata: Metadata = {
   title: "কৃষি পন্য",
@@ -13,5 +15,5 @@ export default function AdminRootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <ReduxProvider>{children}</ReduxProvider>;
+  return <>{children}</>;
 }
