@@ -1,6 +1,8 @@
+import About from "@/components/about/About";
+
 function Page() {
   //
-  return <div>this is crishi ponno about page</div>;
+  return <About/>;
 }
 
 export default Page;

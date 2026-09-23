@@ -5,7 +5,61 @@ import { ThemeProvider } from "next-themes";
 import Dialog from "@/components/utils/dialog";
 import { Toaster } from "sonner";
 import { DialogProvider } from "@/hooks/client/useDialog";
+import Footer from "@/components/layout/Footer";
+import Header from "@/components/layout/Header";
 
+import { Category } from "@/types/NavCategory";
+import Navbar from "@/components/layout/nav/Navbar";
+
+const categories: Category[] = [
+  {
+    id: "vegetables",
+    title: "Vegetables",
+    children: [
+      {
+        title: "Fresh Vegetables",
+        items: ["Potato", "Tomato", "Onion", "Brinjal", "Carrot"],
+      },
+      { title: "Organic", items: ["Organic Potato", "Organic Tomato"] },
+    ],
+  },
+  {
+    id: "fruits",
+    title: "Fruits",
+    children: [
+      {
+        title: "Fresh Fruits",
+        items: ["Apple", "Jack Fruit", "Banana", "Pine Apple", "Mango"],
+      },
+      { title: "Organic Fruits", items: ["Papaya", "Lemon"] },
+    ],
+  },
+  {
+    id: "tress",
+    title: "Tress",
+    children: [
+      {
+        title: "Seedlings grown from seeds",
+        items: ["Oak", "Maple", "Birch", "Willow", "Cherry Blossom"],
+      },
+      {
+        title: "Seedlings produced by grafting method",
+        items: ["Banyan", "Mango", "Eucalyptus"],
+      },
+    ],
+  },
+  {
+    id: "agricultural equipment",
+    title: "Agricultural Equipment",
+    children: [
+      {
+        title: "Heavy equipment",
+        items: ["Tractor", "Crawler Tractor", "Plow", "Rotavator"],
+      },
+      { title: "General equipment", items: ["Hoe"] },
+    ],
+  },
+];
 //
 export const metadata: Metadata = {
   title: "কৃষি পন্য",
@@ -24,7 +78,10 @@ export default function ShopRootLayout({
       <ReduxProvider>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           <DialogProvider>
+            <Header />
+            <Navbar categories={categories} />
             {children}
+            <Footer />
             <Dialog />
             <Toaster position="top-right" richColors />
           </DialogProvider>

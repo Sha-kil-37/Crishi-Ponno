@@ -5,6 +5,8 @@ import { ThemeProvider } from "next-themes";
 import Dialog from "@/components/utils/dialog";
 import { Toaster } from "sonner";
 import { DialogProvider } from "@/hooks/client/useDialog";
+import Sidebar from "@/components/layout/admin/Sidebar";
+import Header from "@/components/layout/admin/Header";
 
 //
 export const metadata: Metadata = {
@@ -24,6 +26,8 @@ export default function AdminRootLayout({
       <ReduxProvider>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           <DialogProvider>
+            <Sidebar />
+            <Header />
             {children}
             <Dialog />
             <Toaster position="top-right" richColors />
