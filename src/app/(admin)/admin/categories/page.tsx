@@ -44,7 +44,7 @@ export default function Page() {
   //
   //
   return (
-    <main className="space-y-6">
+    <main >
       {isFetching && <p>Updating categories...</p>}
       <section className="relative overflow-hidden rounded-2xl bg-[#0f3d2e] px-6 py-7 text-white shadow-sm sm:px-8">
         <div className="relative z-10 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
