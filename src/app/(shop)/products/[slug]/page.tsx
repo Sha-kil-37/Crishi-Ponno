@@ -8,6 +8,7 @@ import db from "@/lib/db";
 import AddToCart from "@/components/shop/product/AddToCart";
 import ProductGallery from "@/components/shop/product/ProductGallery";
 import ProductReview from "@/components/shop/product/ProductReview";
+import AddToWatchList from "@/components/shop/product/AddToWatchList";
 //
 type ProductPageProps = { params: Promise<{ slug: string }> };
 
@@ -161,22 +162,7 @@ export default async function ProductDetailsPage({ params }: ProductPageProps) {
                 ৳{product.price.toLocaleString()}
               </p>
             )}
-
-            <p
-              className={`mt-6 font-semibold ${product.status === "In Stock" ? "text-[#1f7a1f]" : "text-[#a33b26]"}`}
-            >
-              {product.status}
-              {product.quantity > 0
-                ? ` · ${product.quantity} ${product.unit} available`
-                : ""}
-            </p>
-            <p className="mt-4 text-lg leading-8 text-gray-600">
-              {product.shortDescription || product.description}
-            </p>
-
-            <AddToCart product={productForCart} />
-
-            <div className="mt-8 grid grid-cols-2 gap-4 border-t border-[#dcebdc] pt-6 text-sm">
+            <div className="grid grid-cols-2 gap-4 mt-5">
               <div>
                 <p className="text-gray-500">Brand</p>
                 <p className="mt-1 font-semibold text-[#163b1b]">
@@ -190,6 +176,26 @@ export default async function ProductDetailsPage({ params }: ProductPageProps) {
                 </p>
               </div>
             </div>
+            <p
+              className={`mt-6 font-semibold ${product.status === "In Stock" ? "text-[#1f7a1f]" : "text-[#a33b26]"}`}
+            >
+              {product.status}
+              {product.quantity > 0
+                ? ` · ${product.quantity} ${product.unit} available`
+                : ""}
+            </p>
+            <p className="mt-4 text-lg leading-8 text-gray-600">
+              {product.shortDescription || product.description}
+            </p>
+
+            <AddToCart product={productForCart} />
+            <AddToWatchList />
+            <hr className="mt-5" /> 
+            <div className="mt-5 rounded-xl bg-[#F5F5F5] p-4 flex gap-x-2">
+              <h3 className="font-medium textlg">People want this .</h3>
+              <h3>80 people are buy this</h3>
+            </div>
+
             <h2 className="mt-5">Recomend for you</h2>
             <div className="grid grid-cols-4 gap-x-2">
               {[1, 2, 3, 4].map((item, i) => {
@@ -203,7 +209,7 @@ export default async function ProductDetailsPage({ params }: ProductPageProps) {
           </article>
         </div>
 
-        <section className="mt-16 max-w-3xl border-t border-[#dcebdc] pt-8">
+        <section className="mt-5">
           <h2 className="text-2xl font-bold text-[#163b1b]">Product details</h2>
           <p className="mt-4 whitespace-pre-line leading-8 text-gray-600">
             {product.description}

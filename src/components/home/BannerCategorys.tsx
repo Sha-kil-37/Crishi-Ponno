@@ -97,16 +97,15 @@ function BannerCategorys() {
             INFINITE CATEGORY SLIDER
         ====================================================== */}
 
-        <div className="slider-viewport relative overflow-hidden">
+        <div className="slider-viewport relative overflow-hidden py-4">
           {/* Moving track */}
-          <div className="flex w-max gap-1 animate-category-slider">
+          <div className="flex w-max gap-3 animate-category-slider">
             {sliderCategories.map((category, index) => (
               <div
                 key={`${category._id}-${index}`}
-                className="group/card w-[210px] shrink-0 sm:w-[240px] lg:w-[260px]"
+                className="min-w-[210px] h-[210px] bg-gradient-to-b from-sky-100 to-sky-200/80 border border-sky-300/60 ring-4 ring-sky-100/60  rounded-2xl overflow-hidden flex justify-center items-center"
               >
-                {/* Image */}
-                <Link
+                {/* <Link
                   href={`/?category=${encodeURIComponent(category.slug)}`}
                   className="relative block aspect-[4/3] overflow-hidden  bg-[#dcebdc] shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
                 >
@@ -116,30 +115,31 @@ function BannerCategorys() {
                       alt={category.name}
                       width={100}
                       height={100}
+                      // sizes="full"
                       loading="lazy"
                       className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover/card:scale-110"
                     />
                   ) : (
-                    <div className="absolute inset-0 bg-[linear-gradient(140deg,#dcebdc,#a9cf9a)]" />
+                    <div className="absolute inset-0 bg-gradient-to-b from-sky-100 to-sky-200/80" />
                   )}
 
-                  {/* Overlay */}
+             
                   <div className="pointer-events-none absolute inset-0 bg-black/0 transition duration-300 group-hover/card:bg-black/5" />
 
-                  {/* Border */}
+                 
                   <div className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-inset ring-black/5" />
 
-                  {/* Arrow */}
+                  
                   <span className="absolute right-3 top-3 flex h-9 w-9 translate-y-1 items-center justify-center rounded-full bg-white/90 text-[#1f7a1f] opacity-0 shadow-md backdrop-blur-sm transition-all duration-300 group-hover/card:translate-y-0 group-hover/card:opacity-100">
                     <ArrowUpRight size={17} />
                   </span>
-                </Link>
+                </Link> */}
 
                 {/* Category name */}
-                <div className="mt-3 px-1">
+                <div className="">
                   <Link
                     href={`/?category=${encodeURIComponent(category.slug)}`}
-                    className="block truncate text-base font-medium  transition-colors duration-200 hover:text-[#1f7a1f] sm:text-lg"
+                    className="block truncate text-base font-medium  transition-colors duration-200 hover:text-[#1f7a1f] sm:text-lg capitalize"
                   >
                     {category.name}
                   </Link>
