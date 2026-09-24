@@ -1,14 +1,14 @@
 import { Product, ProductResponse } from "@/types/product/product";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 //
-export const productApi = createApi({
-  reducerPath: "productApi",
+export const adminProductApi = createApi({
+  reducerPath: "adminProductApi",
   //
   baseQuery: fetchBaseQuery({
     baseUrl: "/api/admin/product",
   }),
 
-  tagTypes: ["Product"],
+  tagTypes: ["AdminProduct"],
 
   endpoints: (builder) => ({
     // GET ALL PRODUCTS
@@ -19,7 +19,7 @@ export const productApi = createApi({
         return response.data;
       },
 
-      providesTags: ["Product"],
+      providesTags: ["AdminProduct"],
     }),
 
     // ADD PRODUCT
@@ -30,9 +30,9 @@ export const productApi = createApi({
         body: formData,
       }),
 
-      invalidatesTags: ["Product"],
+      invalidatesTags: ["AdminProduct"],
     }),
   }),
 });
 
-export const { useGetAllProductQuery, useAddProductMutation } = productApi;
+export const { useGetAllProductQuery, useAddProductMutation } = adminProductApi;

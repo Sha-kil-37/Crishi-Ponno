@@ -4,7 +4,7 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { ArrowUpRight, PencilLine, Plus, Search, Trash2 } from "lucide-react";
-import { useGetAllProductQuery } from "@/store/services/productApi";
+import { useGetAllProductQuery } from "@/redux/rtkQuery/admin/productApi";
 
 //
 export default function Page() {

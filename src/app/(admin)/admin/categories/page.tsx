@@ -13,7 +13,7 @@ import {
   ShoppingBasket,
   Trash2,
 } from "lucide-react";
-import { useGetAllCategoryQuery } from "@/store/services/categoryApi";
+import { useGetAllCategoryQuery } from "@/redux/rtkQuery/admin/categoryApi";
 //
 export default function Page() {
   const { data, isLoading, isFetching, isError } = useGetAllCategoryQuery();
@@ -44,7 +44,7 @@ export default function Page() {
   //
   //
   return (
-    <main >
+    <main>
       {isFetching && <p>Updating categories...</p>}
       <section className="relative overflow-hidden rounded-2xl bg-[#0f3d2e] px-6 py-7 text-white shadow-sm sm:px-8">
         <div className="relative z-10 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">

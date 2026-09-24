@@ -1,116 +1,106 @@
 "use client";
-//
-import { motion } from "framer-motion";
-import { Package } from "lucide-react";
-import { useMemo } from "react";
-import { useGetAllProductQuery } from "@/store/services/productApi";
-import Product from "./Product";
 
+import { useGetAllProductQuery } from "@/redux/rtkQuery/shop/product/productApi";
+import { useState } from "react";
 
-//
+function Products() {
+  // Keep the active filters and current server page in local state.
+  const [productSearchQuery, setProductSearchQuery] = useState("");
+  const [pageNumber, setPageNumber] = useState(1);
+  const [productLimit, setProductLimit] = useState(10);
+  const {
+    data: productResponse,
+    isLoading,
+    isFetching,
+    isError,
+  } = useGetAllProductQuery({
+    search: productSearchQuery,
+    page: pageNumber,
+    limit: productLimit,
+  });
 
-const containerVariants = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.06,
-    },
-  },
-};
+  // The API returns products and pagination metadata in one response object.
+  const products = productResponse?.data ?? [];
+  const pagination = productResponse?.pagination;
 
-
-
-function ProductSkeleton() {
   return (
-    <div className="overflow-hidden rounded-xl border border-gray-100 bg-white">
-      <div className="aspect-square animate-pulse bg-gray-100" />
+    <div className="mx-auto mt-5 w-5xl border-2 p-10">
+      <form
+        className="grid w-full gap-3"
+        onSubmit={(event) => event.preventDefault()}
+      >
+        <label htmlFor="productSearchQuery">Search Query</label>
+        <input
+          name="productSearchQuery"
+          id="productSearchQuery"
+          value={productSearchQuery}
+          onChange={(event) => {
+            // A new search must start from the first page.
+            setProductSearchQuery(event.target.value);
+            setPageNumber(1);
+          }}
+          type="text"
+          placeholder="search product"
+        />
+        <label htmlFor="productLimit">product limit</label>
+        <input
+          type="number"
+          id="productLimit"
+          name="productLimit"
+          min={1}
+          max={100}
+          value={productLimit}
+          placeholder="product limit"
+          onChange={(event) => {
+            const nextLimit = Number(event.target.value);
+            if (Number.isFinite(nextLimit) && nextLimit > 0) {
+              // Keep the limit within the backend's supported range.
+              setProductLimit(Math.min(nextLimit, 100));
+              setPageNumber(1);
+            }
+          }}
+        />
+      </form>
+      {isLoading && <p>Loading...</p>}
+      {isFetching && !isLoading && <p>Loading products...</p>}
+      {isError && <p>Unable to load products.</p>}
 
-      <div className="space-y-3 p-4">
-        <div className="h-3 w-20 animate-pulse rounded-full bg-gray-100" />
-        <div className="h-5 w-3/4 animate-pulse rounded-full bg-gray-100" />
-        <div className="h-3 w-full animate-pulse rounded-full bg-gray-100" />
-
-        <div className="flex items-center justify-between pt-2">
-          <div className="h-6 w-24 animate-pulse rounded-full bg-gray-100" />
-          <div className="h-10 w-10 animate-pulse rounded-full bg-gray-100" />
-        </div>
+      {/* Render the current page of products from the API response. */}
+      <div className="mt-10 grid grid-cols-4 gap-4">
+        {products.map((product) => (
+          <div
+            key={product._id}
+            className="rounded-xl bg-[#F5F5F5] text-center"
+          >
+            {product.name}
+          </div>
+        ))}
       </div>
+
+      {/* Use backend pagination flags to prevent invalid page requests. */}
+      {pagination && (
+        <div className="mt-6 flex items-center justify-center gap-4">
+          <button
+            type="button"
+            onClick={() => setPageNumber((page) => page - 1)}
+            disabled={!pagination.hasPreviousPage || isFetching}
+          >
+            Previous
+          </button>
+          <span>
+            Page {pagination.page} of {pagination.totalPages}
+          </span>
+          <button
+            type="button"
+            onClick={() => setPageNumber((page) => page + 1)}
+            disabled={!pagination.hasNextPage || isFetching}
+          >
+            Next
+          </button>
+        </div>
+      )}
     </div>
   );
 }
 
-
-
-export default function Products() {
-  //
-  const {
-    data: products,
-    isLoading,
-    isError,
-    refetch,
-  } = useGetAllProductQuery();
-
-  const productList = useMemo(
-    () => (Array.isArray(products) ? products : []),
-    [products],
-  );
-  // console.log(productList);
-  return (
-    <main className="mx-auto w-7xl">
-      {/* Loading */}
-      {isLoading && (
-        <div className="grid gap-4 grid-cols-4">
-          {Array.from({ length: 8 }).map((_, index) => (
-            <ProductSkeleton key={index} />
-          ))}
-        </div>
-      )}
-
-      {/* Error */}
-      {!isLoading && isError && (
-        <div>
-          <Package className="mx-auto h-10 w-10 text-red-400" />
-          <h3>Unable to load products</h3>
-          <p>Something went wrong while loading the products.</p>
-          <button
-            type="button"
-            onClick={refetch}
-            className="mt-5 rounded-full bg-[#F5F5F5]"
-          >
-            Try again
-          </button>
-        </div>
-      )}
-
-      {/* Empty */}
-      {!isLoading && !isError && productList.length === 0 && (
-        <div>
-          <Package />
-          <h3>No products available</h3>
-          <p>
-            There are currently no products to display. Please check again
-            later.
-          </p>
-        </div>
-      )}
-
-      {/* Products */}
-      {!isLoading && !isError && productList.length > 0 && (
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{
-            once: true,
-            amount: 0.05,
-          }}
-          className="grid grid-cols-4 gap-4"
-        >
-          {productList.map((product, i) => {
-            return <Product key={product._id} product={product} />;
-          })}
-        </motion.div>
-      )}
-    </main>
-  );
-}
+export default Products;

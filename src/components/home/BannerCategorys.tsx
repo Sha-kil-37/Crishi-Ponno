@@ -2,9 +2,8 @@
 //
 import Link from "next/link";
 import { ArrowUpRight, Leaf } from "lucide-react";
-import { useGetAllCategoryQuery } from "@/store/services/categoryApi";
+import { useGetAllCategoryQuery } from "@/store/services/admin/categoryApi";
 import { useMemo } from "react";
-import Image from "next/image";
 
 function BannerCategorys() {
   const {

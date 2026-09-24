@@ -1,4 +1,3 @@
-
 "use client";
 //
 import Link from "next/link";
@@ -13,7 +12,7 @@ import {
   ShoppingBasket,
   Trash2,
 } from "lucide-react";
-import { useGetAllBrandQuery } from "@/store/services/brandApi";
+import { useGetAllBrandQuery } from "@/redux/rtkQuery/admin/brandApi";
 //
 export default function Page() {
   const { data, isLoading, isFetching, isError } = useGetAllBrandQuery();
@@ -27,8 +26,7 @@ export default function Page() {
           .includes(query.toLowerCase());
 
         return (
-          matchesQuery &&
-          (status === "All status" || brand.status === status)
+          matchesQuery && (status === "All status" || brand.status === status)
         );
       }) ?? [],
     [data, query, status],
@@ -44,7 +42,7 @@ export default function Page() {
   //
   //
   return (
-    <main >
+    <main>
       {isFetching && <p>Updating brands...</p>}
       <section className="relative overflow-hidden rounded-2xl bg-[#0f3d2e] px-6 py-7 text-white shadow-sm sm:px-8">
         <div className="relative z-10 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
@@ -154,9 +152,7 @@ export default function Page() {
       <section className="overflow-hidden rounded-2xl border border-[#dfeadf] bg-white shadow-sm">
         <div className="flex items-center justify-between border-b border-slate-200 px-5 py-4">
           <div>
-            <h2 className="text-lg font-semibold text-slate-900">
-              Brand list
-            </h2>
+            <h2 className="text-lg font-semibold text-slate-900">Brand list</h2>
             <p className="text-sm text-slate-500">Latest inventory updates</p>
           </div>
           <button className="inline-flex items-center gap-2 rounded-lg border border-slate-200 px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50">

@@ -1,6 +1,6 @@
 "use client";
 
-import { useGetAllProductQuery } from "@/store/services/productApi";
+import { useGetAllProductQuery } from "@/store/services/admin/productApi";
 
 export default function ProductGrid() {
   const { data: products, isLoading, isError } = useGetAllProductQuery();

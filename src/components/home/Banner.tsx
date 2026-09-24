@@ -144,10 +144,10 @@ export default function Banner() {
           </motion.div>
         ))}
       </div>
-      <BannerCategorys />
+      {/* <BannerCategorys /> */}
       <Feature />
       <MultiSlider />
-      <Tranding />
+      {/* <Tranding /> */}
       <Blogs />
       <div className="flex justify-between p-12 bg-[#F5F5F5] w-7xl mx-auto rounded-xl my-10">
         <div>

@@ -35,7 +35,7 @@ export default function Dialog() {
 
       {/* Dialog */}
       <div
-        className={`border border-[#dcebdc] shadow-[0_10px_30px_rgba(15,61,46,0.08)] relative z-10 max-w-lg rounded p-8 transition-all duration-300 ${
+        className={`border border-[#dcebdc] shadow-[0_10px_30px_rgba(15,61,46,0.08)] relative z-10 max-w-lg rounded p-8 transition-all duration-300 bg-white ${
           isVisible
             ? "translate-y-0 scale-100 opacity-100 ease-out"
             : "translate-y-4 scale-95 opacity-0 ease-in"

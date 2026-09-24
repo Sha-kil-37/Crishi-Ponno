@@ -55,5 +55,13 @@ export interface Product {
 export interface ProductResponse {
   success: boolean;
   data: Product[];
+  pagination: {
+    page: number;
+    limit: number;
+    total: number;
+    totalPages: number;
+    hasNextPage: boolean;
+    hasPreviousPage: boolean;
+  };
   message?: string;
 }

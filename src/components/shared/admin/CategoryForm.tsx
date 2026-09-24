@@ -14,7 +14,7 @@ import { categorySchema } from "@/schemas/category.schema";
 import {
   useAddCategoryMutation,
   useGetAllCategoryQuery,
-} from "@/store/services/categoryApi";
+} from "@/store/services/admin/categoryApi";
 //
 
 //
