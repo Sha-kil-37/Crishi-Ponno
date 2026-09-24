@@ -2,7 +2,7 @@
 //
 import Link from "next/link";
 import { ArrowUpRight, Leaf } from "lucide-react";
-import { useGetAllCategoryQuery } from "@/store/services/admin/categoryApi";
+import { useGetAllCategoryQuery } from "@/redux/rtkQuery/admin/categoryApi";
 import { useMemo } from "react";
 
 function BannerCategorys() {

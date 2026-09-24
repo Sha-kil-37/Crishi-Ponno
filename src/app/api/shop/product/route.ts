@@ -24,7 +24,7 @@ export async function GET(request: NextRequest) {
         Category.find({ name: searchRegex }).select("_id").lean(),
       ]);
       const numericSearch = Number(search);
-      const searchConditions = [
+      const searchConditions: Array<Record<string, unknown>> = [
         { name: searchRegex },
         { shortDescription: searchRegex },
         { description: searchRegex },
