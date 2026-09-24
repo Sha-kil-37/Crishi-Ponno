@@ -4,10 +4,10 @@ import { ShoppingCart } from "lucide-react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { toast } from "sonner";
-import { addItem } from "@/store/cartSlice";
-import type { AppDispatch } from "@/store/store";
+import { addItem } from "@/redux/slices/cartSlice";
+import type { AppDispatch } from "@/redux/store/store";
 import QuantitySelector from "./QuantitySelector";
-
+//
 type AddToCartProps = {
   product: {
     _id: string;

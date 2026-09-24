@@ -1,4 +1,6 @@
 import db from "@/lib/db";
+import Brand from "@/models/brand/Brand";
+import Category from "@/models/category/Category";
 import Product from "@/models/product/Product";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -13,24 +15,30 @@ export async function GET(request: NextRequest) {
     const page = Math.max(Number(pageParam), 1);
     const limit = Math.min(Math.max(Number(limitParam), 1), 100);
     const skip = (page - 1) * limit;
-    const filter = search
-      ? {
-          $or: [
-            {
-              name: {
-                $regex: search,
-                $options: "i",
-              },
-            },
-            {
-              description: {
-                $regex: search,
-                $options: "i",
-              },
-            },
-          ],
-        }
-      : {};
+    let filter = {};
+
+    if (search) {
+      const searchRegex = { $regex: search, $options: "i" };
+      const [matchingBrands, matchingCategories] = await Promise.all([
+        Brand.find({ name: searchRegex }).select("_id").lean(),
+        Category.find({ name: searchRegex }).select("_id").lean(),
+      ]);
+      const numericSearch = Number(search);
+      const searchConditions = [
+        { name: searchRegex },
+        { shortDescription: searchRegex },
+        { description: searchRegex },
+        { status: searchRegex },
+        ...matchingBrands.map(({ _id }) => ({ brand: _id })),
+        ...matchingCategories.map(({ _id }) => ({ category: _id })),
+      ];
+
+      if (Number.isFinite(numericSearch)) {
+        searchConditions.push({ price: numericSearch });
+      }
+
+      filter = { $or: searchConditions };
+    }
 
     const [products, total] = await Promise.all([
       Product.find(filter)
