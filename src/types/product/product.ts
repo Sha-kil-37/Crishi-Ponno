@@ -52,16 +52,26 @@ export interface Product {
   updatedAt: string;
 }
 //
-export interface ProductResponse {
+export interface ProductPagination {
+  page: number;
+  limit: number;
+  total: number;
+  totalPages: number;
+  hasNextPage: boolean;
+  hasPreviousPage: boolean;
+}
+
+export interface ProductListResponse {
   success: boolean;
   data: Product[];
-  pagination: {
-    page: number;
-    limit: number;
-    total: number;
-    totalPages: number;
-    hasNextPage: boolean;
-    hasPreviousPage: boolean;
+  message?: string;
+}
+
+export interface StorefrontProductResponse {
+  success: boolean;
+  data: {
+    products: Product[];
+    pagination: ProductPagination;
   };
   message?: string;
 }

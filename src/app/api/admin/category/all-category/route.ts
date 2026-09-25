@@ -3,9 +3,10 @@ import Category from "@/models/category/Category";
 import db from "@/lib/db";
 //
 export async function GET() {
+  //
   try {
     await db();
-
+    //
     const allCategory = await Category.find({});
     // .sort({ createdAt: -1 }).lean();
     return NextResponse.json({

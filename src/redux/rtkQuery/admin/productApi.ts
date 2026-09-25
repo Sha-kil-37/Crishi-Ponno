@@ -1,4 +1,4 @@
-import { Product, ProductResponse } from "@/types/product/product";
+import { Product, ProductListResponse } from "@/types/product/product";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 //
 export const adminProductApi = createApi({
@@ -15,7 +15,7 @@ export const adminProductApi = createApi({
     getAllProduct: builder.query<Product[], void>({
       query: () => "/all-product",
 
-      transformResponse: (response: ProductResponse) => {
+      transformResponse: (response: ProductListResponse) => {
         return response.data;
       },
 

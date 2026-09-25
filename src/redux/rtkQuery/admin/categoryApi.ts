@@ -1,15 +1,15 @@
 import { Category, CategoryResponse } from "@/types/category/category";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-
-export const categoryApi = createApi({
-  reducerPath: "categoryApi",
+//
+export const adminCategoryApi = createApi({
+  reducerPath: "adminCategoryApi",
 
   baseQuery: fetchBaseQuery({
     baseUrl: "/api/admin/category",
   }),
-
-  tagTypes: ["Category"],
-
+  //
+  tagTypes: ["AdminCategory"],
+  //
   endpoints: (builder) => ({
     // GET ALL CATEGORIES
     getAllCategory: builder.query<Category[], void>({
@@ -19,7 +19,7 @@ export const categoryApi = createApi({
         return response.data;
       },
 
-      providesTags: ["Category"],
+      providesTags: ["AdminCategory"],
     }),
 
     // ADD CATEGORY
@@ -30,12 +30,10 @@ export const categoryApi = createApi({
         body: formData,
       }),
 
-      invalidatesTags: ["Category"],
+      invalidatesTags: ["AdminCategory"],
     }),
   }),
 });
 
-export const {
-  useGetAllCategoryQuery,
-  useAddCategoryMutation,
-} = categoryApi;
+export const { useGetAllCategoryQuery, useAddCategoryMutation } =
+  adminCategoryApi;

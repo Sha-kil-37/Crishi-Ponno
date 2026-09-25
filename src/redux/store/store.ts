@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { categoryApi } from "../rtkQuery/admin/categoryApi";
+import { adminCategoryApi } from "../rtkQuery/admin/categoryApi";
 import { brandApi } from "../rtkQuery/admin/brandApi";
 import { adminProductApi } from "../rtkQuery/admin/productApi";
 import cartReducer from "../slices/cartSlice";
@@ -9,15 +9,15 @@ export const store = configureStore({
   reducer: {
     // auth: authReducer,
     cart: cartReducer,
-    [categoryApi.reducerPath]: categoryApi.reducer,
+    [adminCategoryApi.reducerPath]: adminCategoryApi.reducer,
     [brandApi.reducerPath]: brandApi.reducer,
     [adminProductApi.reducerPath]: adminProductApi.reducer,
-    [productApi.reducerPath]:productApi.reducer,
+    [productApi.reducerPath]: productApi.reducer,
   },
-
+  //
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
-      .concat(categoryApi.middleware)
+      .concat(adminCategoryApi.middleware)
       .concat(brandApi.middleware)
       .concat(adminProductApi.middleware)
       .concat(productApi.middleware),
