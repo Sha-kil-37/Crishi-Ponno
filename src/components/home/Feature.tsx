@@ -1,5 +1,5 @@
 "use client";
-
+//
 import { motion } from "framer-motion";
 import {
   Headphones,
@@ -52,10 +52,7 @@ const benefits = [
 function Feature() {
   //
   return (
-    <section
-      aria-labelledby="benefits-heading"
-      className="py-12"
-    >
+    <section aria-labelledby="benefits-heading" className="py-12">
       <div className="w-full">
         <div className="mb-8 flex flex-col gap-3 sm:mb-10 sm:flex-row sm:items-end sm:justify-between w-7xl mx-auto">
           <div>

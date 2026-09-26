@@ -11,7 +11,7 @@ import {
   Sprout,
 } from "lucide-react";
 import { brandSchema } from "@/schemas/brand.schema";
-import { useAddBrandMutation } from "@/redux/rtkQuery/admin/brandApi";
+import { useAddBrandMutation } from "@/redux/rtkQuery/admin/brand/brandApi";
 
 //
 export default function BrandForm() {

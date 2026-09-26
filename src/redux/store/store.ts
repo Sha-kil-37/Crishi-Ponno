@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { adminCategoryApi } from "../rtkQuery/admin/categoryApi";
-import { brandApi } from "../rtkQuery/admin/brandApi";
-import { adminProductApi } from "../rtkQuery/admin/productApi";
+import { adminCategoryApi } from "../rtkQuery/admin/category/categoryApi";
+import { brandApi } from "../rtkQuery/admin/brand/brandApi";
+import { adminProductApi } from "../rtkQuery/admin/product/productApi";
 import cartReducer from "../slices/cartSlice";
 import { productApi } from "../rtkQuery/shop/product/productApi";
 //

@@ -4,7 +4,7 @@ import Image from "next/image";
 import banner from "../../../public/images/banner/banner.png";
 import Link from "next/link";
 //
-function BannerAbout() {
+function About() {
   return (
     <div className="my-4">
       <div className="bg-[#F5F5F5] w-full pt-8">
@@ -41,4 +41,4 @@ function BannerAbout() {
   );
 }
 
-export default BannerAbout;
+export default About;

@@ -12,7 +12,7 @@ import {
   ShoppingBasket,
   Trash2,
 } from "lucide-react";
-import { useGetAllBrandQuery } from "@/redux/rtkQuery/admin/brandApi";
+import { useGetAllBrandQuery } from "@/redux/rtkQuery/admin/brand/brandApi";
 //
 export default function Page() {
   const { data, isLoading, isFetching, isError } = useGetAllBrandQuery();

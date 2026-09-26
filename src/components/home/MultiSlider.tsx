@@ -1,6 +1,5 @@
 "use client";
-
-import Image from "next/image";
+//
 import { motion } from "motion/react";
 import { Pause, Play } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
@@ -294,9 +293,7 @@ export default function MultiSlider() {
                           {card.title}
                         </h3>
 
-                        <p className="mt-1 ">
-                          {card.description}
-                        </p>
+                        <p className="mt-1 ">{card.description}</p>
                       </div>
                     </article>
                   ))}

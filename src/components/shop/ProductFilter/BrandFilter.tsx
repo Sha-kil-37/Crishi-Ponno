@@ -1,6 +1,6 @@
 "use client";
 
-import { useGetAllBrandQuery } from "@/redux/rtkQuery/admin/brandApi";
+import { useGetAllBrandQuery } from "@/redux/rtkQuery/admin/brand/brandApi";
 import { useMemo, useState } from "react";
 
 interface BrandFilterProps {

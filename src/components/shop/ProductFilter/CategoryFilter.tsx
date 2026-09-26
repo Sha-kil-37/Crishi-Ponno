@@ -1,6 +1,6 @@
 "use client";
 
-import { useGetAllCategoryQuery } from "@/redux/rtkQuery/admin/categoryApi";
+import { useGetAllCategoryQuery } from "@/redux/rtkQuery/admin/category/categoryApi";
 import { useMemo, useState } from "react";
 
 interface CategoryFilterProps {

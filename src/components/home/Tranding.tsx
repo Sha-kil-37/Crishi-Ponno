@@ -11,7 +11,7 @@ import {
   TrendingUp,
 } from "lucide-react";
 import { useMemo, useState } from "react";
-import { useGetAllProductQuery } from "@/redux/rtkQuery/admin/productApi";
+import { useGetAllProductQuery } from "@/redux/rtkQuery/admin/product/productApi";
 import type { Product } from "@/types/product/product";
 //
 /* =========================================================

@@ -1,5 +1,5 @@
-import React from "react";
-
+"use client";
+//
 function About() {
   return <div>this is about </div>;
 }

@@ -13,7 +13,7 @@ import {
   ShoppingBasket,
   Trash2,
 } from "lucide-react";
-import { useGetAllCategoryQuery } from "@/redux/rtkQuery/admin/categoryApi";
+import { useGetAllCategoryQuery } from "@/redux/rtkQuery/admin/category/categoryApi";
 //
 export default function Page() {
   const { data, isLoading, isFetching, isError } = useGetAllCategoryQuery();

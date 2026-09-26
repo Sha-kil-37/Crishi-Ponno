@@ -11,6 +11,14 @@ import Navbar from "@/components/layout/nav/Navbar";
 import Footer from "@/components/layout/Footer";
 import Dialog from "@/components/utils/dialog";
 import { Category } from "@/types/NavCategory";
+import Feature from "@/components/home/Feature";
+import Trending from "@/components/home/Tranding";
+import MultiSlider from "@/components/home/MultiSlider";
+import Blogs from "@/components/home/Blogs";
+import Highlight from "@/components/home/Highlight";
+import About from "@/components/home/About";
+import Categories from "@/components/home/Categories";
+
 //
 const categories: Category[] = [
   {
@@ -96,6 +104,13 @@ export default function Page() {
             <Header />
             <Navbar categories={categories} />
             <Banner />
+            <About />
+            <Highlight />
+            <Categories />
+            <Feature />
+            <Trending />
+            <MultiSlider />
+            <Blogs />
             <Footer />
             <Dialog />
             <Toaster />

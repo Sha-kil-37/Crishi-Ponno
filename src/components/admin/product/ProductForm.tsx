@@ -11,10 +11,9 @@ import {
   Sprout,
 } from "lucide-react";
 import { productSchema } from "@/schemas/product.schema";
-import { useAddProductMutation } from "@/redux/rtkQuery/admin/productApi";
-import { useGetAllBrandQuery } from "@/redux/rtkQuery/admin/brandApi";
-import { useGetAllCategoryQuery } from "@/redux/rtkQuery/admin/categoryApi";
-
+import { useAddProductMutation } from "@/redux/rtkQuery/admin/product/productApi";
+import { useGetAllBrandQuery } from "@/redux/rtkQuery/admin/brand/brandApi";
+import { useGetAllCategoryQuery } from "@/redux/rtkQuery/admin/category/categoryApi";
 
 //
 
