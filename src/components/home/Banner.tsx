@@ -1,6 +1,6 @@
 "use client";
 //
-import BannerSlider from "./BannerSlider";
+import Slider from "./Slider";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import Tranding from "./Tranding";
@@ -17,8 +17,8 @@ import poultry from "../../../public/images/banner/poultry.png";
 import fish from "../../../public/images/banner/fish.jpg";
 import MultiSlider from "./MultiSlider";
 import Feature from "./Feature";
-import BannerAbout from "./BannerAbout";
-import Blogs from "./Blogs";
+import About from "./About";
+import Blogs from "./Blog";
 //
 
 //
@@ -94,8 +94,8 @@ export default function Banner() {
   return (
     //
     <div>
-      <BannerSlider />
-      <BannerAbout />
+      <Slider />
+      <About />
       <div className="grid grid-cols-1 gap-2 md:grid-cols-2 px-2">
         {bannerItems.map((item, i) => (
           <motion.div

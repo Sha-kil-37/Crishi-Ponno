@@ -1,4 +1,4 @@
-import ProductForm from "@/components/shared/admin/ProductForm";
+import ProductForm from "@/components/admin/product/ProductForm";
 //
 function Page() {
   //

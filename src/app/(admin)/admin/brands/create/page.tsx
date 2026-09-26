@@ -1,4 +1,4 @@
-import BrandForm from "@/components/shared/admin/BrandForm";
+import BrandForm from "@/components/admin/brand/BrandForm";
 
 export default function Page() {
   //

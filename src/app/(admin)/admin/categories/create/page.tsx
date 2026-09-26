@@ -1,6 +1,6 @@
 //
 "use client";
-import CategoryForm from "@/components/shared/admin/CategoryForm";
+import CategoryForm from "@/components/admin/category/CategoryForm";
 //
 export default function Page() {
   return <CategoryForm />;
