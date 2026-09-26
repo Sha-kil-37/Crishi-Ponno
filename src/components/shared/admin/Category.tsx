@@ -7,7 +7,10 @@ import { ChevronRight, MoreHorizontal, PencilLine, Trash2 } from "lucide-react";
 import Image from "next/image";
 //
 export default function Category({ category }: { category: Category }) {
-  const categoryImage = category.image?.url || "/icons/google.svg";
+  const categoryImage =
+    typeof category.image === "string"
+      ? category.image || "/icons/google.svg"
+      : category.image?.url || "/icons/google.svg";
 
   return (
     <article
@@ -53,7 +56,10 @@ export default function Category({ category }: { category: Category }) {
       </div>
       <div className="mt-4 flex items-center justify-between border-t border-slate-100 pt-3">
         <p className="text-xs text-slate-400">
-          Last update : {new Date(category.createdAt).toLocaleDateString()}
+          Last update :{" "}
+          {category.createdAt
+            ? new Date(category.createdAt).toLocaleDateString()
+            : "—"}
         </p>
         <div className="flex items-center gap-1">
           <Link

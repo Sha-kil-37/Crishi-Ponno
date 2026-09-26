@@ -208,10 +208,14 @@ export default function Page() {
                     </span>
                   </td>
                   <td className="px-5 py-4">
-                    {new Date(category.createdAt).toLocaleDateString("en-GB")}
+                    {category.createdAt
+                      ? new Date(category.createdAt).toLocaleDateString("en-GB")
+                      : "—"}
                   </td>
                   <td className="px-5 py-4">
-                    {new Date(category.updatedAt).toLocaleDateString("en-GB")}
+                    {category.updatedAt
+                      ? new Date(category.updatedAt).toLocaleDateString("en-GB")
+                      : "—"}
                   </td>
                   <td className="px-5 py-4">
                     <div className="flex items-center justify-end gap-2">

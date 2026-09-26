@@ -34,7 +34,7 @@ function Product({ product }: ProductProps) {
   return (
     <motion.article variants={itemVariants} className="group">
       <div className="overflow-hidden rounded-xl transition ">
-        <Link href={`/product/${product.slug}`} className="block">
+        <Link href={`shop/product/${product.slug}`} className="block">
           <div className="relative aspect-square overflow-hidden bg-[#F5F5F5]">
             <Image
               height={100}
